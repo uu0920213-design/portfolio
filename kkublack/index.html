@@ -47,10 +47,10 @@
           </ul>
         </nav>
         <div class="mo-navi">
-          <div class="mo-navi-box ">
+          <div class="mo-navi-box">
             <!-- close-btn을 클릭했을 때 is-open toggle클래스 / 나중에 is-open추가해야함-->
             <h2>창업</h2>
-            <ul class="">
+            <ul class="is-open">
               <!-- h2를 클릭했을 때 나오는 toggle class / is-open나중에 클래스 속성주기 -->
               <li><a href="#">브랜드소개</a></li>
               <li><a href="#">브랜드경쟁력</a></li>
@@ -70,6 +70,49 @@
         </div>
       </div>
     </header>
+    <!-- header script -->
+    <script>
+      /* querySelectorAll() 여러개를 불러올때 */
+      const menuBtn = document.querySelector(".menu-btn");
+      const moNaviBox = document.querySelector(".mo-navi-box");
+
+      /* 재할당을 받을 일이 없음 const사용 */
+      /* querySelector요소를 불러올때 쓰는 함수 */
+
+      //화살표 함수 add, remove, toggle
+        /* 과거에 사용하던 방식 
+        menuBtn.addEventListener("click", function() {
+          console.log(" 클릭되었당") /오류 메세지를 확인하려고 사용도 함
+        }) */
+        menuBtn.addEventListener("click", () => {
+        menuBtn.classList.toggle("is-open");
+        moNaviBox.classList.toggle("is-open");
+        })
+        /* menuBtn을 클릭했을때 작동될거야 */
+        /* 연속적으로 동작을 할수있게함 toggle(열기/끄기) */
+
+        if(menuBtn.classList.contains("is-open")) {
+          console.log("열려있어!")
+        } else {
+          console.log("닫혀있어!")
+        }
+        /* 클래스("is-open")가 있느냐 없느냐를 확인할 수 있음 */
+
+        const h2 = document.querySelector(".mo-navi-box h2");
+        const ul = document.querySelector(".mo-navi-box ul");
+        /* 클릭해야할 친구 h2 잡고 동작될거를 안에 씀 */
+
+        h2.addEventListener("click", () => {
+        ul.classList.toggle("is-open");
+        })
+    </script>
+    <!-- 
+      menuBtn.classList.add() - 클래스 추가만 함
+      menuBtn.classList.remove() - 클래스 제거만 함
+      menuBtn.classList.toggle() - 있으면제거, 없으면 추가함
+      menuBtn.classList.replace("is-open", "is-closed") - 클래스를 다른걸로 바꿈
+    -->
+
     <main>
       <ul class="menu-wrap">
           <li class="active"><a href="#brand">브랜드소개</a></li>
@@ -80,6 +123,33 @@
       </ul>
       <!--  스크롤 작업시 header가 사라진 후에 생성 -->
       <!-- 위에 메뉴가 계속 따라오길 바란다면 그만큼의 padding값을 줘서 내려오게 해야함 -->
+
+      <script>
+        const menuWrap = document.querySelector(".menu-wrap");
+
+        window.addEventListener("scroll", () => {
+          const scrollY = window.scrollY;
+
+          //console.log(scrollY) 창의 좌표값을 받을 수 있음
+          //스크롤이벤트는 라이브러리(위치값을 기억함)를 사용해서 작업한다.
+
+          if(scrollY > 100) {
+            //menuWrap.classList.add("show");
+            menuWrap.style.display = "flex"; //강제로 스타일을 박아버림
+          } else {
+            //menuWrap.classList.remove("show"); //100보다 작은 상황이 오면 사라져라
+            menuWrap.style.display = "none";
+          }
+        })
+      </script>
+      <!--  style.top
+            style.backgroundColor
+            style.boxShadow
+            style.borderRadius
+            style.fontSize
+            style.paddingTop
+      -->
+
       <section class="hero-sec heading scroll" id="brand">
         <div class="txt-ani">
           <div><strong>멈출 수 없는 맛</strong></div>
@@ -412,7 +482,7 @@
                       <span class="label-text">유입경로</span>
                     </label>
                     <!-- business-box active toggleClass / 나중에 밑에 active속성 기입-->
-                    <div class="business-box ">
+                    <div class="business-box">
                       <input type="text" name="" id="" value="유입경로 선택" readonly>
                       <img src="img/selectarrow.png" alt="">
                       <ul class="business-select">
@@ -461,6 +531,58 @@
         </section>
       </div>
     </main>
+    
+    <script>
+      //점포유무 있음없음
+      const toggleBtn = document.querySelectorAll(".toggle-btn")
+      //li를 각각 선택하기 위해 forEach는 담아두는 변수를 각각 선택할 수 있어짐
+      //toggleBtn은 단체 forEach로 각각 하나의 버튼을 btn으로 분류함
+      toggleBtn.forEach(btn => {
+        btn.addEventListener("click", () => {
+          console.log("클릭된 버튼", btn.textContent);
+          //제거를 먼저하고 클릭할 수 있게함, forEach를 많이 씀
+          toggleBtn.forEach( b => {
+            b.classList.remove("active");
+          })
+          
+          btn.classList.add("active");
+        })
+      })
+
+
+      // business-box active 유입경로 열고닫기 toggle
+      // <input type="text" name="" id="" value="유입경로 선택" readonly> java는 value값을 바꿀 수 있음
+      const businessBox = document.querySelector(".business-box");
+      const businessInput = document.querySelector('input[name=""]');
+      const businessLis = document.querySelectorAll('.business-select li');
+      //열고닫기 기능 businessbox의 열고 닫는 기능
+      businessBox.addEventListener("click", () =>
+        businessBox.classList.toggle("active")
+      )  
+      ////businessLis를 클릭해서 value값을 변동하고 리스트를 닫음
+      businessLis.forEach(li => {
+        li.addEventListener("click", (e) => {
+          e.stopPropagation(); //이벤트가 더이상 퍼져나가는걸 방지
+          //자식요소에 이벤트를 줄 때 부모요소에 영향을 끼치지 말라고 할때 사용
+          //e.stopPropagation();를 걸지 않으면 자식요소가 부모요소에 영향을 끼쳐서 계속 열렸다 닫았다를 반복하게됨
+
+          businessInput.value = li.textContent;
+          businessBox.classList.remove("active");
+        })
+      })
+    </script>
+    <!-- html은 부모 자식 구조임
+      <div class ="business-box"> <-부모
+      <ul class = "business-select"> <-자식
+        <li>매장방문</li> <-손자
+      <ul>
+      </div>
+
+      손자li를 클릭하면 부모도 클릭된것처럼 느껴짐
+      li도 클릭되고 부모도 클릭된거라 인지하고 두개의 addEventListener가 모두 실행됨
+      e.stopPropagation()을 사용하면 부모까지 가지않게 전파를 막음
+    -->
+
     <footer>
       <ul class="line1">
         <li><a href="#"><strong>개인정보처리방침</strong></a></li>
