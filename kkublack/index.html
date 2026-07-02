@@ -126,9 +126,12 @@
 
       <script>
         const menuWrap = document.querySelector(".menu-wrap");
+        const menuItems = menuWrap.querySelectorAll("li");
 
         window.addEventListener("scroll", () => {
           const scrollY = window.scrollY;
+
+          console.log(scrollY);
 
           //console.log(scrollY) 창의 좌표값을 받을 수 있음
           //스크롤이벤트는 라이브러리(위치값을 기억함)를 사용해서 작업한다.
@@ -140,6 +143,14 @@
             //menuWrap.classList.remove("show"); //100보다 작은 상황이 오면 사라져라
             menuWrap.style.display = "none";
           }
+        })
+
+        menuItems.forEach((item) => {
+          item.addEventListener("click", () => {
+            menuItems.forEach((el) => el.classList.remove("active"));
+
+            item.classList.add("active");
+          })
         })
       </script>
       <!--  style.top
@@ -185,6 +196,71 @@
           <div class="num"><strong>0원</strong></div>
         </div>
       </section>
+
+      <script>
+        const counter = (counterElement, max) => {
+          let now = max; //max에서 시작해서 0을 향해 줄어듦
+
+          //30ms(0.03초)마다 반복실행
+          const handle = setInterval(() => {
+            //화면에 표시 (목표 - 남은거리 ) = 지금까지 올라온 숫자
+            // toLocaleString는 콤마(,) 찍어주는 함수
+            counterElement.innerHTML = Math.ceil(max-now).toLocaleString() + "원";
+
+            // 남은 거리가 1보다 작아지면 = 거의 도착했으면
+            if(now < 1) {
+              clearInterval(handle); //반복멈추기
+              //마지막에 정확하게 목표값 맞추기
+              counterElement.innerHTML = max.toLocaleString() + "원";
+            }
+            //남은거리 1/8만큼씩 이동 남은거리가 클수록 빠르고, 줄어들수록 작아짐
+            const step = now / 8;
+            now -= step;
+          }, 30)
+        }
+        /* max = 목표 1억
+          now = 아직 남은양 처음에는 1억
+          화면표시 max-now 지금까지 뺀 양, 처음에는 0
+
+          now가 1억->0으로 내려가면
+          화면숫자는 0 -> 1억으로 올라감 */
+
+        //바로 실행이 되어버려서 실제로는 스크롤이벤트를 같이 넣어줘야함
+        //const numEl = document.querySelector(".num strong")
+        //counter(numEl, 100_000_000);
+
+        //countElement 숫자를 표시할 html요소
+        //max 최종 목표 숫자
+
+        //스크롤 이벤트
+        const startCountersOnScroll = () => {
+          const numSec = document.querySelector(".count-sec");
+          //count-sec이 문서 위에서 몇 px 떨어졌는지 측정 (고정값)
+          const numSecOffsetTop = numSec.offsetTop;
+          //이미 실행했는지 체크하는 스위치
+          let started = false;
+
+          //스크롤 할 때마다 실행될 함수
+          const handleScroll = () => {
+            //지금 얼마나 스크롤했는지 측정 (변하는 값)
+            const scrollY = window.scrollY;
+            if(scrollY >= numSecOffsetTop && !started) {
+              const counterElement = document.querySelector(".num strong");
+              counter(counterElement, 101184800);
+              //다시는 실행 안함
+              started = true;
+
+              //스크롤이벤트 해제
+              window.removeEventListener("scroll", handleScroll);
+            }
+          };
+          //스크롤 될때마다 handleScroll실행
+          window.addEventListener("scroll", handleScroll);
+        };
+        //페이지가 완전히 로드된 후 함수실행
+        window.addEventListener('load', startCountersOnScroll);
+
+      </script>
       <!-- <div class="bg-sec">
         <img src="img/s3_bg.jpg" alt="꾸블랙치킨">
       </div> -->
