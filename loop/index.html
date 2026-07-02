@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loop 마라톤 랜딩페이지 제작</title>
+
+    <meta name="author" content="LOOP마라톤클래스">
+    <meta name="description" content="반복은 단순한 루틴이 아니라, 성장의 루프입니다. 엘리트 코칭과 체계적인 12주 완주 플랜으로 실패 없는 마라톤 도전을 시작하세요.">
+    <meta name="keyword" content="TEAM LOOP, 루프 마라톤, 마라톤 클래스, 러닝 플랫폼, 12주 완주 플랜, 풀코스 마라톤, 러닝 커뮤니티, 강현지 코치">
+    <meta name="classification" content="마라톤 성장 플랫폼 및 러닝 아카데미">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="TEAM LOOP">
+    <meta property="og:description" content="반복을 성장의 루프로 바꾸는 순간. 전문 코칭 시스템과 함께 나만의 목표 레이스를 완주하세요!">
+    <!-- 300자내외 -->
+    <meta property="og:url" content="https://teamloop.com/index.php">
+    <meta property="og:image" content="">
+    <!-- og이미지 사이즈 1200 * 630 -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/logo_loop.png">
+    <link rel="canonical" href="https://kkublack.com/index.php">
+
+    <link rel="stylesheet" href="../assets/css/paperfont.css">
+    <link rel="stylesheet" href="../assets/css/font.css">
+    <link rel="stylesheet" href="../css/default.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+
+    <link rel="stylesheet" href="css/main.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        <header>
+            <div class="inner h-in">
+                <h1><a href="index.html"><img src="img/logo_loop.png" alt="TEAMLOOP"></a></h1>
+                <nav>
+                    <h2 class="sr-only">마라톤클래스</h2>
+                    <ul class="nav-menu-list">
+                            <li><a href="#class">클래스</a></li>
+                            <li><a href="#coache">코치진</a></li>
+                            <li><a href="#why-loop">LOOP</a></li>
+                            <li><a href="#special">스페셜</a></li>
+                            <li><a href="#reviews">후기</a></li>
+                            <li><a href="#faq">FAQ</a></li>
+                        </ul>
+                        <div class="nav-btn">
+                            <a href="#contact" class="btn-secondary">상담문의</a>
+                            <a href="#register" class="btn-cta">클래스신청</a>
+                        </div>
+                </nav>
+                <div class="mo-navi">
+                    <div class="mo-navi-box">
+                        <h2 class="mo-title">TEAM LOOP</h2>
+                        <ul class="mo-menu">
+                            <li><a href="#">클래스</a></li>
+                            <li><a href="#">코치진</a></li>
+                            <li><a href="#">LOOP</a></li>
+                            <li><a href="#">스페셜</a></li>
+                            <li><a href="#">후기</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                        <div class="mo-btn">
+                            <a href="#contact" class="btn-secondary">상담문의</a>
+                            <a href="#register" class="btn-cta">클래스 신청</a>
+                        </div>
+                    </div>
+                    </div>
+                    <button class="menu-btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </header>
+    </div>
+    
+    <script>
+        const menuBtn = document.querySelector('.menu-btn');
+        const moNaviBox = document.querySelector('.mo-navi-box');
+
+        menuBtn.addEventListener('click', () => {
+            menuBtn.classList.toggle('is-open');
+            moNaviBox.classList.toggle('is-open');
+        });
+
+        const h2 = document.querySelector(".mo-navi-box h2");
+        const ul = document.querySelector(".mo-navi-box ul");
+
+        h2.addEventListener("click", () => {
+            ul.classList.toggle("is-open");
+        })
+    </script>
+
+    <main>
+        <ul class="menu-wrap">
+            <li class="active"><a href="#class">클래스</a></li>
+            <li><a href="#coache">코치진</a></li>
+            <li><a href="#why-loop">LOOP</a></li>
+            <li><a href="#special">스페셜</a></li>
+            <li><a href="#reviews">후기</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+
+        <script>
+            const menuWrap = document.querySelector(".menu-wrap");
+
+            window.addEventListener("scroll", () => {
+                const scrollY = window.scrollY;
+
+                if(scrollY > 100) {
+                    menuWrap.style.display = "flex";
+                } else {
+                    menuWrap.style.display = "none";
+                }
+            })
+        </script>
+
+        <section class="hero-sec">
+            <div class="pd">
+                <div class="hero-copy">
+                    <span>반복은 단순한 루틴이 아니라,</span>
+                    <span>성장의 루프입니다</span>
+                </div>
+                <div class="stats-content">
+                    <div class="hero-stats">
+                        <div class="stat-number">
+                            <span class="count" data-key="runner">0</span>
+                            <span class="symbol"></span>
+                        </div>
+                        <span class="label">수료 러너</span>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-number">
+                            <span class="count" data-key="finishRate">0</span>
+                            <span>%</span>
+                        </div>
+                        <span class="label">완주율</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
