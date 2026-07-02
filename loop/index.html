@@ -24,12 +24,13 @@
     <link rel="stylesheet" href="../css/default.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
 
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/main2.css">
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
 </head>
 <body>
     <div id="wrap">
+        <!-- header -->
         <header>
             <div class="inner h-in">
                 <h1><a href="index.html"><img src="img/logo_loop.png" alt="TEAMLOOP"></a></h1>
@@ -80,8 +81,21 @@
         const moNaviBox = document.querySelector('.mo-navi-box');
 
         menuBtn.addEventListener('click', () => {
-            menuBtn.classList.toggle('is-open');
-            moNaviBox.classList.toggle('is-open');
+        const isOpen = menuBtn.classList.toggle('is-open');
+        moNaviBox.classList.toggle('is-open');
+
+        if (isOpen) {
+            // 메뉴 열 때: 현재 스크롤 위치 저장 후 body 고정
+            const scrollY = window.scrollY;
+            document.body.style.setProperty('--scroll-y', `-${scrollY}px`);
+            document.body.dataset.scrollY = scrollY;
+            document.body.classList.add('menu-open');
+        } else {
+            // 메뉴 닫을 때: body 고정 해제하고 원래 스크롤 위치로 복원
+                const scrollY = document.body.dataset.scrollY || 0;
+                document.body.classList.remove('menu-open');
+                window.scrollTo(0, parseInt(scrollY));
+            }
         });
 
         const h2 = document.querySelector(".mo-navi-box h2");
@@ -90,10 +104,12 @@
         h2.addEventListener("click", () => {
             ul.classList.toggle("is-open");
         })
+
     </script>
 
     <main>
-        <ul class="menu-wrap">
+        <!-- menu-wrap -->
+        <!-- <ul class="menu-wrap">
             <li class="active"><a href="#class">클래스</a></li>
             <li><a href="#coache">코치진</a></li>
             <li><a href="#why-loop">LOOP</a></li>
@@ -114,10 +130,14 @@
                     menuWrap.style.display = "none";
                 }
             })
-        </script>
 
+            menuWrap.classList.add("show");
+            menuWrap.classList.remove("show");
+        </script> -->
+
+        <!-- hero-sec -->
         <section class="hero-sec">
-            <div class="pd">
+            <div class="hero-pd inner">
                 <div class="hero-copy">
                     <span>반복은 단순한 루틴이 아니라,</span>
                     <span>성장의 루프입니다</span>
@@ -139,6 +159,43 @@
                     </div>
                 </div>
             </div>
+        </section>
+        <!-- class-sec -->
+        <section class="class-sec">
+            <div class="inner pd">
+                <div class="sec-header">
+                    <p class="sec-label">Why LOOP</p>
+                    <h2 class="sec-tit">
+                        <span>단순한 러닝크루가 </span>
+                        <span>아닙니다.</span>
+                    </h2>
+                    <p class="sec-des">
+                        혼자 달리면 꾸준함이 어렵습니다.<br>LOOP는 목표 레이스를 중심으로 설계된 마라톤 성장 플랫폼입니다.
+                    </p>
+                </div>
+                <ul class="feature-list">
+                    <li class="feature-card">
+                            <h3 class="f-tit">전문코칭</h3>
+                            <p class="f-des">엘리트 선수 출신 코치의 맞춤형 피드백</p>
+                    </li>
+                    <li class="feature-card">
+                            <h3 class="f-tit">체계적인 훈련 프로그램</h3>
+                            <p class="f-des">지형의 한계 없이, 트랙부터 크로스컨트리까지 목적에 맞춰 달립니다.</p>
+                    </li>
+                    <li class="feature-card">
+                            <h3 class="f-tit">러닝 커뮤니티</h3>
+                            <p class="f-des">같은 목표를 가진 러너들과 함께 성장할 수 있습니다.</p>
+                    </li>
+                    <li class="feature-card">
+                            <h3 class="f-tit">대회 지원 시스템</h3>
+                            <p class="f-des">응원단, 보급품, 레이스 전략 사후 피드백까지 준비되어 있습니다.</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!-- class lineup-sec -->
+        <section class="class lineup-sec">
+
         </section>
     </main>
 </body>
