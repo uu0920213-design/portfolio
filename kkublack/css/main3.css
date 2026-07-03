@@ -316,7 +316,16 @@ nav a:hover {
   padding-top: 80px;
   background: var(--color-black) url(../img/s1_bg.jpg) no-repeat center / cover;
   text-align: center;
+
+  clip-path: inset(0 50%);
+  transition: clip-path 1.2s ease-in-out;
 }
+.hero-sec.open{
+  clip-path: inset(0 0);
+}
+/* .hero-sec.open {
+  clip-path: inset(0 0);
+} */
 
 .txt-ani {
   height: 170px;
