@@ -53,12 +53,12 @@
                     <div class="mo-navi-box">
                         <h2 class="mo-title">TEAM LOOP</h2>
                         <ul class="mo-menu">
-                            <li><a href="#">클래스</a></li>
-                            <li><a href="#">코치진</a></li>
-                            <li><a href="#">LOOP</a></li>
-                            <li><a href="#">스페셜</a></li>
-                            <li><a href="#">후기</a></li>
-                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#class">클래스</a></li>
+                            <li><a href="#coache">코치진</a></li>
+                            <li><a href="#why-loop">LOOP</a></li>
+                            <li><a href="#special">스페셜</a></li>
+                            <li><a href="#reviews">후기</a></li>
+                            <li><a href="#faq">FAQ</a></li>
                         </ul>
                         <div class="mo-btn">
                             <a href="#contact" class="btn-secondary">상담문의</a>
@@ -103,6 +103,15 @@
 
         h2.addEventListener("click", () => {
             ul.classList.toggle("is-open");
+        })
+
+        const moNaviLinks = document.querySelectorAll(".mo-navi-box ul a");
+        moNaviLinks.forEach((link) => {
+            link.addEventListener("click", () =>{
+            menuBtn.classList.remove("is-open");
+            moNaviBox.classList.remove("is-open");
+            ul.classList.remove("is-open");
+            })
         })
 
     </script>
@@ -161,7 +170,7 @@
             </div>
         </section>
         <!-- class-sec -->
-        <section class="class-sec">
+        <section class="class-sec" id="class">
             <div class="inner pd">
                 <div class="sec-header">
                     <p class="sec-label">Why LOOP</p>
@@ -170,7 +179,7 @@
                         <span>아닙니다.</span>
                     </h2>
                     <p class="sec-des">
-                        혼자 달리면 꾸준함이 어렵습니다.<br>LOOP는 목표 레이스를 중심으로 설계된 마라톤 성장 플랫폼입니다.
+                        기록이 정체되고 훈련 방향이 맞는지 확신이 없고 대회가 다가올수록 불안해집니다.<br>LOOP는 목표 레이스를 중심으로 설계된 마라톤 성장 플랫폼입니다.
                     </p>
                 </div>
                 <ul class="feature-list">
