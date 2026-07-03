@@ -50,13 +50,13 @@
           <div class="mo-navi-box">
             <!-- close-btn을 클릭했을 때 is-open toggle클래스 / 나중에 is-open추가해야함-->
             <h2>창업</h2>
-            <ul class="is-open">
+            <ul class="">
               <!-- h2를 클릭했을 때 나오는 toggle class / is-open나중에 클래스 속성주기 -->
-              <li><a href="#">브랜드소개</a></li>
-              <li><a href="#">브랜드경쟁력</a></li>
-              <li><a href="#">창업경쟁력</a></li>
-              <li><a href="#">창업안내</a></li>
-              <li><a href="#">창업비용 및 문의</a></li>
+              <li><a href="#brand">브랜드소개</a></li>
+              <li><a href="#competi">브랜드경쟁력</a></li>
+              <li><a href="#franchise">창업경쟁력</a></li>
+              <li><a href="#guide">창업안내</a></li>
+              <li><a href="#price">창업비용 및 문의</a></li>
             </ul>
           </div>
           <button class="menu-btn">
@@ -105,6 +105,16 @@
         h2.addEventListener("click", () => {
         ul.classList.toggle("is-open");
         })
+
+        //모바일 navi a를 클릭했을 때 moNavibox창이 닫히고(.is-open클래스 삭제) 햄버거 버튼(menuBtn)에  .is-open클래스 삭제, h2요소 is-open삭제
+        const moNaviLinks = document.querySelectorAll(".mo-navi-box ul a");
+        moNaviLinks.forEach((link) => {
+          link.addEventListener("click", () =>{
+            menuBtn.classList.remove("is-open");
+            moNaviBox.classList.remove("is-open");
+            ul.classList.remove("is-open");
+          })
+        })
     </script>
     <!-- 
       menuBtn.classList.add() - 클래스 추가만 함
@@ -121,45 +131,7 @@
           <li><a href="#guide">창업안내</a></li>
           <li><a href="#price">창업비용 및 문의</a></li>
       </ul>
-      <!--  스크롤 작업시 header가 사라진 후에 생성 -->
-      <!-- 위에 메뉴가 계속 따라오길 바란다면 그만큼의 padding값을 줘서 내려오게 해야함 -->
-
-      <script>
-        const menuWrap = document.querySelector(".menu-wrap");
-        const menuItems = menuWrap.querySelectorAll("li");
-
-        window.addEventListener("scroll", () => {
-          const scrollY = window.scrollY;
-
-          console.log(scrollY);
-
-          //console.log(scrollY) 창의 좌표값을 받을 수 있음
-          //스크롤이벤트는 라이브러리(위치값을 기억함)를 사용해서 작업한다.
-
-          if(scrollY > 100) {
-            //menuWrap.classList.add("show");
-            menuWrap.style.display = "flex"; //강제로 스타일을 박아버림
-          } else {
-            //menuWrap.classList.remove("show"); //100보다 작은 상황이 오면 사라져라
-            menuWrap.style.display = "none";
-          }
-        })
-
-        menuItems.forEach((item) => {
-          item.addEventListener("click", () => {
-            menuItems.forEach((el) => el.classList.remove("active"));
-
-            item.classList.add("active");
-          })
-        })
-      </script>
-      <!--  style.top
-            style.backgroundColor
-            style.boxShadow
-            style.borderRadius
-            style.fontSize
-            style.paddingTop
-      -->
+    
 
       <section class="hero-sec heading scroll" id="brand">
         <div class="txt-ani">
@@ -677,4 +649,65 @@
     </footer>
   </div>
 </body>
+      <!--  스크롤 작업시 header가 사라진 후에 생성 -->
+      <!-- 위에 메뉴가 계속 따라오길 바란다면 그만큼의 padding값을 줘서 내려오게 해야함 -->
+
+      <script>
+        const menuWrap = document.querySelector(".menu-wrap");
+        const menuItems = menuWrap.querySelectorAll("li");
+        const sections = document.querySelectorAll("#brand, #competi, #franchise, #guide, #price");
+
+        window.addEventListener("scroll", () => {
+          const scrollY = window.scrollY;
+
+          //console.log(scrollY);
+
+          //console.log(scrollY) 창의 좌표값을 받을 수 있음
+          //스크롤이벤트는 라이브러리(위치값을 기억함)를 사용해서 작업한다.
+
+          if(scrollY > 100) {
+            //menuWrap.classList.add("show");
+            menuWrap.style.display = "flex"; //강제로 스타일을 박아버림
+          } else {
+            //menuWrap.classList.remove("show"); //100보다 작은 상황이 오면 사라져라
+            menuWrap.style.display = "none";
+          }
+          //지금 어느 섹션에 있는지 찾기
+          let currentID = "";
+        
+          sections.forEach((section) => {
+            // section.offsetTop은 그 섹션이 페이지 맨 위에서 얼마나 떨어져있는지
+            // -150은 여유값, 섹션이 화면 상단에 거의 닿을 때 미리 바꿔주려는 조건식
+            if(scrollY >= section.offsetTop - 150) {
+              currentID = section.id;
+            }
+          })
+
+          // currentID와 일치하는 링크를 가진 li에 active적용
+          menuItems.forEach((item) => {
+            item.classList.remove("active");
+
+            const link = item.querySelector("a");
+            if(link.getAttribute("href") === "#" + currentID) {
+              item.classList.add("active")
+            }
+          })
+        })
+
+
+        /* menuItems.forEach((item) => {
+          item.addEventListener("click", () => {
+            menuItems.forEach((el) => el.classList.remove("active"));
+
+            item.classList.add("active");
+          })
+        }) */
+      </script>
+      <!--  style.top
+            style.backgroundColor
+            style.boxShadow
+            style.borderRadius
+            style.fontSize
+            style.paddingTop
+      -->
 </html>
