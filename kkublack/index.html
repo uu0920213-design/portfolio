@@ -137,14 +137,20 @@
     
 
       <section class="hero-sec heading scroll" id="brand">
-        <div class="txt-ani">
+        <div class="txt-ani" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="1500">
           <div><strong>멈출 수 없는 맛</strong></div>
           <!-- strong을 넣어도 괜찮고 p요소로 만들어도 괜찮고 h2를 써도됨. 하지만 strong은 인라인요소라 div안에넣기 -->
           <div><strong>불맛을 제대로</strong></div>
         </div>
-        <h2>꾸블랙치킨</h2>
+        <h2 data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="1800">꾸블랙치킨</h2>
         <p>1만 시간의 집념으로 제대로 구웠다</p>     
       </section>
+      <script>
+        window.addEventListener("load", function(){
+          document.querySelector(".hero-sec").classList.add("open");
+        })
+      </script>
+
       <div class="banner-wrap heading">
         <div class="banner-track">
           <div class="banner-item">
