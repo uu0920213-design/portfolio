@@ -247,14 +247,14 @@ nav {
         overflow-y: auto;
         z-index: 20;
     }
-    body.menu-open {
+    /* body.menu-open {
         position: fixed;
         top: var(--scroll-y, 0);
         left: 0;
         width: 100%;
         overflow: hidden;
         height: 100%;
-    }
+    } */
     .mo-title {
         display: flex;
         justify-content: space-between;
@@ -578,12 +578,12 @@ main-class-sec
     .sec-tit span{
         display:block;
     }
-    .sec-des{
+    /* .sec-des{
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
         overflow: hidden;
-    }
+    } */
     .feature-list {
     grid-template-columns: 1fr;
     gap: var(--spacing-16);
