@@ -241,6 +241,29 @@
       //wheel 이벤트 안에서 preventDefault()를 사용할 것이다 라고 브라우저에게 알림
       //wheel, touch이벤트에서는 기본적으로 스크롤을 막지 않을거지?라고 동작함
       </script>
+      <!-- 
+      사용자가 휠을 돌림
+      ↓
+      아래 또는 위 스크롤인지 확인
+      ↓
+      hero가 화면에 있는지 확인
+      ↓
+      스크롤잠금
+      ↓
+      progress값 증가 (0->1)
+      ↓
+      css변수변경 (--progress)
+      ↓
+      텍스트 위치와 투명도 애니메이션 실행 (css작업)
+      ↓
+      progress = 1
+      ↓
+      600ms 대기
+      ↓
+      스크롤잠금해제
+      ↓
+      다음섹션이동
+      -->
 
       <div class="banner-wrap heading">
         <div class="banner-track">
