@@ -182,36 +182,56 @@
 
           //일반 스크롤 상태
           if(!isHeroLocked) {
+            //아래 스크롤 + hero섹션보임 + 아직 애니메이션이 안끝남을 모두 만족
             const lockDown = goingDown && isHeroVisible && progress < 1;
+            //위로 스크롤 + 맨위 + 애니메이션이 끝난 상태이면 역재생
             const lockUp = !goingDown && window.scrollY <= 0 && progress >0;
             
             //아래 또는 위 조건이 만족된 경우
           if (lockDown || lockUp) {
+                  // 스크롤 잠금 상태
                   isHeroLocked = true;
+                  // 이전 예약이 남았다면 초기화
                   isUnlocking = false;
+                  // 현재 위치 저장 후 hidden(페이지 이동화면을 막음)
                   scrollPosY = window.scrollY;
                   document.documentElement.style.overflow = "hidden";
               }
           }
 
+          // 잠겨있는 동안 실행(잠긴상태에서만)
           if(isHeroLocked) {
+            // 기본 스크롤(해당이벤트)를 막음
               e.preventDefault();
+              // window.addEventListener('wheel', (e) < 해당 이벤트(기본 스크롤)을 막음
+              //스크롤 위치 고정(아까 저장한 위치로 계속 되돌려야 화면이 움직이지 않음)
               window.scrollTo(0, scrollPosY);
+              //120 / 1200 = 0.1 progress가 0.1, 0.2, 0.3으로 증가
               progress += e.deltaY / TOTAL;
+              // -0.2면 0 1이 넘어가면 1로 제한하여 변환
               progress = Math.min(Math.max(progress, 0), 1);
+              // css로 적용
               heroPanel.style.setProperty("--progress", progress);
+              //("--progress"-> 속성, progress-> 실제로 받는 값)
+              //transform: translateY(calc((1 - var(--progress, 0)) * 54px));<< css에 들어가는 값
 
+              //애니메이션 종료 아직 스크롤 해제를 예약하지 않았다면 실행
               if(progress >= 1 && !isUnlocking) {
+                  //중복예약 막기
                   isUnlocking = true;
                   setTimeout(() => {
+                    //사용자가 다시 위로 돌리지 않았다면
                       if(progress >= 1) {
                           isHeroLocked = false;
+                          // 잠금을 해제하자
                           document.documentElement.style.overflow = "auto";
                       }
+                      // 예약상태를 초기화
                       isUnlocking = false;
-                  }, 600);
+                  }, 600); //히든을 오토로 풀어주는데 600만큼의 딜레이를 줌
               }
 
+              // 역재생 종료 - 잠금해제후 일반스크롤로 돌아감
               if(progress <= 0) {
                   isHeroLocked = false;
                   document.documentElement.style.overflow = "auto";
