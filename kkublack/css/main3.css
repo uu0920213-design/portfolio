@@ -698,8 +698,11 @@ progress가 0이면 0, opacity가 1이면 0.8
     font-size: 18px;
     font-weight: 500;
   }
+  .intro-sec .mobile {
+    display: none;
+  }
   /* .intro-sec p:nth-child(2){
-    font-size: 14px;
+    display: none;
   } */
 }
 
