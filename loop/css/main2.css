@@ -793,7 +793,7 @@ main-lineup-sec
         max-width: 394px;
     }
 }
-@media(max-width:360px) {
+@media(max-width:430px) {
     .class-card {
         flex-direction: column;
     }
@@ -858,6 +858,9 @@ main-coach-sec
 }
 
 @media(max-width:500px) {
+    .coach-sec{
+    background: var(--color-black) url(../img/coach-mo-back.png) no-repeat center / cover;
+    }
     .coach-card {
     background: none;
     }
