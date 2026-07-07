@@ -944,3 +944,23 @@ main-benefits-sec
     line-height: 1.5;
     padding-left: 10px;
 }
+@media (max-width: 1440px){
+
+    .benefit-card{
+        gap: 24px;
+        padding: 60px 38px;
+    }
+
+    .benefit-tit{
+        font-size: 18px;
+    }
+
+    .benefit-sub{
+        font-size: 24px;
+    }
+
+    .benefit-des{
+        font-size: 16px;
+    }
+
+}
