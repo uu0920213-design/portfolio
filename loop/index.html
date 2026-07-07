@@ -23,10 +23,12 @@
     <link rel="stylesheet" href="../assets/css/font.css">
     <link rel="stylesheet" href="../css/default.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <link rel="stylesheet" href="css/main2.css">
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 </head>
 <body>
     <div id="wrap">
@@ -146,8 +148,8 @@
 
         <!-- hero-sec -->
         <section class="hero-sec">
-            <div class="hero-pd inner">
-                <div class="hero-copy">
+            <div class="hero-pd inner" >
+                <div class="hero-copy" >
                     <span>반복은 단순한 루틴이 아니라,</span>
                     <span>성장의 루프입니다</span>
                 </div>
@@ -171,7 +173,7 @@
         </section>
         <!-- class-sec -->
         <section class="class-sec" id="class">
-            <div class="inner pd">
+            <div class="inner pd" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="300" data-aos-easing="ease-out" data-aos-once="false">
                 <div class="sec-header">
                     <p class="sec-label">Why LOOP</p>
                     <h2 class="sec-tit">
@@ -183,19 +185,19 @@
                     </p>
                 </div>
                 <ul class="feature-list">
-                    <li class="feature-card">
+                    <li class="feature-card" data-aos="fade-up"data-aos-anchor-placement="top-bottom" data-aos-delay="0">
                             <h3 class="f-tit">전문코칭</h3>
                             <p class="f-des">엘리트 선수 출신 코치의 맞춤형 피드백</p>
                     </li>
-                    <li class="feature-card">
+                    <li class="feature-card" data-aos="fade-up"data-aos-anchor-placement="top-bottom" data-aos-delay="300">
                             <h3 class="f-tit">체계적인 훈련 프로그램</h3>
                             <p class="f-des">지형의 한계 없이, 트랙부터 크로스컨트리까지 목적에 맞춰 달립니다.</p>
                     </li>
-                    <li class="feature-card">
+                    <li class="feature-card" data-aos="fade-up"data-aos-anchor-placement="top-bottom" data-aos-delay="600">
                             <h3 class="f-tit">러닝 커뮤니티</h3>
                             <p class="f-des">같은 목표를 가진 러너들과 함께 성장할 수 있습니다.</p>
                     </li>
-                    <li class="feature-card">
+                    <li class="feature-card" data-aos="fade-up"data-aos-anchor-placement="top-bottom" data-aos-delay="900">
                             <h3 class="f-tit">대회 지원 시스템</h3>
                             <p class="f-des">응원단, 보급품, 레이스 전략 사후 피드백까지 준비되어 있습니다.</p>
                     </li>
@@ -344,4 +346,10 @@
         </section>
     </main>
 </body>
+<script>
+    AOS.init({
+        duration: 1000,
+        delay: 200
+    });
+</script>
 </html>
