@@ -4,6 +4,7 @@
 ========================================================================== */
     --color-white: #FFFFFF;
     --color-white-opacity: rgba(255, 255, 255, 0.3); /* FFFFFF 30% */
+    --color-white-70: rgba(255, 255, 255, 0.7); /* FFFFFF 70% */
     --color-transparent: rgba(255, 255, 255, 0);    /* FFFFFF 0% */
     --color-transparent-2: rgba(0, 0, 0, 0);         /* 000000 0% */
     --color-black: #060606;
@@ -11,6 +12,7 @@
     --color-black-soft: #080808;
     --color-black-soft-2: #0D0D0D;
     --color-black-soft-opacity: rgba(8, 8, 8, 0.9);   /* 080808 90% */
+    --color-black-soft-opacity80: rgba(8, 8, 8, 0.8);   /* 080808 80% */
 
   /* Gray Scale */
     --color-gray-800: #111111;
@@ -27,6 +29,7 @@
   /* Point Colors */
     --color-pink-primary: #E12DA3;
     --color-pink-primary-opacity: rgba(225, 45, 163, 0.08); /* E12DA3 8% */
+    --color-pink-primary-card: rgba(225, 45, 163, 0.5);
     --color-purple-accent: #892FC1;  
     --color-purple-accent-2: #290C3B;
     --color-purple-bright: #6261D3;
@@ -81,9 +84,9 @@
 
   /* 페이드아웃 투명 그라디언트 (Selection: Linear 80%) */
     --gradient-fade-out: linear-gradient(
-    180deg,
-    var(--color-purple-start) 0%,
-    var(--color-black-end) 100%);
+    152deg,
+    var(--color-pink-primary-card) 0%,
+    var(--color-black-soft-opacity) 100%);
 
   /* 핑크 to 퍼플 메인 그라디언트 (Selection: Linear 80%) */
     --gradient-pink-to-purple: linear-gradient(
@@ -103,6 +106,7 @@
     var(--color-gray-600-opacity) 0%,
     var(--color-black-opacity) 100%
     );
+    
 /* ==========================================================================
 5. Number / radius (반경/라운드 값)========================================================================== */
     --radius-0: 0px;
@@ -110,6 +114,7 @@
     --radius-4: 4px;
     --radius-8: 8px;
     --radius-10: 10px;
+    --radius-12: 12px;
     --radius-20: 20px;
     --radius-full: 9999px;
 
@@ -496,10 +501,9 @@ main-class-sec
 ========================================================================== */
 .class-sec{
     width: 100%;
-    /* height: 100dvh; */
     background: var(--color-black) url(../img/class-sec-img.png) no-repeat center/cover;
-    justify-content: space-between;
-    align-items: center;
+    /* justify-content: space-between;
+    align-items: center; */
 }
 .pd {
     height: 100%;
@@ -536,7 +540,7 @@ main-class-sec
     color: var(--color-white);
     gap: var(--spacing-12);
 }
-.sec-tit span:last-child {
+.class-sec .sec-tit span:last-child {
     color: var(--color-pink-primary);
 }
 .sec-des {
@@ -599,9 +603,6 @@ main-lineup-sec
     justify-content: space-between;
     align-items: center;
     word-break: keep-all;
-}
-.lineup-sec .sec-tit span {
-    color: var(--color-white);
 }
 
 .lineup-panel{
@@ -801,10 +802,7 @@ main-lineup-sec
 main-coach-sec
 ========================================================================== */
 .coach-sec{
-    /* position: relative; */
     background: var(--color-black);
-    /* justify-content: space-between;
-    align-items: center; */
 }
 .coach-sec .pd {
     gap: 18px;
@@ -885,4 +883,61 @@ main-coach-sec
     .coach-achievements li {
         padding: 8px 28px; 
     }
+}
+/* ==========================================================================
+main-benefits-sec
+========================================================================== */
+.benefits-sec{
+    width: 100%;
+    background: var(--color-black) url(../img/benefits-sec.png) no-repeat center/cover;
+}
+.benefit-list{
+    display: flex;
+    gap: 20px;
+    color: var(--color-white-70);
+}
+.benefit-card{
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    background: url(../img/benefit-card-ui.png) no-repeat center /cover;
+    width: 100%;
+    border-top: 1px solid var(--color-gray-600);
+    border-right: 1px solid var(--color-gray-600);
+    border-radius: var(--radius-12);
+    padding: 66px 42px;
+}
+.benefit-card:hover {
+    background: url(../img/benefit-card-ui-hover.png) no-repeat center /cover;
+    color: var(--color-white);
+}
+.benefit-header{
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+
+}
+.benefit-num {
+    font-size: 40px;
+    font-weight: 700;
+}
+.benefit-tit {
+    font-size: 20px;
+    font-weight: 600;
+}
+.benefit-sub {
+    display: flex;
+    justify-content: center;
+    background: url(../img/glass.png) no-repeat center /contain;
+    width: 100%;
+    align-items: center;
+    font-size: 26px;
+    font-weight: 700;
+    padding: 22px 0; 
+}
+.benefit-des {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.5;
+    padding-left: 10px;
 }
