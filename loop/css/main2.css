@@ -1304,7 +1304,7 @@ main-reviews-sec
 main-process-sec
 ========================================================================== */
 .process-sec {
-    background: url(../img/process-sec.png) no-repeat center / cover;
+    background: black url(../img/process-sec.png) no-repeat center / cover;
 }
 
 .process-sec .sec-header {
