@@ -1481,3 +1481,124 @@ main-faq-sec
 .faq-item.is-open .faq-icon::after {
     background: var(--color-pink-primary);
 }
+
+/* ==========================================================================
+main-cta-section
+========================================================================== */
+.cta-section {
+    background: black url(../img/cta-section.png) no-repeat center / cover ;
+    width: 100%;
+    padding: clamp(80px, 10vw, 160px) clamp(20px, 4vw, 48px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(48px, 7vw, 120px);
+    color: var(--color-white);
+}
+.cta-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 26px;
+    width: 100%;
+    text-align: center;
+}
+.cta-label,
+.cta-desc {
+    color: var(--color-gray-300);
+    font-size: 20px;
+    font-weight: 600;
+}
+.cta-title {
+    font-size: 80px;
+    font-weight: 900;
+    line-height: 1.2;
+}
+
+
+.cta-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+}
+.cta-actions .faq-button {
+    flex: 0 0 240px;
+    max-width: 240px;
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+main-footer-sec
+========================================================================== */
+.footer-sec {
+    background: var(--color-section-black-soft-1);
+    color: var(--color-gray-400);
+}
+.footer-inner {
+    padding: 80px clamp(20px, 3vw, 48px) 48px;
+}
+.footer-main {
+    display: flex;
+    justify-content: space-between;
+    gap: 80px;
+    padding-bottom: 72px;
+    border-bottom: 1px solid var(--color-gray-600);
+}
+
+.footer-brand {
+    max-width: 460px;
+}
+
+.footer-logo {
+    display: block;
+    margin-bottom: 12px;
+    color: var(--color-white);
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.footer-desc {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+.footer-nav {
+    display: flex;
+    gap: clamp(60px, 8vw, 140px);
+    align-items: flex-end;
+}
+
+.footer-heading {
+    margin-bottom: 8px;
+    color: var(--color-gray-500);
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.footer-list,
+.footer-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.footer-list a,
+.footer-contact a,
+.footer-contact span {
+    color: var(--color-gray-400);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    font-size: 14px;
+    font-weight: 600;
+    padding-top: 20px;
+}
