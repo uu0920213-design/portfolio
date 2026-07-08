@@ -28,11 +28,13 @@
 
   /* Point Colors */
     --color-pink-primary: #E12DA3;
+    --color-pink-primary-opacity80: rgba(225, 45, 163, 0.8);
     --color-pink-primary-opacity: rgba(225, 45, 163, 0.08); /* E12DA3 8% */
     --color-pink-primary-card: rgba(225, 45, 163, 0.5);
     --color-purple-accent: #892FC1;  
     --color-purple-accent-2: #290C3B;
     --color-purple-bright: #6261D3;
+    --color-purple-bright-opacity: rgba(98, 97, 211, 0.8);
     --color-yellow-rating: #F5A623;
 
     /* gradient Colors */
@@ -53,7 +55,7 @@
 3. Color / Gradient (단일 컬러 참조 변수)
 ========================================================================== */
     --color-purple-start: var(--color-pink-primary);
-    --color-purple-end: var(--color-purple-bright);
+    --color-purple-end: var(--color-purple-bright-opacity);
     --color-black-end: var(--color-transparent-2);
     --color-gray-end-2: var(--color-gray-600);
 
@@ -90,8 +92,8 @@
 
   /* 핑크 to 퍼플 메인 그라디언트 (Selection: Linear 80%) */
     --gradient-pink-to-purple: linear-gradient(
-    180deg,
-    var(--color-pink-primary) 0%,
+    158deg,
+    var(--color-pink-primary-opacity80) 0%,
     var(--color-purple-end) 100%);
 
     /* Gray → Light Gray */
@@ -970,3 +972,512 @@ main-benefits-sec
     }
 
 } */
+/* ==========================================================================
+main-special program-sec
+========================================================================== */
+.special-sec {
+    background: var(--color-black-soft-2);
+}
+.special-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+}
+.card{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--color-gray-600);
+    padding: 28px 40px;
+    border-radius: var(--radius-12);
+}
+.card-gap{
+    display: flex;
+    gap: 40px;
+}
+.special-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-pink-primary-opacity);
+    color: var(--color-pink-primary);
+    width: 120px;
+    height: 40px;
+    padding: 10px 30px;
+    border: 1px solid var(--color-pink-primary);
+    border-radius: var(--radius-8);
+}
+.special-content {
+    display: flex;
+    flex-direction: column;
+}
+.special-title {
+    color: var(--color-white);
+}
+.special-desc{
+    color: var(--color-gray-400);
+}
+.special-arrow {
+    display: inline-block;
+    width: 26px;
+    height: 31px;
+    background: url(../img/weui_arrow.svg) no-repeat center/contain;
+}
+
+/* ==========================================================================
+main-special welcome kit-sec
+========================================================================== */
+.welcomekit-sec{
+    background: url(../img/welcome\ kit-sec.png);
+}
+.welcomekit-layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(40px, 6vw, 100px);
+}
+
+.welcomekit-content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    flex: 1;
+}
+.kit-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--color-gray-400);
+}
+.kit-list li {
+    display: flex;
+    align-items: center;
+}
+.kit-list li::before {
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin-right: 16px;
+    background: url(../img/check-box.svg) no-repeat center / contain;
+}
+.kit-visual {
+    position: relative;
+    flex: 1.3;
+    aspect-ratio: 894 / 680;
+    background: url(../img/kit-img.png) no-repeat center / cover;
+    border-radius: var(--radius-20);
+    overflow: hidden;
+}
+.kit-btn{
+    color: var(--color-white);
+    padding: 20px 66px;
+    background: var(--gradient-pink-to-purple);
+    font-size: 20px;
+    font-weight: 600;
+    max-width: 280px;
+    text-align: center;
+    border-radius: var(--radius-8);
+}
+.kit-caption {
+    position: absolute;
+    left: 40px;
+    right: 40px;
+    bottom: 38px;
+    padding: 28px 40px;
+    background: rgba(0, 0, 0, 0.65);
+    border-radius: var(--radius-12);
+}
+.kit-caption strong {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-pink-primary);
+}
+.kit-caption p {
+    color: var(--color-white);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* ==========================================================================
+main-gallery-sec
+========================================================================== */
+.gallery-sec{
+    background: var(--color-section-black-soft-2);
+}
+.gallery-pd {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 140px;
+    padding-bottom:clamp(32px,5vw,64px);
+}
+.gallery-sec .sec-header {
+    align-items: center;
+    text-align: center;
+}
+
+.gallery-sec .sec-label {
+    justify-content: center;
+}
+
+.gallery-sec .sec-tit {
+    text-align: center;
+}
+.gallery-pd .sec-label::after{
+    content: "";
+    width: 28px;
+    height: 2px;
+    background: var(--color-pink-primary);
+}
+.swiper {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 5 / 2;
+    object-fit: cover;
+}
+
+/* 
+이미지 비율 다르게 주고싶을 때
+.mySwiper2 .swiper-slide img {
+    aspect-ratio: 5 / 2;
+}
+.mySwiper .swiper-slide img {
+    aspect-ratio: 3 / 1;
+} */
+
+.swiper-button-next,
+.swiper-button-prev {
+    width: 40px;
+    height: 40px;
+    color: var(--color-white-70);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.mySwiper {
+    box-sizing: border-box;
+    padding: 10px 0;
+}
+
+.mySwiper .swiper-slide {
+    width: 25%;
+    opacity: 0.4;
+}
+
+.mySwiper .swiper-slide-thumb-active {
+    opacity: 1;
+}
+
+.mySwiper2 .swiper-pagination-bullet {
+    border: 1px solid var(--color-white);
+    background-color: var(--color-white);
+    opacity: 1;
+}
+
+.mySwiper2 .swiper-pagination-bullet-active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.gallery-des {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-gray-400);
+    text-align: right;
+    padding-right: clamp(20px, 3vw, 48px);
+    padding-bottom:clamp(32px,5vw,64px);
+}
+
+/* ==========================================================================
+main-reviews-sec
+========================================================================== */
+.reviews-sec {
+    background: var(--color-section-gray-2);
+}
+.review-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.review-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 240px;
+    width: 100%;
+    box-sizing: border-box;
+
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--color-gray-500);
+    padding: 18px 40px;
+    border: 1px solid var(--color-gray-500);
+    border-radius: var(--radius-8);
+}
+.review-button::after{
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 24px;
+    background:url(../img/weui_arrow.svg) no-repeat center/cover;
+}
+.reviews-container {
+    display: flex;
+    gap: 20px;
+}
+.review {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    width: 100%;
+    max-width: 520px;
+    padding: 40px;
+    box-sizing: border-box;
+    background-color: var(--color-gray-800);
+    border: 1px solid var(--color-gray-600);
+    border-radius: var(--radius-20);
+
+}
+.review-rating {
+    display: flex;
+    gap: 2px;
+    width: 20px;
+    height: 20px;
+}
+.review-text {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--color-white);
+}
+.review-text::after{
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: var(--color-gray-600);
+    margin: 20px 0;
+}
+.review-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.review-info {
+    display: flex;
+    flex-direction: column;
+}
+.review-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--color-gray-400);
+}
+.review-event {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-gray-400);
+}
+.review-badge {
+    background: var(--color-pink-primary-opacity);
+    border: 1px solid var(--color-pink-primary);
+    border-radius: var(--radius-full);
+    color: var(--color-pink-primary);
+    padding: 10px 24px;
+
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+/* ==========================================================================
+main-process-sec
+========================================================================== */
+.process-sec {
+    background: url(../img/process-sec.png) no-repeat center / cover;
+}
+
+.process-sec .sec-header {
+    align-items: center;
+    text-align: center;
+}
+
+.process-sec .sec-label {
+    justify-content: center;
+}
+
+.process-sec .sec-tit {
+    text-align: center;
+}
+.process-sec .sec-label::after{
+    content: "";
+    width: 28px;
+    height: 2px;
+    background: var(--color-pink-primary);
+}
+.process-list {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    max-width: 1600px;
+    list-style: none;
+    margin-top: 40px;
+}
+.process-list::before {
+    content: '';
+    position: absolute;
+    top: 32px;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: var(--color-gray-500);
+}
+.process-item {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.process-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border: 1px solid var(--color-gray-400);
+    border-radius: var(--radius-full);
+    background: var(--color-black-soft);
+    color: var(--color-pink-primary);
+    font-size: 20px;
+    font-weight: 600;
+}
+.process-txt {
+    margin-top: 22px;
+}
+.process-txt h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--color-white);
+}
+.process-txt p {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--color-gray-400);
+}
+
+/* ==========================================================================
+main-faq-sec
+========================================================================== */
+.faq-sec {
+    background: var(--color-section-black-soft-2);
+}
+.faq-layout{
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: clamp(60px, 9vw, 170px);
+}
+
+.faq-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 32px;
+    max-width: 240px;
+    border: 1px solid var(--color-gray-500);
+    border-radius: var(--radius-8);
+    background: var(--color-black-opacity);
+
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--color-white);
+}
+.faq-button:hover {
+    background: var(--gradient-pink-to-purple);
+}
+.faq-list {
+    border-top: 1px solid var(--color-gray-500);
+}
+.faq-item {
+    border-bottom: 1px solid var(--color-gray-500);
+}
+.faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    width: 100%;
+    padding: 32px 20px;
+    border: 0;
+    background: transparent;
+    color: var(--color-gray-500);
+    font-size: 24px;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+}
+.faq-item.is-open .faq-question {
+    color: var(--color-pink-primary);
+}
+
+.faq-answer {
+    display: none;
+    padding: 0 20px 32px;
+    color: var(--color-gray-400);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.faq-item.is-open .faq-answer {
+    display: block;
+}
+
+.faq-icon {
+    position: relative;
+    flex: 0 0 32px;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--color-gray-500);
+    border-radius: 2px;
+}
+
+.faq-icon::before,
+.faq-icon::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 14px;
+    height: 2px;
+    background: var(--color-gray-500);
+    transform: translate(-50%, -50%);
+}
+
+.faq-icon::after {
+    width: 2px;
+    height: 14px;
+}
+
+.faq-item.is-open .faq-icon {
+    border-color: var(--color-pink-primary);
+    transform: rotate(45deg);
+    transition: 0.3s;
+}
+
+.faq-item.is-open .faq-icon::before,
+.faq-item.is-open .faq-icon::after {
+    background: var(--color-pink-primary);
+}
