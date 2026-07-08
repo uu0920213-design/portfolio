@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>꾸블랙치킨</title>
+  <meta name="author" content="꾸블랙치킨">
+  <meta name="description" content="ONE BITE NO BREAKS 멈출 수 없는 맛! 꾸블랙치킨">
+  <meta name="keyword" content="ONE BITE NO BREAKS 멈출 수 없는 맛! 꾸블랙치킨">
+  <meta name="classification" content="ONE BITE NO BREAKS 멈출 수 없는 맛! 꾸블랙치킨">
+  <meta property="og:type" content="website">
+  <!-- video, movie -->
+  <!-- https://developers.kakao.com/tool/debugger/sharing -->
+  <meta property="og:title" content="꾸블랙치킨">
+  <meta property="og:description" content="ONE BITE NO BREAKS 멈출 수 없는 맛! 꾸블랙치킨">
+  <!-- 300자내외 -->
+  <meta property="og:url" content="https://kkublack.com/index.php">
+  <meta property="og:image" content="https://kkublack.com/storage/site/79c32e8e3a5413f8fe897e5f1c3d8327_oWY6qUGB_c18afe96708fac2c91f7db2130a63d614554dfee.png">
+  <!-- og이미지 사이즈 1200 * 630 -->
+  <link rel="shortcut icon" type="image/x-icon" href="https://kkublack.com//storage/site/79c32e8e3a5413f8fe897e5f1c3d8327_Ge7ZgWNU_2b193835a6fc1108488d9489bf378be7cbccd327.png">
+  <link rel="canonical" href="https://kkublack.com/index.php">
+
+  <link rel="stylesheet" href="../assets/css/paperfont.css">
+  <link rel="stylesheet" href="../assets/css/font.css">
+  <link rel="stylesheet" href="../css/default.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/main4.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  
+  
+</head>
+<body>
+  <div id="wrap">
+    <header>
+      <div class="inner h-in">
+        <h1><a href="index.html"><img src="img/logo_white.svg" alt="꾸블랙치킨"></a></h1>
+        <nav>
+          <h2 class="sr-only">창업</h2>
+          <ul>
+            <li><a href="#brand">브랜드소개</a></li>
+            <li><a href="#competi">브랜드경쟁력</a></li>
+            <li><a href="#franchise">창업경쟁력</a></li>
+            <li><a href="#guide">창업안내</a></li>
+            <li><a href="#price">창업비용 및 문의</a></li>
+          </ul>
+        </nav>
+        <div class="mo-navi">
+          <div class="mo-navi-box">
+            <!-- close-btn을 클릭했을 때 is-open toggle클래스 / 나중에 is-open추가해야함-->
+            <h2>창업</h2>
+            <ul class="">
+              <!-- h2를 클릭했을 때 나오는 toggle class / is-open나중에 클래스 속성주기 -->
+              <li><a href="#brand">브랜드소개</a></li>
+              <li><a href="#competi">브랜드경쟁력</a></li>
+              <li><a href="#franchise">창업경쟁력</a></li>
+              <li><a href="#guide">창업안내</a></li>
+              <li><a href="#price">창업비용 및 문의</a></li>
+            </ul>
+          </div>
+          <button class="menu-btn">
+            <!-- is-open으로 누르면 바뀌는건 자바스크립트로 작업 
+              모양이 바뀌는건 css작업 
+              is-open은 toggle클래스 / 추후 is-open속성 넣어줘야함 -->
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <!-- header script -->
+    <script>
+      /* querySelectorAll() 여러개를 불러올때 */
+      const menuBtn = document.querySelector(".menu-btn");
+      const moNaviBox = document.querySelector(".mo-navi-box");
+
+      /* 재할당을 받을 일이 없음 const사용 */
+      /* querySelector요소를 불러올때 쓰는 함수 */
+
+      //화살표 함수 add, remove, toggle
+        /* 과거에 사용하던 방식 
+        menuBtn.addEventListener("click", function() {
+          console.log(" 클릭되었당") /오류 메세지를 확인하려고 사용도 함
+        }) */
+        menuBtn.addEventListener("click", () => {
+        menuBtn.classList.toggle("is-open");
+        moNaviBox.classList.toggle("is-open");
+        })
+        /* menuBtn을 클릭했을때 작동될거야 */
+        /* 연속적으로 동작을 할수있게함 toggle(열기/끄기) */
+
+        if(menuBtn.classList.contains("is-open")) {
+          console.log("열려있어!")
+        } else {
+          console.log("닫혀있어!")
+        }
+        /* 클래스("is-open")가 있느냐 없느냐를 확인할 수 있음 */
+
+        const h2 = document.querySelector(".mo-navi-box h2");
+        const ul = document.querySelector(".mo-navi-box ul");
+        /* 클릭해야할 친구 h2 잡고 동작될거를 안에 씀 */
+
+        h2.addEventListener("click", () => {
+        ul.classList.toggle("is-open");
+        })
+
+        //모바일 navi a를 클릭했을 때 moNavibox창이 닫히고(.is-open클래스 삭제) 햄버거 버튼(menuBtn)에  .is-open클래스 삭제, h2요소 is-open삭제
+        const moNaviLinks = document.querySelectorAll(".mo-navi-box ul a");
+        moNaviLinks.forEach((link) => {
+          link.addEventListener("click", () =>{
+            menuBtn.classList.remove("is-open");
+            moNaviBox.classList.remove("is-open");
+            ul.classList.remove("is-open");
+          })
+        })
+    </script>
+    <!-- 
+      menuBtn.classList.add() - 클래스 추가만 함
+      menuBtn.classList.remove() - 클래스 제거만 함
+      menuBtn.classList.toggle() - 있으면제거, 없으면 추가함
+      menuBtn.classList.replace("is-open", "is-closed") - 클래스를 다른걸로 바꿈
+    -->
+
+    <main>
+      <ul class="menu-wrap">
+          <li class="active"><a href="#brand">브랜드소개</a></li>
+          <li><a href="#competi">브랜드경쟁력</a></li>
+          <li><a href="#franchise">창업경쟁력</a></li>
+          <li><a href="#guide">창업안내</a></li>
+          <li><a href="#price">창업비용 및 문의</a></li>
+      </ul>
+      
+      <div class="hero-wrap">
+        <section class="hero-sec heading" id="brand">
+          <div class="txt-ani" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="1500">
+            <div><strong>멈출 수 없는 맛</strong></div>
+            <!-- strong을 넣어도 괜찮고 p요소로 만들어도 괜찮고 h2를 써도됨. 하지만 strong은 인라인요소라 div안에넣기 -->
+            <div><strong>불맛을 제대로</strong></div>
+          </div>
+          <h2 data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="1800" data-aos-once="true">꾸블랙치킨</h2>
+          <p>1만 시간의 집념으로 제대로 구웠다</p>     
+        </section>
+      </div>
+
+      <script>
+        //wheel -> 모바일 적용 안됨 , touchstart 같은거를 넣어줘야함 / scroll은 둘다 가능
+        //innerHeight (안쪽높이), outerHeight설명
+        window.addEventListener("load", function() {
+            document.querySelector(".hero-sec").classList.add("open");
+        })
+
+        const heroPanel = document.querySelector("#brand"); // sticky 고정 
+        const heroWrap = document.querySelector(".hero-wrap"); // 얼마나 지났는지 측정할 기준
+
+        window.addEventListener("scroll", () => {
+          // 상단에서 얼마나 떨어져 있나 화면인게 핵심 스크롤값에 따라 변함
+          // 위로 밀려난만큼(top이 음수인만큼) 지나온 것으로 해석
+            const passed = -heroWrap.getBoundingClientRect().top;
+            const range = heroWrap.offsetHeight - heroPanel.offsetHeight;
+            // window.innerHeight를 쓰면 ios사파리에서 스크롤중 주소창이 접혔다 펴지면서 화면높이자체가 출렁거림
+            // outerHeight는 요소의 실제높이로 봐도 무방 - 실제 요소의 높이가 몇인가(padding,border포함)
+
+            let progress = passed / range;
+            progress = Math.min(Math.max(progress, 0), 1);
+
+            heroPanel.style.setProperty("--progress", progress);
+        })
+
+      </script>
+      
+
+      <div class="banner-wrap heading">
+        <div class="banner-track">
+          <div class="banner-item">
+            <span class="banner-text">one bite, no breaks </span>
+            <span class="banner-text">one bite, no breaks </span>
+            <span class="banner-text">one bite, no breaks </span>
+            <span class="banner-text">one bite, no breaks </span>
+          </div>
+          <div class="banner-item">
+            <span class="banner-text">one bite, no breaks </span>
+            <span class="banner-text">one bite, no breaks </span>
+            <span class="banner-text">one bite, no breaks </span>
+            <span class="banner-text">one bite, no breaks </span>
+          </div>
+        </div>
+      </div>
+      <section class="count-sec">
+        <div class="txt-box">
+          <h2 class="heading tit">꾸블랙은 지금도 <span>웨이팅 중</span></h2>
+          <p>오로지 치킨 하나로 줄 세우는 곳</p>
+        </div>
+        <div class="count-txt heading">
+          <p>오픈 한달만에 1억 돌파</p>
+          <div class="num"><strong>0원</strong></div>
+        </div>
+      </section>
+
+      <script>
+        const counter = (counterElement, max) => {
+          let now = max; //max에서 시작해서 0을 향해 줄어듦
+
+          //30ms(0.03초)마다 반복실행
+          const handle = setInterval(() => {
+            //화면에 표시 (목표 - 남은거리 ) = 지금까지 올라온 숫자
+            // toLocaleString는 콤마(,) 찍어주는 함수
+            counterElement.innerHTML = Math.ceil(max-now).toLocaleString() + "원";
+
+            // 남은 거리가 1보다 작아지면 = 거의 도착했으면
+            if(now < 1) {
+              clearInterval(handle); //반복멈추기
+              //마지막에 정확하게 목표값 맞추기
+              counterElement.innerHTML = max.toLocaleString() + "원";
+            }
+            //남은거리 1/8만큼씩 이동 남은거리가 클수록 빠르고, 줄어들수록 작아짐
+            const step = now / 8;
+            now -= step;
+          }, 30)
+        }
+        /* max = 목표 1억
+          now = 아직 남은양 처음에는 1억
+          화면표시 max-now 지금까지 뺀 양, 처음에는 0
+
+          now가 1억->0으로 내려가면
+          화면숫자는 0 -> 1억으로 올라감 */
+
+        //바로 실행이 되어버려서 실제로는 스크롤이벤트를 같이 넣어줘야함
+        //const numEl = document.querySelector(".num strong")
+        //counter(numEl, 100_000_000);
+
+        //countElement 숫자를 표시할 html요소
+        //max 최종 목표 숫자
+
+        //스크롤 이벤트
+        const startCountersOnScroll = () => {
+          const numSec = document.querySelector(".count-sec");
+          //count-sec이 문서 위에서 몇 px 떨어졌는지 측정 (고정값)
+          const numSecOffsetTop = numSec.offsetTop;
+          //이미 실행했는지 체크하는 스위치
+          let started = false;
+
+          //스크롤 할 때마다 실행될 함수
+          const handleScroll = () => {
+            //지금 얼마나 스크롤했는지 측정 (변하는 값)
+            const scrollY = window.scrollY;
+            if(scrollY >= numSecOffsetTop && !started) {
+              const counterElement = document.querySelector(".num strong");
+              counter(counterElement, 101184800);
+              //다시는 실행 안함
+              started = true;
+
+              //스크롤이벤트 해제
+              window.removeEventListener("scroll", handleScroll);
+            }
+          };
+          //스크롤 될때마다 handleScroll실행
+          window.addEventListener("scroll", handleScroll);
+        };
+        //페이지가 완전히 로드된 후 함수실행
+        window.addEventListener('load', startCountersOnScroll);
+
+      </script>
+      <!-- <div class="bg-sec">
+        <img src="img/s3_bg.jpg" alt="꾸블랙치킨">
+      </div> -->
+      <div class="sec-wrap">
+        <div class="bg">
+          <section class="intro-sec">
+            <div class="inner">
+              <h2 class="heading">
+              <span>NEW ORIGIN</span>
+              <span>KKUBLACK</span>
+              </h2>
+              <div class="txt-box">
+                <p>치밥, 사리, 토핑으로 유명한 숯불치킨은 많은데 왜 ‘불맛’으로 기억되는 숯불치킨은 없을까?</p>
+                <p>
+                  <span class="mobile">
+                    상엔 수많은 숯불치킨이 있지만, 우리는 가장 기본인 ‘불맛’의 본질에 집중했습니다. 
+                  </span>
+                  <span>
+                    F&B 전문가들이 모여 전통 숯불의 깊은 풍미를 재해석하고, 현대적 기술을 접목해 숯불의 향 · 불의 온도 · 소스의 균형을 치밀하게 설계했습니다. 
+                  </span>
+                  <span class="mobile">
+                    인위적인 향이 아닌 진짜 숯으로 완성한 압도적인 맛의 차이. 오직 꾸블랙에서만 경험할 수 있는, 입안 가득 부드럽고 은은하게 퍼지는 진짜 숯불향을 느껴보세요.
+                  </span>
+                </p>
+              </div>
+            </div>
+          </section>
+        </div>
+        <section class="interior-sec pd" id="competi">
+          <h2 class="heading tit">
+            <span>공간 본질에 집중한 감도 높은</span>
+            <span>모던 레트로 인테리어</span>
+          </h2>
+          <div class="swiper g-slider">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <img src="img/s7_img1.jpg" alt="인테리어1" class="pc-img">
+                <img src="img/s7_img1_mo.jpg" alt="인테리어1" class="mo-img">
+              </div>
+              <div class="swiper-slide">
+                <img src="img/s7_img2.jpg" alt="인테리어2" class="pc-img">
+                <img src="img/s7_img2_mo.jpg" alt="인테리어2" class="mo-img">
+              </div>
+              <div class="swiper-slide">
+                <img src="img/s7_img3.jpg" alt="인테리어3" class="pc-img">
+                <img src="img/s7_img3_mo.jpg" alt="인테리어3" class="mo-img">
+              </div>
+              <div class="swiper-slide">
+                <img src="img/s7_img4.jpg" alt="인테리어4" class="pc-img">
+                <img src="img/s7_img4_mo.jpg" alt="인테리어4" class="mo-img">
+              </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          </div>
+        </section>
+        <script>
+          /* // const swiper = new Swiper('g-slider',{}) */
+          const swiper = new Swiper('.g-slider',{
+            loop: true,
+            pagination: {
+              el: '.g-slider .swiper-pagination',
+            },
+            navigation: {
+              nextEl: '.g-slider .swiper-button-next',
+              prevEl: '.g-slider .swiper-button-prev',
+            },
+          })
+        </script>
+        <section class="merit-sec pd" id="franchise">
+          <!-- false 위에서 아래로 내려올때마다 계속 반복됨 , true한번만가능 -->
+          <div class="inner" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="300" data-aos-easing="ease-out" data-aos-once="false">
+            <div class="txt-box">
+              <h2 class="heading tit">
+                <span>1만 시간의 노하우를</span>
+                <span>단 3가지 기술에 압축했습니다</span>
+              </h2>
+              <p>초보 점주님이 만들어도 고객에게 가는 맛의 감동은 늘 똑같도록.<br>획일화된 맛을 쉽고 빠르게 구현하는 꾸블랙만의 기술력</p>
+            </div>
+            <ul>
+              <li data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="0">
+                <div class="img-box">
+                  <img src="img/s10_img1.jpg" alt="꾸블랙치킨">
+                  <strong>초벌</strong>
+                </div>
+                <div class="sub-box">
+                  <h3>꾸블랙 전용 초벌기</h3>
+                  <p>섬세한 온도 제어로 불향의 디테일 완성</p>
+                </div>
+              </li>
+              <li data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="300">
+                <div class="img-box">
+                  <img src="img/s10_img2.jpg" alt="꾸블랙치킨">
+                  <strong>소스</strong>
+                </div>
+                <div class="sub-box">
+                  <h3>규격화 시그니처 소스</h3>
+                  <p>세밀한 조제로 맛의 편차를 원천 차단</p>
+                </div>
+              </li>
+              <li data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="600">
+                <div class="img-box">
+                  <img src="img/s10_img3.jpg" alt="꾸블랙치킨">
+                  <strong>조리</strong>
+                </div>
+                <div class="sub-box">
+                  <h3>스마트 자동조리기</h3>
+                  <p>버튼 하나로 본점의 화력을 그대로 재현</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section class="youtube-sec pd">
+          <h2 class="heading tit" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+            <span>22평 매장에서 억대매출 달성!</span>
+            <span>비법은 빠른 조리과정에 있습니다</span>
+          </h2>
+          <div class="media" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/JrRyUu3Q1wE?si=VJK7OfM9fi_8OFHg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <div class="sub-tit">
+            <p>6마리 완성에 <span>단 8분!</span></p>
+            <p>주문부터 서빙까지 <span>단 9분!</span></p>
+          </div>
+        </section>
+        <section class="benefit-sec pd" id="guide">
+          <div class="inner">
+            <div class="txt-box">
+            <h2 class="heading tit">성원에 감사드립니다</h2>
+            <p>부산본점 오픈과 함께 지금까지 수많은 가맹 문의가 이어졌으나<br>무분별한 빠른 확장보다, 가맹점과 함께 성장할 수 있는 체계를 만들기 위해 준비에 집중하였습니다.<br>이제 그 기다림에 보답하며, 단 한 번의 창업 프로모션을 시작합니다.</p>
+            </div>
+            <ul>
+              <li class="r-badge" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="0">
+                <strong class="heading">500만원</strong>
+                <span>가맹비 전액면제</span>
+              </li>
+              <li class="r-badge" data-aos="fade-up" data-aos-anchor-placement="top-bottom"  data-aos-delay="300">
+                <strong class="heading">200만원</strong>
+                <span>교육비 전액면제</span>
+              </li>
+              <li class="r-badge" data-aos="fade-up" data-aos-anchor-placement="top-bottom"  data-aos-delay="600">
+                <strong class="heading">300만원</strong>
+                <span>보증금 전액면제</span>
+              </li>
+              <li class="r-badge" data-aos="fade-up" data-aos-anchor-placement="top-bottom"  data-aos-delay="900">
+                <strong class="heading">500만원</strong>
+                <span>인테리어 비용 평당 50만원 할인</span>
+                <span class="star" style="color: var(--color-gray-500);">10평 기준</span>
+              </li>
+              <li class="r-badge" data-aos="fade-up" data-aos-anchor-placement="top-bottom"  data-aos-delay="1200">
+                <strong class="heading">500만원</strong>
+                <span>3.3% 로열티 및 광고분담금 한시적 면제</span>
+              </li>
+              <li class="y-badge" data-aos="fade-up" data-aos-anchor-placement="top-bottom"  data-aos-delay="1500">
+                <strong class="heading">오픈마케팅 지원</strong>
+                <span>블로그 체험한, 채널광고 등</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section class="franc-sec pd" id="price">
+          <div class="inner" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+            <div class="txt-box">
+              <h2 class="heading tit">신규창업 비용</h2>
+              <p>본사 마진만 남는 거품 비용은 확 빼고 창업비용만 남겼습니다.</p>
+            </div>
+            <div class="scroll-box">
+              <table>
+              <col>
+              <col>
+              <col>
+              <col>
+              <!-- 표의 수대로 넣고 전체 설정을 할 수 있음 -->
+              <thead>
+                <tr>
+                  <th>구분</th>
+                  <th>내용</th>
+                  <th>금액</th>
+                  <th>프로모션가</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>가맹비</th>
+                  <td>브랜드 상호 및 상표사용권, 영업권 보장 등</td>
+                  <td class="arrow"><b>500만원</b></td>
+                  <td class="bold"><em>한시적면제</em></td>
+                </tr>
+                <tr>
+                  <th>교육비</th>
+                  <td>제조 / 운영 / 서비스</td>
+                  <td class="arrow"><b>200만원</b></td>
+                  <td class="bold"><em>한시적면제</em></td>
+                </tr>
+                <tr>
+                  <th>이행보증금</th>
+                  <td>각종 계약관련 이행 보증금</td>
+                  <td class="arrow"><b>300만원</b></td>
+                  <td class="bold"><em>한시적면제</em></td>
+                </tr>
+                <tr>
+                  <th>기기 및 장비</th>
+                  <td>숯불오븐조리기 / 자동볶음기 / 튀김기 / 정제기<br>초도집기 및 석쇠 / 작업대 및 선반 / 테이블냉장고 / 간택기 / 4도어 냉장고 등</td>
+                  <td class=""><em>2,150만원</em></td>
+                  <td class="">&nbsp;</td>
+                </tr>
+                <th>인테리어</th>
+                  <td>목공 / 전기 / 도장 / 홀덕트 / 바닥재 / 타일 / 방수 등</td>
+                  <td class="arrow big"><b>2,000만원</b><span>(1평당 200)</span></td>
+                  <td class="bold"><em>1,500만원</em><span>(1평당 150)</span></td>
+                </tr>
+                <th>간판</th>
+                  <td>LED채널간판, 외부시트지, 아크릴스카시 등</td>
+                  <td class="arrow"><b>450만원</b></td>
+                  <td class="bold"><em>개별시공가능</em></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4">
+                    <div>합계 <strong>3,650</strong>만원 <span>(5,600만원)</span></div>
+                  </td>
+                  <!-- 4칸을 차지하게됨 -->
+                </tr>
+              </tfoot>
+              </table>
+              <div class="summary-box">
+                <ul class="left">
+                  <li class="star">별도사항 : 익스테리어, 가구, 스피커, CCTV, 냉난방기, 전기증설, 소방설비, 철거, 초도물류 등</li>
+                  <li class="star">포스시스템 : 장비(포스기, 캐치테이블 기기 포함) 렌탈 가능</li>
+                  <li class="star">위 자료는 매장 상황에 따라 변동될 수 있습니다.</li>
+                </ul>
+                <p class="star">10평(33m² 기준) | 단위 : 만원, VAT 별도</p>
+              </div>
+            </div>
+            <!-- 테이블만 따로 스크롤이 있으면 좋겠다면 table과 summary박스를 묶으면됨 -->
+          </div>
+        </section>
+        <section class="lnq-sec pd">
+          <div class="inner">
+            <div class="txt-box" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="0">
+            <h2 class="heading tit">창업문의</h2>
+            <p>
+              <span>꾸블랙과 함께할 예비 가맹점주님을 환영합니다.</span>
+              <span>하단의 정보를 기입해주시면 빠른 시일 내에 친절하고 자세한 상담 도와드리겠습니다.</span>
+            </p>
+            </div>
+            <div class="form-container" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="300">
+                <div class="form-header">
+                  <h3>상담자 정보</h3>
+                  <p class="gray">별표 표시는 필수 입력 항목입니다.*</p>
+                </div>
+                <form class="contact-form" action="">
+                  <div class="form-group">
+                    <label for="name">
+                      <span class="required">*</span>
+                      <span class="label-text">성함</span>
+                    </label>
+                    <input type="text" id="name" name="name" placeholder="성함" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="phone">
+                      <span class="required">*</span>
+                      <span class="label-text">연락처</span>
+                    </label>
+                    <input type="tel" id="phone" name="phone" placeholder="연락처" required>
+                    <!-- name은 DB넘어갈때의 이름 / label과 id가 동일해야 작동함-->
+                  </div>
+                  <div class="form-group">
+                    <label for="location">
+                      <span class="required">*</span>
+                      <span class="label-text">창업희망지역</span>
+                    </label>
+                    <select name="location" id="location" required>
+                      <option value="">시/도 선택</option>
+                      <option value="seoul">서울특별시</option>
+                      <option value="incheon">인천광역시</option>
+                      <option value="daejeon">대전광역시</option>
+                      <option value="gwangju">광주광역시</option>
+                      <option value="daegu">대구광역시</option>
+                      <option value="ulsan">울산광역시</option>
+                    </select>
+                    <!-- div안에 셀렉트 박스를 넣음, div에 before나 after를 넣어서 정확히 붙어있음
+                    div가 relative , 화살표가 absolute가 됨 
+                    select에 직접적으로 주기보다 div를 사용하는 것이 제일 많이 쓰임-->
+                  </div>
+                  <!-- <div class="form-group">
+                    <label for="business-type">
+                      <span class="label-text">유입경로</span>
+                    </label>
+                    <select name="business-type" id="business-type">
+                      <option value="">유입경로 선택</option>
+                      <option value="store_visit">매장방문</option>
+                      <option value="naver">네이버</option>
+                      <option value="instagram">인스타그램</option>
+                      <option value="youtube">유튜브</option>
+                      <option value="referral">지인소개</option>
+                      <option value="other">기타</option>
+                      value값은 백엔드 개발자랑 말해야함
+                    </select>
+                  </div> -->
+                  <div class="form-group select-toggle">
+                    <label for="business-type">
+                      <span class="label-text">유입경로</span>
+                    </label>
+                    <!-- business-box active toggleClass / 나중에 밑에 active속성 기입-->
+                    <div class="business-box">
+                      <input type="text" name="" id="" value="유입경로 선택" readonly>
+                      <img src="img/selectarrow.png" alt="">
+                      <ul class="business-select">
+                        <li class="store_visit">매장방문</li>
+                        <li class="naver">네이버</li>
+                        <li class="instagram">인스타그램</li>
+                        <li class="youtube">유튜브</li>
+                        <li class="referral">지인소개</li>
+                        <li class="other">기타</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="">
+                      <span class="label-text">점포유무</span>
+                    </label>
+                    <div class="toggle-group">
+                      <button type="button" class="toggle-btn active" data-value="option1">없음</button>
+                      <button type="button" class="toggle-btn" data-value="option2">있음</button>
+                      <!-- <input type="hidden" id="category" name="category" value="option1"> -->
+                      <!-- 사용자가 선택했지만, 서버에는 뭘 선택했는지 모름
+                      value에 선택 값이 저장되면서 서버가 확인할 수 있음 -->
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="avail-time">상담 가능 요일/시간</label>
+                    <input type="text" id="avail-time" name="avail-time" placeholder="예) 주말/14시 이후">
+                  </div>
+                  <div class="form-group">
+                    <label for="message">문의내용</label>
+                    <textarea name="message" id="message" placeholder="문의내용" rows="6"></textarea>
+                  </div>
+                  <div class="form-footer">
+                    <div class="checkbox-group gray">
+                      <input type="checkbox" id="terms" name="terms" required>
+                      <label for="terms">
+                        개인정보 수집 활용을 동의합니다.
+                        <a href="#" class="terms-link">전문보기</a>
+                      </label>
+                    </div>
+                  </div>
+                  <button type="button" id="" class="submit-btn">개설 문의하기</button>
+                </form>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    
+    <script>
+      //점포유무 있음없음
+      const toggleBtn = document.querySelectorAll(".toggle-btn")
+      //li를 각각 선택하기 위해 forEach는 담아두는 변수를 각각 선택할 수 있어짐
+      //toggleBtn은 단체 forEach로 각각 하나의 버튼을 btn으로 분류함
+      toggleBtn.forEach(btn => {
+        btn.addEventListener("click", () => {
+          console.log("클릭된 버튼", btn.textContent);
+          //제거를 먼저하고 클릭할 수 있게함, forEach를 많이 씀
+          toggleBtn.forEach( b => {
+            b.classList.remove("active");
+          })
+          
+          btn.classList.add("active");
+        })
+      })
+
+
+      // business-box active 유입경로 열고닫기 toggle
+      // <input type="text" name="" id="" value="유입경로 선택" readonly> java는 value값을 바꿀 수 있음
+      const businessBox = document.querySelector(".business-box");
+      const businessInput = document.querySelector('input[name=""]');
+      const businessLis = document.querySelectorAll('.business-select li');
+      //열고닫기 기능 businessbox의 열고 닫는 기능
+      businessBox.addEventListener("click", () =>
+        businessBox.classList.toggle("active")
+      )  
+      ////businessLis를 클릭해서 value값을 변동하고 리스트를 닫음
+      businessLis.forEach(li => {
+        li.addEventListener("click", (e) => {
+          e.stopPropagation(); //이벤트가 더이상 퍼져나가는걸 방지
+          //자식요소에 이벤트를 줄 때 부모요소에 영향을 끼치지 말라고 할때 사용
+          //e.stopPropagation();를 걸지 않으면 자식요소가 부모요소에 영향을 끼쳐서 계속 열렸다 닫았다를 반복하게됨
+
+          businessInput.value = li.textContent;
+          businessBox.classList.remove("active");
+        })
+      })
+    </script>
+    <!-- html은 부모 자식 구조임
+      <div class ="business-box"> <-부모
+      <ul class = "business-select"> <-자식
+        <li>매장방문</li> <-손자
+      <ul>
+      </div>
+
+      손자li를 클릭하면 부모도 클릭된것처럼 느껴짐
+      li도 클릭되고 부모도 클릭된거라 인지하고 두개의 addEventListener가 모두 실행됨
+      e.stopPropagation()을 사용하면 부모까지 가지않게 전파를 막음
+    -->
+
+    <footer>
+      <ul class="line1">
+        <li><a href="#"><strong>개인정보처리방침</strong></a></li>
+        <li><a href="#"><strong>이메일 무단 수집 거부</strong></a></li>
+      </ul>
+      <ul class="line2">
+        <li><a href="#">(주)꾸블랙</a></li>
+        <li><a href="#">대표이사: 강태성</a></li>
+        <li><a href="#">사업자등록번호: 671-86-04156</a></li>
+        <li><a href="#">부산광역시 남구 진남로 29번길 28</a></li>
+        <li><a href="mailto:kkublack_official@naver.com">이메일: kkublack_official@naver.com</a></li>
+        <!-- mailto:메일을 보내겠다 기능 + 이메일 전송 링크-->
+        <li><a href="#">가맹문의 및 고객지원: 1811-9807</a></li>
+      </ul>
+      <p class="heading">COPYRIGHT &copy;KKUBLACK ALL RIGHTS RESERVED.</p>
+    </footer>
+  </div>
+</body>
+      <!--  스크롤 작업시 header가 사라진 후에 생성 -->
+      <!-- 위에 메뉴가 계속 따라오길 바란다면 그만큼의 padding값을 줘서 내려오게 해야함 -->
+
+      <script>
+        const menuWrap = document.querySelector(".menu-wrap");
+        const menuItems = menuWrap.querySelectorAll("li");
+        const sections = document.querySelectorAll("#brand, #competi, #franchise, #guide, #price");
+
+        window.addEventListener("scroll", () => {
+          const scrollY = window.scrollY;
+
+          //console.log(scrollY);
+
+          //console.log(scrollY) 창의 좌표값을 받을 수 있음
+          //스크롤이벤트는 라이브러리(위치값을 기억함)를 사용해서 작업한다.
+
+          if(scrollY > 100) {
+            //menuWrap.classList.add("show");
+            menuWrap.style.display = "flex"; //강제로 스타일을 박아버림
+          } else {
+            //menuWrap.classList.remove("show"); //100보다 작은 상황이 오면 사라져라
+            menuWrap.style.display = "none";
+          }
+          //지금 어느 섹션에 있는지 찾기
+          let currentID = "";
+        
+          sections.forEach((section) => {
+            // section.offsetTop은 그 섹션이 페이지 맨 위에서 얼마나 떨어져있는지
+            // -150은 여유값, 섹션이 화면 상단에 거의 닿을 때 미리 바꿔주려는 조건식
+            if(scrollY >= section.offsetTop - 150) {
+              currentID = section.id;
+            }
+          })
+
+          // currentID와 일치하는 링크를 가진 li에 active적용
+          menuItems.forEach((item) => {
+            item.classList.remove("active");
+
+            const link = item.querySelector("a");
+            if(link.getAttribute("href") === "#" + currentID) {
+              item.classList.add("active")
+            }
+          })
+        })
+
+
+        /* menuItems.forEach((item) => {
+          item.addEventListener("click", () => {
+            menuItems.forEach((el) => el.classList.remove("active"));
+
+            item.classList.add("active");
+          })
+        }) */
+      </script>
+      <!--  style.top
+            style.backgroundColor
+            style.boxShadow
+            style.borderRadius
+            style.fontSize
+            style.paddingTop
+      -->
+  <script>
+    //AOS.init();
+    //전체적인 속성 제어
+    AOS.init({
+      duration: 1000,
+      delay: 200
+    });
+    //전체에 똑같이 넣을 속성이면 써주면 됨
+  </script>
+  <!--
+    <div
+      기본적으로 사용하는 속성
+      data-aos="fade-up"
+      data-aos-offset="200"
+      data-aos-delay="50"
+      data-aos-duration="1000"
+      data-aos-easing="ease-in-out"
+      data-aos-once="false"
+      data-aos-anchor-placement="top-center"
+
+      HTML data-속성
+      - HTML요소에 개발자가 원하는 정보를 직접 붙여두는 공식적인 방법
+      - HTML은 원래 정해진 속성만 사용가능한데 예를들어 <img>에는 src, alt같은 식으로, 이 요소에 내가 원하는 정보를 메모해두고 싶을 때 사용 (포스트잇같은 개념)
+      -<div data-menu="chicken">후라이드</div>
+      -<div data-price="18000">양념치킨</div>
+      -<div data-catagory="side" data-spicy="true">치킨소스</div>
+      - 규칙은 딱하나 data-로 시작하기면 뒤에 오는 이름은 자유(하이픈과 소문자 권장)
+
+      <div id="box" data-price="18000" data-menu-name="black-chicken"></div>
+
+      자바스크립트에서 데이터속성을 제어하거나 수정하기 용이
+      const box = document.querySelector("#box");
+      box.dataset.price;
+      box.dataset.menuName;
+
+      box.dataset.price = "20000"
+
+    -->
+</html>
