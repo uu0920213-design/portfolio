@@ -308,7 +308,43 @@
                     </h2>
                 </div>
                 
-                <ul class="benefit-list">
+                <div class="swiper benefitSwiper">
+                    <ul class="benefit-list swiper-wrapper">
+                        <li class="benefit-card swiper-slide">
+                            <div class="benefit-header">
+                                <span class="benefit-num">01</span>
+                                <h3 class="benefit-tit">Event Priority Access</h3>
+                            </div>
+                            <div class="benefit-sub">이벤트 세션</div>
+                            <p class="benefit-des">매 시즌마다 특별한 날이<br> 준비되어 있습니다.</p>
+                        </li>
+                        <li class="benefit-card swiper-slide">
+                            <div class="benefit-header">
+                                <span class="benefit-num">02</span>
+                                <h3 class="benefit-tit">Brand Partnership Benefits</h3>
+                            </div>
+                            <div class="benefit-sub">브랜드 혜택</div>
+                            <p class="benefit-des">파트너 브랜드 할인과<br>시즌 한정 협찬 제공</p>
+                        </li>
+                        <li class="benefit-card swiper-slide">
+                            <div class="benefit-header">
+                                <span class="benefit-num">03</span>
+                                <h3 class="benefit-tit">Photo Records</h3>
+                            </div>
+                            <div class="benefit-sub">포토/프로필</div>
+                            <p class="benefit-des">12주 루프의 결과를 작품처럼 <br>하이퀄리티 포토/프로필 촬영</p>
+                        </li>
+                        <li class="benefit-card swiper-slide">
+                            <div class="benefit-header">
+                                <span class="benefit-num">04</span>
+                                <h3 class="benefit-tit">Team Package</h3> 
+                            </div>
+                            <div class="benefit-sub">팀 패키지</div>
+                            <p class="benefit-des">시즌을 함께 열어주는<br>TEAM LOOP의 공식 패키지</p>
+                        </li>
+                    </ul>
+                </div>
+                <!-- <ul class="benefit-list">
                     <li class="benefit-card">
                         <div class="benefit-header">
                             <span class="benefit-num">01</span>
@@ -341,9 +377,52 @@
                         <div class="benefit-sub">팀 패키지</div>
                         <p class="benefit-des">시즌을 함께 열어주는<br>TEAM LOOP의 공식 패키지</p>
                     </li>
-                </ul>
+                </ul> -->
             </div>
         </section>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.js"></script>
+        <script>
+            var benefitSwiper = new Swiper('.benefitSwiper', {
+    effect: 'coverflow',
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: 'auto',
+    initialSlide: 0,
+    loop: false, // 카드 4개 고정, 순서 보장을 위해 loop 해제
+    slideToClickedSlide: true,
+    coverflowEffect: {
+        rotate: 35,
+        stretch: 0,
+        depth: 120,
+        modifier: 1,
+        slideShadows: false,
+    },
+    pagination: {
+        el: '.benefitSwiper .benefit-pagination',
+        clickable: true,
+    },
+    on: {
+        init: function () {
+            updateBenefitActive(this);
+        },
+        slideChange: function () {
+            updateBenefitActive(this);
+        },
+    },
+});
+
+function updateBenefitActive(swiper) {
+    document.querySelectorAll('.benefitSwiper .benefit-card').forEach((card) => {
+        card.classList.remove('is-active');
+    });
+
+    const activeCard = swiper.slides[swiper.activeIndex];
+
+    if (activeCard) {
+        activeCard.classList.add('is-active');
+    }
+}
+        </script>
 
         <!-- special program-sec -->
         <section class="special-sec" id="special">
