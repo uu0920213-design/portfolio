@@ -999,9 +999,24 @@ main-special program-sec
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: var(--color-black-soft-opacity80);
     border: 1px solid var(--color-gray-600);
-    padding: 28px 40px;
+    padding: clamp(20px, 2vw, 28px)
+        clamp(24px, 3vw, 40px);
     border-radius: var(--radius-12);
+
+    transition:
+        background-color .35s ease,
+        border-color .35s ease,
+        transform .35s ease,
+        box-shadow .35s ease;
+}
+.card:hover {
+    background: var(--color-pink-primary-opacity);
+    background-color:var(--color-pink-primary-opacity);
+    border-color:var(--color-pink-primary);
+    transform:translateY(-4px);
+    box-shadow:0 12px 32px rgba(225,45,163,.02)
 }
 .card-gap{
     display: flex;
@@ -1013,11 +1028,15 @@ main-special program-sec
     justify-content: center;
     background: var(--color-pink-primary-opacity);
     color: var(--color-pink-primary);
-    width: 120px;
-    height: 40px;
+    width: clamp(100px, calc(1.754vw + 94.74px), 120px);
+    height: clamp(36px, calc(0.351vw + 34.95px), 40px);
     padding: 10px 30px;
     border: 1px solid var(--color-pink-primary);
     border-radius: var(--radius-8);
+
+    font-size: clamp(14px, calc(0.351vw + 12.95px), 18px);
+    font-weight: 600;
+    line-height: 1;
 }
 .special-content {
     display: flex;
@@ -1025,9 +1044,15 @@ main-special program-sec
 }
 .special-title {
     color: var(--color-white);
+    font-size: clamp(18px, calc(0.526vw + 16.42px), 24px);
+    font-weight: 600;
 }
 .special-desc{
     color: var(--color-gray-400);
+    font-size: clamp(16px, calc(0.351vw + 14.95px), 20px);
+    font-weight: 500;
+    word-break: keep-all;
+    overflow-wrap: break-word;
 }
 .special-arrow {
     display: inline-block;
@@ -1035,7 +1060,29 @@ main-special program-sec
     height: 31px;
     background: url(../img/weui_arrow.svg) no-repeat center/contain;
 }
-
+@media (max-width: 820px) {
+    .special-arrow {
+        display: none;
+    }
+}
+@media (max-width: 500px) {
+    .card-gap {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+@media (max-width: 360px){
+    .card-gap {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .special-title {
+        font-size: 16px;
+    }
+    .special-desc {
+        font-size: 14px;
+    }
+}
 /* ==========================================================================
 main-special welcome kit-sec
 ========================================================================== */
