@@ -901,6 +901,20 @@ main-benefits-sec
     width: 100%;
     background: var(--color-black) url(../img/benefits-sec.png) no-repeat center/cover;
 }
+.benefitSwiper {
+    width: 100%;
+    overflow: hidden;
+    padding: 40px 0 60px;
+}
+.benefitSwiper .benefit-list {
+    padding: 0;
+    margin: 0;
+}
+
+.benefitSwiper .benefit-card {
+    max-width: 300px;
+    height: auto;
+}
 .benefit-list{
     display: flex;
     gap: 20px;
@@ -909,69 +923,66 @@ main-benefits-sec
 .benefit-card{
     display: flex;
     flex-direction: column;
-    gap: clamp(20px, calc(2.222vw - 4px), 28px)/* 28px */;
+    gap: clamp(18px, calc(0.526vw + 16.42px), 24px)/* 28px */;
     background: url(../img/benefit-card-ui.png) no-repeat center /cover;
     width: 100%;
     border-top: 1px solid var(--color-gray-600);
     border-right: 1px solid var(--color-gray-600);
     border-radius: var(--radius-12);
-    padding: clamp(54px, calc(3.333vw + 18px), 66px)
-           clamp(34px, calc(2.222vw + 10px), 42px)/* 66px 42px */;
+    padding: clamp(46px, calc(1.053vw + 42.84px), 58px)
+             clamp(30px, calc(0.702vw + 27.89px), 38px)/* 66px 42px */;
 }
-.benefit-card:hover {
+
+.benefit-card.is-active {
     background: url(../img/benefit-card-ui-hover.png) no-repeat center /cover;
     color: var(--color-white);
 }
 .benefit-header{
     display: flex;
     flex-direction: column;
-    padding-left: 10px;
+    /* padding-left: 10px; */
 
 }
 .benefit-num {
-    font-size: clamp(34px, calc(1.667vw + 16px), 40px)/* 40px */;
+    font-size: clamp(30px, calc(0.526vw + 28.42px), 36px)/* 40px */;
     font-weight: 700;
 }
 .benefit-tit {
-    font-size: clamp(16px, calc(0.556vw + 10px), 20px)/* 20px */;
-    font-weight: 600;
+    font-size: clamp(15px, calc(0.263vw + 14.21px), 18px)/* 20px */;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .benefit-sub {
     display: flex;
     justify-content: center;
+    aspect-ratio: 316 / 102;
     background: url(../img/glass.png) no-repeat center /contain;
     width: 100%;
     align-items: center;
-    font-size: clamp(22px, calc(1.111vw + 10px), 26px)/* 26px */;
-    font-weight: 700;
-    padding: clamp(18px, calc(1.111vw + 6px), 22px) 0/* 22px 0 */; 
+
+    /* border-style: solid;
+    border-width: 4px 24px; 
+    border-image: url(../img/glass.png) 40 48 fill / 20px 24px / 0 stretch; */
+    /* background: none; */
+
+    font-size: clamp(18px, calc(0.175vw + 17.47px), 20px);
+    font-weight: 500;
+    padding: clamp(16px, calc(0.351vw + 14.95px), 20px) 0; 
+    letter-spacing: 0.08rem;
 }
 .benefit-des {
-    font-size: clamp(14px, calc(1.111vw + 2px), 18px)/* 18px */;
-    font-weight: 500;
+    font-size: clamp(14px, calc(0.175vw + 13.47px), 16px);
+    font-weight: 300;
     line-height: 1.5;
-    padding-left: clamp(8px, calc(0.556vw + 2px), 10px)/* 10px */;
 }
-/* @media (max-width: 1440px){
-
-    .benefit-card{
-        gap: 24px;
-        padding: 60px 38px;
+@media (max-width: 480px) {
+    .benefitSwiper .benefit-card {
+        width: 82%;
+        max-width: 280px;
     }
-
-    .benefit-tit{
-        font-size: 18px;
-    }
-
-    .benefit-sub{
-        font-size: 24px;
-    }
-
-    .benefit-des{
-        font-size: 16px;
-    }
-
-} */
+}
 /* ==========================================================================
 main-special program-sec
 ========================================================================== */
@@ -1592,6 +1603,7 @@ main-footer-sec
     color: var(--color-gray-400);
     font-size: 14px;
     font-weight: 600;
+    font-style: normal;
 }
 
 .footer-bottom {
