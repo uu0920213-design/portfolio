@@ -1584,6 +1584,14 @@ main-process-sec
     }
 
 }
+@media(max-width: 360px){
+    .process-txt h3 {
+        font-size: 22px;
+    }
+    .process-txt p {
+        font-size: 18px;
+    }
+}
 
 /* ==========================================================================
 main-faq-sec
