@@ -714,50 +714,86 @@
                         <span>목표 설정부터 완주까지</span>
                     </h2>
                 </div>
-                
-                <ol class="process-list" role="list">
-                    <li class="process-item" role="listitem">
-                        <span class="process-num">01</span>
-                        <div class="process-txt">
-                        <h3>상담 & 등록</h3>
-                        <p>목표레이스와 현재 기록 제출</p>
-                        </div>
-                    </li>
+                <div class="process-scroll">
+                    <ol class="process-list" role="list">
+                        <li class="process-item" role="listitem">
+                            <span class="process-num">01</span>
+                            <div class="process-txt">
+                            <h3>상담 & 등록</h3>
+                            <p>목표레이스와 현재 기록 제출</p>
+                            </div>
+                        </li>
 
-                    <li class="process-item" role="listitem">
-                        <span class="process-num">02</span>
-                        <div class="process-txt">
-                        <h3>정규 훈련</h3>
-                        <p>체계적인 LOOP 훈련 프로그램</p>
-                        </div>
-                    </li>
+                        <li class="process-item" role="listitem">
+                            <span class="process-num">02</span>
+                            <div class="process-txt">
+                            <h3>정규 훈련</h3>
+                            <p>체계적인 LOOP 훈련 프로그램</p>
+                            </div>
+                        </li>
 
-                    <li class="process-item" role="listitem">
-                        <span class="process-num">03</span>
-                        <div class="process-txt">
-                        <h3>레이스 준비</h3>
-                        <p>대회 전 컨디셔닝 & 전략점검</p>
-                        </div>
-                    </li>
+                        <li class="process-item" role="listitem">
+                            <span class="process-num">03</span>
+                            <div class="process-txt">
+                            <h3>레이스 준비</h3>
+                            <p>대회 전 컨디셔닝 & 전략점검</p>
+                            </div>
+                        </li>
 
-                    <li class="process-item" role="listitem">
-                        <span class="process-num">04</span>
-                        <div class="process-txt">
-                        <h3>대회 참가</h3>
-                        <p>응원단 동행 & 보급품 지원</p>
-                        </div>
-                    </li>
+                        <li class="process-item" role="listitem">
+                            <span class="process-num">04</span>
+                            <div class="process-txt">
+                            <h3>대회 참가</h3>
+                            <p>응원단 동행 & 보급품 지원</p>
+                            </div>
+                        </li>
 
-                    <li class="process-item" role="listitem">
-                        <span class="process-num">05</span>
-                        <div class="process-txt">
-                        <h3>기록분석</h3>
-                        <p>완주 후 데이터 분석 & 피드백</p>
-                        </div>
-                    </li>
-                </ol>
+                        <li class="process-item" role="listitem">
+                            <span class="process-num">05</span>
+                            <div class="process-txt">
+                            <h3>기록분석</h3>
+                            <p>완주 후 데이터 분석 & 피드백</p>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
             </div>
         </section>
+        <script>
+            const slider = document.querySelector('.process-scroll');
+
+let isDown = false;
+let startX;
+let scrollLeft;
+
+slider.addEventListener('mousedown', (e) => {
+    isDown = true;
+    slider.classList.add('dragging');
+
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+});
+
+slider.addEventListener('mouseleave', () => {
+    isDown = false;
+    slider.classList.remove('dragging');
+});
+
+slider.addEventListener('mouseup', () => {
+    isDown = false;
+    slider.classList.remove('dragging');
+});
+
+slider.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+
+    e.preventDefault();
+
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 1.5; // 드래그 속도
+    slider.scrollLeft = scrollLeft - walk;
+});
+        </script>
 
         <section class="faq-sec" id="faq">
             <div class="inner pd">
