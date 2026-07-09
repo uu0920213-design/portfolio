@@ -383,45 +383,45 @@
         <script src="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.js"></script>
         <script>
             var benefitSwiper = new Swiper('.benefitSwiper', {
-    effect: 'coverflow',
-    grabCursor: true,
-    centeredSlides: true,
-    slidesPerView: 'auto',
-    initialSlide: 0,
-    loop: false, // 카드 4개 고정, 순서 보장을 위해 loop 해제
-    slideToClickedSlide: true,
-    coverflowEffect: {
-        rotate: 35,
-        stretch: 0,
-        depth: 120,
-        modifier: 1,
-        slideShadows: false,
-    },
-    pagination: {
-        el: '.benefitSwiper .benefit-pagination',
-        clickable: true,
-    },
-    on: {
-        init: function () {
-            updateBenefitActive(this);
-        },
-        slideChange: function () {
-            updateBenefitActive(this);
-        },
-    },
-});
+                effect: 'coverflow',
+                grabCursor: true,
+                centeredSlides: true,
+                slidesPerView: 'auto',
+                initialSlide: 0,
+                loop: false, 
+                slideToClickedSlide: true,
+                coverflowEffect: {
+                    rotate: 35,
+                    stretch: 0,
+                    depth: 120,
+                    modifier: 1,
+                    slideShadows: false,
+                },
+                pagination: {
+                    el: '.benefitSwiper .benefit-pagination',
+                    clickable: true,
+                },
+                on: {
+                    init: function () {
+                        updateBenefitActive(this);
+                    },
+                    slideChange: function () {
+                        updateBenefitActive(this);
+                    },
+                },
+            });
 
-function updateBenefitActive(swiper) {
-    document.querySelectorAll('.benefitSwiper .benefit-card').forEach((card) => {
-        card.classList.remove('is-active');
-    });
+            function updateBenefitActive(swiper) {
+                document.querySelectorAll('.benefitSwiper .benefit-card').forEach((card) => {
+                    card.classList.remove('is-active');
+                });
 
-    const activeCard = swiper.slides[swiper.activeIndex];
+                const activeCard = swiper.slides[swiper.activeIndex];
 
-    if (activeCard) {
-        activeCard.classList.add('is-active');
-    }
-}
+                if (activeCard) {
+                    activeCard.classList.add('is-active');
+                }
+            }
         </script>
 
         <!-- special program-sec -->
