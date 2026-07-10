@@ -121,7 +121,7 @@
     <main>
         <!-- menu-wrap -->
         <ul class="menu-wrap">
-            <li class="active"><a href="#class">클래스</a></li>
+            <li><a href="#class">클래스</a></li>
             <li><a href="#coach">코치진</a></li>
             <li><a href="#why-loop">LOOP</a></li>
             <li><a href="#special">스페셜</a></li>
@@ -131,39 +131,64 @@
 
         <script>
             const menuWrap = document.querySelector(".menu-wrap");
+            const menuLinks = document.querySelectorAll(".menu-wrap a");
 
             window.addEventListener("scroll", () => {
-                const scrollY = window.scrollY;
 
-                if(scrollY > 100) {
-                    menuWrap.style.display = "flex";
+                // 메뉴 표시
+                if (window.scrollY > 100) {
+                    menuWrap.classList.add("show");
                 } else {
-                    menuWrap.style.display = "none";
+                    menuWrap.classList.remove("show");
                 }
-            })
 
-            menuWrap.classList.add("show");
-            menuWrap.classList.remove("show");
+                // active 변경
+                let current = "";
+
+                menuLinks.forEach((link) => {
+
+                    const section = document.querySelector(link.getAttribute("href"));
+
+                    if (!section) return;
+
+                    const top = section.offsetTop - 150;
+                    const bottom = top + section.offsetHeight;
+
+                    if (window.scrollY >= top && window.scrollY < bottom) {
+                        current = link.getAttribute("href");
+                    }
+
+                });
+
+                menuLinks.forEach((link) => {
+                    link.parentElement.classList.remove("active");
+
+                    if (link.getAttribute("href") === current) {
+                        link.parentElement.classList.add("active");
+                    }
+                });
+
+            });
         </script>
 
         <!-- hero-sec -->
         <section class="hero-sec">
             <div class="hero-pd inner" >
-                <div class="hero-copy" >
+                <div class="hero-copy" data-aos="fade-up" data-aos-duration="700" data-aos-easing="ease-out">
                     <span>반복은 단순한 루틴이 아니라,</span>
                     <span>성장의 루프입니다</span>
                 </div>
                 <div class="stats-content">
                     <div class="hero-stats">
                         <div class="stat-number">
-                            <span class="count" data-key="runner">0</span>
+                            <span class="count" data-key="runner">478</span>
                             <span class="symbol"></span>
                         </div>
                         <span class="label">수료 러너</span>
                     </div>
                     <div class="hero-stats">
                         <div class="stat-number">
-                            <span class="count" data-key="finishRate">0</span>
+                            <span class="count" data-key="finishRate">98</span>
                             <span>%</span>
                         </div>
                         <span class="label">완주율</span>
@@ -171,9 +196,37 @@
                 </div>
             </div>
         </section>
+        <script>
+            const hero = document.querySelector(".hero-sec");
+const stats = document.querySelector(".stats-content");
+
+window.addEventListener("load", () => {
+
+    // ① Hero 등장
+    hero.classList.add("open");
+
+    // ② Hero 등장 완료(0.9초)
+    setTimeout(() => {
+
+        // AOS 실행
+        AOS.refresh();
+
+        // ③ 텍스트 FadeUp(0.7초) 거의 끝날 때
+        setTimeout(() => {
+
+            // ④ 숫자 영역 등장
+            stats.classList.add("show");
+
+        }, 650);
+
+    }, 700);
+
+});
+        </script>
+
         <!-- class-sec -->
         <section class="class-sec" id="class">
-            <div class="inner pd" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="300" data-aos-easing="ease-out" data-aos-once="false">
+            <div class="inner pd">
                 <div class="sec-header">
                     <p class="sec-label">Why LOOP</p>
                     <h2 class="sec-tit">
@@ -185,7 +238,7 @@
                     </p>
                 </div>
                 <ul class="feature-list">
-                    <li class="feature-card" data-aos="fade-up"data-aos-anchor-placement="top-bottom" data-aos-delay="0">
+                    <li class="feature-card" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="0" data-aos-easing="ease-out" data-aos-once="false">
                             <h3 class="f-tit">전문코칭</h3>
                             <p class="f-des">엘리트 선수 출신 코치의 맞춤형 피드백</p>
                     </li>
@@ -214,7 +267,7 @@
                         <span>목표에 맞는 나만의 클래스</span>
                     </h2>
                 </div>
-                <div class="lineup-panel">
+                <div class="lineup-panel" data-aos="fade-up"data-aos-anchor-placement="top-bottom" data-aos-delay="0">
                     <!-- 왼쪽 -->
                     <div class="lineup-txt">
                         <h3 class="lineup-tit">체계적인 12주 완주플랜</h3>
@@ -241,7 +294,7 @@
                     </div>
                     <!-- 오른쪽 -->
                     <div class="lineup-list">
-                        <div class="class-card active">
+                        <div class="class-card">
                             <div class="card-content">
                                 <div class="card-tit">
                                     <span class="running-svg"></span>
@@ -344,40 +397,6 @@
                         </li>
                     </ul>
                 </div>
-                <!-- <ul class="benefit-list">
-                    <li class="benefit-card">
-                        <div class="benefit-header">
-                            <span class="benefit-num">01</span>
-                            <h3 class="benefit-tit">Event Priority Access</h3>
-                        </div>
-                        <div class="benefit-sub">이벤트 세션</div>
-                        <p class="benefit-des">매 시즌마다 특별한 날이<br> 준비되어 있습니다.</p>
-                    </li>
-                    <li class="benefit-card">
-                        <div class="benefit-header">
-                            <span class="benefit-num">02</span>
-                            <h3 class="benefit-tit">Brand Partnership Benefits</h3>
-                        </div>
-                        <div class="benefit-sub">브랜드 혜택</div>
-                        <p class="benefit-des">파트너 브랜드 할인과<br>시즌 한정 협찬 제공</p>
-                    </li>
-                    <li class="benefit-card">
-                        <div class="benefit-header">
-                            <span class="benefit-num">03</span>
-                            <h3 class="benefit-tit">Photo Records</h3>
-                        </div>
-                        <div class="benefit-sub">포토 / 프로필</div>
-                        <p class="benefit-des">12주 루프의 결과를 작품처럼 <br>하이퀄리티 포토/프로필 촬영</p>
-                    </li>
-                    <li class="benefit-card">
-                        <div class="benefit-header">
-                            <span class="benefit-num">04</span>
-                            <h3 class="benefit-tit">Team Package</h3> 
-                        </div>
-                        <div class="benefit-sub">팀 패키지</div>
-                        <p class="benefit-des">시즌을 함께 열어주는<br>TEAM LOOP의 공식 패키지</p>
-                    </li>
-                </ul> -->
             </div>
         </section>
         <script src="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.js"></script>
@@ -437,8 +456,8 @@
                         정규 클래스 외 시즌별 특별 프로그램
                     </p>
                 </div>
-                <div class="special-card">
-                    <div class="card">
+                <div class="special-card" >
+                    <div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="0" data-aos-easing="ease-out" data-aos-once="false">
                         <div class="card-gap">
                             <span class="special-badge">TRAIL</span>
                             <div class="special-content">
@@ -448,7 +467,7 @@
                         </div>
                         <span class="special-arrow"></span>
                     </div>
-                    <div class="card">
+                    <div class="card" data-aos="fade-up"data-aos-anchor-placement="top-bottom" data-aos-delay="300">
                         <div class="card-gap">
                             <span class="special-badge">HYROX</span>
                             <div class="special-content">
@@ -458,7 +477,7 @@
                         </div>
                         <span class="special-arrow"></span>
                     </div>
-                    <div class="card">
+                    <div class="card" data-aos="fade-up"data-aos-anchor-placement="top-bottom" data-aos-delay="600">
                         <div class="card-gap">
                             <span class="special-badge">CAMP</span>
                             <div class="special-content">
@@ -468,7 +487,7 @@
                         </div>
                         <span class="special-arrow"></span>
                     </div>
-                    <div class="card">
+                    <div class="card" data-aos="fade-up"data-aos-anchor-placement="top-bottom" data-aos-delay="900">
                         <div class="card-gap">
                             <span class="special-badge">GLOBAL</span>
                             <div class="special-content">
