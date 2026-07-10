@@ -528,7 +528,7 @@
             <div class="gallery-sec-layout">
                     <div
                     style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
-                    class="swiper mySwiper2"
+                    class="swiper gallery-main-swiper"
                     >
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
@@ -551,26 +551,26 @@
                         <div class="swiper-button-next"></div>
                         <div class="swiper-button-prev"></div>
                     </div>
-                    </div>
-                    <div thumbsSlider="" class="swiper mySwiper">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide"> 
-                            <img src="img/gallery-img1.jpg" alt="망원유수지" class="pc-img"/>
-                            </div>
-                            <div class="swiper-slide">
-                            <img src="img/gallery-img2.jpg" alt="한강" class="pc-img"/>
-                            </div>
-                            <div class="swiper-slide">
-                            <img src="img/gallery-img3.jpg" alt="노을공원" class="pc-img"/>
-                            </div>
-                            <div class="swiper-slide">
-                            <img src="img/gallery-img4.jpg" alt="인왕산" class="pc-img"/>
-                            </div>
-                            <div class="swiper-slide">
-                            <img src="img/gallery-img5.jpg" alt="올림픽공원" class="pc-img"/>
+            </div>
+            <!-- <div thumbsSlider="" class="swiper gallery-thumb-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"> 
+                        <img src="img/gallery-img1.jpg" alt="망원유수지" class="pc-img"/>
                         </div>
+                        <div class="swiper-slide">
+                        <img src="img/gallery-img2.jpg" alt="한강" class="pc-img"/>
+                        </div>
+                        <div class="swiper-slide">
+                        <img src="img/gallery-img3.jpg" alt="노을공원" class="pc-img"/>
+                        </div>
+                        <div class="swiper-slide">
+                        <img src="img/gallery-img4.jpg" alt="인왕산" class="pc-img"/>
+                        </div>
+                        <div class="swiper-slide">
+                        <img src="img/gallery-img5.jpg" alt="올림픽공원" class="pc-img"/>
                     </div>
                 </div>
+            </div> -->
                 <p class="gallery-des">
                         트랙, 업힐, 크로스컨트리 LOOP 러너들의 실제 훈련사진 입니다.
                     </p>
@@ -578,25 +578,24 @@
 
     <!-- Initialize Swiper -->
     <script>
-        var swiper = new Swiper('.mySwiper', {
+        const gallerySwiper = new Swiper('.gallery-main-swiper', {
+            loop: true,
             spaceBetween: 10,
-            slidesPerView: 4,
-            freeMode: true,
-            watchSlidesProgress: true,
-        });
+            centeredSlides: true,
 
-        var swiper2 = new Swiper('.mySwiper2', {
-            spaceBetween: 10,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+
             pagination: {
-            el: '.mySwiper2 .swiper-pagination',
-            clickable: true,
+                el: '.gallery-main-swiper .swiper-pagination',
+                clickable: true,
             },
+
             navigation: {
-            nextEl: '.mySwiper2 .swiper-button-next',
-            prevEl: '.mySwiper2 .swiper-button-prev',
-            },
-            thumbs: {
-            swiper: swiper,
+                nextEl: '.gallery-main-swiper .swiper-button-next',
+                prevEl: '.gallery-main-swiper .swiper-button-prev',
             },
         });
         </script>
