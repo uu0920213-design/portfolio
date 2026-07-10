@@ -142,7 +142,9 @@ html {
 body {
     color: var(--color-black);
 }
-
+main{
+    background-color: var(--color-black);
+}
 #wrap {
     min-width: 360px;
 }
@@ -397,20 +399,39 @@ main- menu-wrap
 }
 .menu-wrap li.active a {
     color: var(--color-pink-primary);
+    font-weight: 900;
 }
 /* @media (max-width: 360px) {
     .menu-wrap a {
     font-size: 10px;
     } */
 
-/* ==========================================================================
+/* 
+==========================================================================
 main-hero-sec
 ========================================================================== */
+
 .hero-sec{
     width: 100%;
     height: calc(100dvh - 84px);
     background: var(--color-black) url(../img/hero-sec-img.png) no-repeat center/cover;
     text-align: center;
+
+    /* clip-path: inset(0 50%);
+    transition: clip-path 1.2s ease-in-out; */
+    opacity:0;
+    transform:translateY(30px) scale(.96);
+    filter:blur(4px);
+    transition:
+        opacity .9s ease,
+        transform .9s ease,
+        filter .9s ease;
+}
+.hero-sec.open{
+    /* clip-path: inset(0 0); */
+    opacity:1;
+    transform:translateY(0) scale(1);
+    filter:blur(0);
 }
 .hero-pd { 
     height: 100%;
@@ -437,6 +458,14 @@ main-hero-sec
     margin-top: auto;
     margin-right: 0;
     align-self: flex-end;
+
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity .35s ease, transform .35s ease;
+}
+.stats-content.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 .hero-stats {
     display: flex;
@@ -484,6 +513,7 @@ main-hero-sec
     line-height: 1;
     text-align: start;
 }
+
 @media (max-width: 1600px) {
     .stats-content {
         margin-right: 32px;
@@ -720,9 +750,13 @@ main-lineup-sec
     border-radius: 20px;
     background-color: var(--color-pink-primary-opacity);
     box-shadow: inset 0 2px 1px 0 rgba(255, 255, 255, 0.25);
+    transition:
+        background-color .35s ease,
+        transform .35s ease;
 }
-.class-card.active {
+.class-card:hover {
     background: var(--color-white-opacity);
+    transform:translateY(-4px);
 }
 .card-tit{
     display: flex;
@@ -782,6 +816,9 @@ main-lineup-sec
     }
 }
 @media(max-width:500px){
+    .lineup-sec{
+    background: var(--color-black) url(../img/class-lineup-sec-mo.png) no-repeat center/cover;
+    }
     .lineup-panel{  
         padding: 20px;
         gap: 32px;
@@ -976,6 +1013,12 @@ main-benefits-sec
     font-size: clamp(14px, calc(0.175vw + 13.47px), 16px);
     font-weight: 300;
     line-height: 1.5;
+}
+@media (max-width: 500px) {
+    .benefits-sec{
+    width: 100%;
+    background: var(--color-black) url(../img/benefits-sec-mo.png) no-repeat center/cover;
+}
 }
 @media (max-width: 480px) {
     .benefitSwiper .benefit-card {
@@ -1214,22 +1257,21 @@ main-gallery-sec
     margin-right: auto;
 }
 
-.swiper-slide img {
-    display: block;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 5 / 2;
-    object-fit: cover;
+.gallery-main-swiper{
+    width:100%;
+    height:92dvh;
 }
 
-/* 
-이미지 비율 다르게 주고싶을 때
-.mySwiper2 .swiper-slide img {
-    aspect-ratio: 5 / 2;
+.gallery-main-swiper .swiper-slide{
+    height:100%;
 }
-.mySwiper .swiper-slide img {
-    aspect-ratio: 3 / 1;
-} */
+
+.gallery-main-swiper img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position: 50% 70%;
+}
 
 .swiper-button-next,
 .swiper-button-prev {
@@ -1240,28 +1282,30 @@ main-gallery-sec
     background-position: center;
 }
 
-.mySwiper {
+.gallery-thumb-swiper {
     box-sizing: border-box;
     padding: 10px 0;
 }
 
-.mySwiper .swiper-slide {
+.gallery-thumb-swiper .swiper-slide {
     width: 25%;
     opacity: 0.4;
 }
 
-.mySwiper .swiper-slide-thumb-active {
+.gallery-thumb-swiper .swiper-slide-thumb-active {
     opacity: 1;
 }
 
-.mySwiper2 .swiper-pagination-bullet {
-    border: 1px solid var(--color-white);
-    background-color: var(--color-white);
+.gallery-main-swiper .swiper-pagination-bullet {
+    width: 40px;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.3);
     opacity: 1;
 }
 
-.mySwiper2 .swiper-pagination-bullet-active {
-    background-color: rgba(255, 255, 255, 0.2);
+.gallery-main-swiper .swiper-pagination-bullet-active {
+    background-color: rgba(255, 255, 255, 0.8);
 }
 .gallery-des {
     font-size: 14px;
@@ -1269,9 +1313,9 @@ main-gallery-sec
     color: var(--color-gray-400);
     text-align: right;
     padding-right: clamp(20px, 3vw, 48px);
+    padding-top: 10px;
     padding-bottom:clamp(32px,5vw,64px);
 }
-
 /* ==========================================================================
 main-reviews-sec
 ========================================================================== */
@@ -1544,7 +1588,9 @@ main-process-sec
 }
 
 @media (max-width:500px){
-
+    .process-sec {
+    background: black url(../img/process-sec-mo.png) no-repeat center / cover;
+    }
     .process-scroll{
 
         overflow:visible;
@@ -1620,6 +1666,7 @@ main-faq-sec
     font-weight: 700;
     line-height: 1;
     color: var(--color-white);
+    transition:  background-color .35s ease-in-out;
 }
 .faq-button:hover {
     background: var(--gradient-pink-to-purple);
@@ -1649,6 +1696,7 @@ main-faq-sec
     font-weight: 600;
     text-align: left;
     cursor: pointer;
+    transition: color .2s ease-in;
 }
 .faq-item.is-open .faq-question {
     color: var(--color-pink-primary);
