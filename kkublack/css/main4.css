@@ -84,6 +84,9 @@ body {
   color: var(--color-black);
   overflow-x: clip;
 }
+main {
+  background: var(--color-black);
+}
 
 #wrap {
   min-width: 360px;
