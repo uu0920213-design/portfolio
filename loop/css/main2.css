@@ -511,7 +511,8 @@ main-hero-sec
     font-size: clamp(12px, 1vw, 16px);
     font-weight: 700;
     line-height: 1;
-    text-align: start;
+    text-align: right;
+    padding-right: 4px;
 }
 
 @media (max-width: 1600px) {
