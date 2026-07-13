@@ -967,10 +967,119 @@ slider.addEventListener('mousemove', (e) => {
         </div>
         </footer>
 
-        <script>
-
-        </script>
     </main>
+
+            <!-- floating-ui -->
+<div class="floating-menu">
+    <div class="chatbot-panel">
+        <div class="chat-header">
+
+            <button class="chat-back" aria-label="뒤로가기">
+                <img src="img/arrow-left.svg" alt="">
+            </button>
+
+            <div class="chat-title-wrap">
+                <strong class="chat-title">LOOP</strong>
+                <span class="chat-sub">운영시간 보기</span>
+            </div>
+
+        </div>
+
+        <div class="chat-body">
+
+            <!-- Home -->
+            <div class="chat-view chat-home active">
+                
+                <div class="greeting-card">
+                    <p class="greeting-title">
+                        안녕하세요 러너님 👋
+                    </p>
+                    <p class="greeting-desc">
+                        체계적인 성장을 이끄는 LOOP입니다.<br>
+                        무엇을 도와드릴까요?
+                    </p>
+                </div>
+                <button class="start-chat">
+                    AI 상담 시작하기
+                </button>
+            </div>
+
+            <!-- Chat -->
+            <div class="chat-view chat-room">
+                <div class="ai-message">
+                    <strong>AI 챗봇</strong>
+                    <p>
+                        안녕하세요! 무엇을 도와드릴까요?
+                    </p>
+                </div>
+                <div class="quick-list">
+                    <button>🏃 클래스 일정</button>
+                    <button>⚡ 프로그램 안내</button>
+                    <button>💳 환불 규정</button>
+                </div>
+                
+                <div class="input-container">
+                        <div class="chat-input">
+                        <input
+                            type="text"
+                            spellcheck="false"
+                            placeholder="메시지를 입력해주세요."
+                        >
+                        <button class="row-btn">
+                            ↑
+                        </button>
+                    </div>
+                    <span class="input-des">중요한 정보는 상담원과 확인 부탁드립니다.</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <button class="floating-item" aria-label="AI챗봇">
+        <img src="img/talk.svg" alt class="talk-icon">
+        <span class="floating-text">AI 챗봇</span>
+        <img src="img/close.svg" alt class="close-icon">
+    </button>
+
+    <button class="top-btn" aria-label="맨위로">
+        <img src="img/up.svg" alt="top">
+    </button>
+
+</div>
+
+<script>
+const floatingMenu = document.querySelector(".floating-menu");
+const floatingBtn = document.querySelector(".floating-item");
+
+const startChatBtn = document.querySelector(".start-chat");
+const chatHome = document.querySelector(".chat-home");
+const chatRoom = document.querySelector(".chat-room");
+
+const closeButtons = document.querySelectorAll(".chat-close, .chat-back");
+
+// 챗봇 열기/닫기
+floatingBtn.addEventListener("click", () => {
+    floatingMenu.classList.toggle("open");
+});
+
+// AI 상담 시작
+startChatBtn.addEventListener("click", () => {
+    chatHome.classList.add("hide");
+    chatRoom.classList.add("active");
+});
+
+// 뒤로가기
+closeButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        chatHome.classList.remove("hide");
+        chatRoom.classList.remove("active");
+        floatingMenu.classList.remove("open");
+    });
+});
+
+</script>
+    
 
 </body>
 <script>
