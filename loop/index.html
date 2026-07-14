@@ -14,10 +14,10 @@
     <meta property="og:description" content="반복을 성장의 루프로 바꾸는 순간. 전문 코칭 시스템과 함께 나만의 목표 레이스를 완주하세요!">
     <!-- 300자내외 -->
     <meta property="og:url" content="https://teamloop.com/index.php">
-    <meta property="og:image" content="">
+    <meta property="og:image" content="img/og-img.png">
     <!-- og이미지 사이즈 1200 * 630 -->
     <link rel="shortcut icon" type="image/x-icon" href="img/logo_loop.png">
-    <link rel="canonical" href="https://kkublack.com/index.php">
+    <link rel="canonical" href="">
 
     <link rel="stylesheet" href="../assets/css/paperfont.css">
     <link rel="stylesheet" href="../assets/css/font.css">
@@ -969,116 +969,190 @@ slider.addEventListener('mousemove', (e) => {
 
     </main>
 
-            <!-- floating-ui -->
-<div class="floating-menu">
-    <div class="chatbot-panel">
-        <div class="chat-header">
+    <!-- chat-bot-ui -->
+<div class="chat-bot">
+    <svg width="0" height="0">
+        <defs>
+        <linearGradient id="navGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#8B5CF6"/>
+            <stop offset="100%" stop-color="#38BDF8"/>
+        </linearGradient>
+        </defs>
+    </svg>
 
-            <button class="chat-back" aria-label="뒤로가기">
-                <img src="img/arrow-left.svg" alt="">
-            </button>
+    <div class="stage">
+        <div class="floating-wrap">
+            <div class="widget" id="widget">
+            <button class="close-btn" id="closeBtn">✕</button>
 
-            <div class="chat-title-wrap">
-                <strong class="chat-title">LOOP</strong>
-                <span class="chat-sub">운영시간 보기</span>
-            </div>
+            <div class="views-wrapper">
 
-        </div>
+                <!-- HOME -->
+                <section class="chatview is-active" data-page="home">
+                <div class="hero-banner"></div>
 
-        <div class="chat-body">
-
-            <!-- Home -->
-            <div class="chat-view chat-home active">
-                
-                <div class="greeting-card">
-                    <p class="greeting-title">
-                        안녕하세요 러너님 👋
-                    </p>
-                    <p class="greeting-desc">
-                        체계적인 성장을 이끄는 LOOP입니다.<br>
-                        무엇을 도와드릴까요?
-                    </p>
-                </div>
-                <button class="start-chat">
-                    AI 상담 시작하기
-                </button>
-            </div>
-
-            <!-- Chat -->
-            <div class="chat-view chat-room">
-                <div class="ai-message">
-                    <strong>AI 챗봇</strong>
-                    <p>
-                        안녕하세요! 무엇을 도와드릴까요?
-                    </p>
-                </div>
-                <div class="quick-list">
-                    <button>🏃 클래스 일정</button>
-                    <button>⚡ 프로그램 안내</button>
-                    <button>💳 환불 규정</button>
-                </div>
-                
-                <div class="input-container">
-                        <div class="chat-input">
-                        <input
-                            type="text"
-                            spellcheck="false"
-                            placeholder="메시지를 입력해주세요."
-                        >
-                        <button class="row-btn">
-                            ↑
-                        </button>
+                <div class="bot-card">
+                    <div class="chat-row">
+                    <div class="avatar-badge"></div>
+                    <div class="name">
+                        LOOP AI 코치
+                        <span class="sub-des">AI 에이전트가 바로 답변해드려요</span>
                     </div>
-                    <span class="input-des">중요한 정보는 상담원과 확인 부탁드립니다.</span>
+                    </div>
+                    <p>안녕하세요, 러너님! 👋</p>
+                    <p>훈련, 코스, 웰컴킷 관련 궁금한 점을 남겨주시면 빠르게 안내드릴게요.</p>
+                    <div class="hours-box">
+                    <b>AI 코치</b> 24시간 연중무휴<br>
+                    <b>카톡 문의</b> 평일 09:00 ~ 18:00
+                    </div>
+                    <button class="cta-btn" onclick="openChat('home')">문의하기 →</button>
                 </div>
+
+                
+                </section>
+
+                <!-- CONVERSATION LIST -->
+                <section class="chatview" data-page="conv">
+                <div class="chatview-header">대화</div>
+                <div class="unread-banner">
+                    <span>1개의 안읽은 알림이 있어요</span>
+                    <button>모두 읽기</button>
+                </div>
+
+                <div class="conv-list">
+                    <div class="notif-item" onclick="openChat('conv')">
+                    <div class="notif-avatar"><span class="dot"></span></div>
+                    <div class="notif-text">
+                        <div class="top"><span class="name">LOOP AI 코치</span><span class="date">06-23</span></div>
+                        <div class="preview">안녕하세요, 러너님! 체계적인 성장을 이끄는 LOOP입니다. 완주를 위한 12주 정규 클래스부터 이번 시즌에만 열리는 특별한 미니세션까지, LOOP AI가 러너님의 목표 달성을 위한 최적의 안내를 도와드립니다. 가장 먼저 무엇을 해결해 드릴까요?</div>
+                    </div>
+                    </div>
+                </div>
+
+                <button class="fab-new" onclick="openChat('conv')">새 문의하기 →</button>
+                </section>
+
+                <!-- SETTINGS (placeholder) -->
+                <section class="chatview" data-page="settings">
+                <div class="chatview-header">설정</div>
+                <div class="notif-item"><div class="notif-text"><div class="preview" style="color:var(--text-muted)">준비 중인 화면이에요.</div></div></div>
+                </section>
+
+                <!-- CHAT DETAIL OVERLAY -->
+                <div class="chat-overlay" id="chatOverlay">
+                <div class="chat-header">
+                    <button class="back-btn" id="backBtn">←</button>
+                    <span class="name">LOOP AI 코치</span>
+                </div>
+                <div class="chat-body">
+                    <div class="chat-welcome">
+                    안녕하세요, 러너님! 👋<br>
+                    <b>운영시간</b><br>
+                    AI 코치: 24시간 연중무휴<br>
+                    코치 상담: 평일 09:00 ~ 18:00
+                    </div>
+                    <div class="quick-replies">
+                    <div class="chip">이번 주 훈련 스케줄 알려줘</div>
+                    <div class="chip">풀마라톤반과 하이브리드반 차이가 뭐야?</div>
+                    </div>
+                </div>
+                <div class="chat-input-bar">
+                    <div class="input-row">
+                    <input type="text" placeholder="AI 코치에게 질문해 주세요">
+                    <button class="send-btn">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+                    </button>
+                    </div>
+                    <div class="disclaimer">AI는 한정된 데이터에 기반하니, 중요한 정보는 추가 확인을 권장해요.</div>
+                </div>
+                </div>
+
             </div>
 
+            <nav class="bottom-nav">
+                <button class="chat-nav-btn is-active" data-target="home">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/></svg>
+                홈
+                </button>
+                <button class="chat-nav-btn" data-target="conv">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                대화
+                <span class="nav-dot"></span>
+                </button>
+                <button class="chat-nav-btn" data-target="settings">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                설정
+                </button>
+            </nav>
+            </div>
+            <div class="launcher" id="launcher">
+            <div class="bubble"></div>
+            <span class="label">AI 챗봇</span>
         </div>
+        <button class="top-btn" id="topBtn"></button>
+        </div>
+        
+    </div>
     </div>
 
-    <button class="floating-item" aria-label="AI챗봇">
-        <img src="img/talk.svg" alt class="talk-icon">
-        <span class="floating-text">AI 챗봇</span>
-        <img src="img/close.svg" alt class="close-icon">
-    </button>
+    <script>
+    const launcher = document.getElementById('launcher');
+    const widget = document.getElementById('widget');
+    const closeBtn = document.getElementById('closeBtn');
+    const chatOverlay = document.getElementById('chatOverlay');
+    const backBtn = document.getElementById('backBtn');
+    const navBtns = document.querySelectorAll('.chat-nav-btn');
+    const pages = document.querySelectorAll('.chatview[data-page]');
 
-    <button class="top-btn" aria-label="맨위로">
-        <img src="img/up.svg" alt="top">
-    </button>
+    launcher.addEventListener('click', () => {
 
-</div>
+        if (widget.classList.contains('open')) {
 
-<script>
-const floatingMenu = document.querySelector(".floating-menu");
-const floatingBtn = document.querySelector(".floating-item");
+            widget.classList.remove('open');
+            chatOverlay.classList.remove('open');
 
-const startChatBtn = document.querySelector(".start-chat");
-const chatHome = document.querySelector(".chat-home");
-const chatRoom = document.querySelector(".chat-room");
+            launcher.classList.remove('is-active');
 
-const closeButtons = document.querySelectorAll(".chat-close, .chat-back");
+        } else {
 
-// 챗봇 열기/닫기
-floatingBtn.addEventListener("click", () => {
-    floatingMenu.classList.toggle("open");
-});
+            widget.classList.add('open');
 
-// AI 상담 시작
-startChatBtn.addEventListener("click", () => {
-    chatHome.classList.add("hide");
-    chatRoom.classList.add("active");
-});
+            launcher.classList.add('is-active');
 
-// 뒤로가기
-closeButtons.forEach(button => {
-    button.addEventListener("click", () => {
-        chatHome.classList.remove("hide");
-        chatRoom.classList.remove("active");
-        floatingMenu.classList.remove("open");
+        }
+
     });
-});
 
-</script>
+    closeBtn.addEventListener('click', () => {
+
+        widget.classList.remove('open');
+        chatOverlay.classList.remove('open');
+
+        launcher.classList.remove('is-active');
+
+    });
+
+    navBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+        navBtns.forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        pages.forEach(p => p.classList.toggle('is-active', p.dataset.page === btn.dataset.target));
+        chatOverlay.classList.remove('open');
+        });
+    });
+
+    function openChat(){ chatOverlay.classList.add('open'); }
+    backBtn.addEventListener('click', () => chatOverlay.classList.remove('open'));
+
+    const topBtn = document.getElementById("topBtn");
+
+    topBtn.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+    </script>
     
 
 </body>
