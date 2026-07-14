@@ -2357,7 +2357,7 @@ chat-bot
     .chat-overlay.open{ transform:translateX(0); }
 
     /* ---------- Bottom nav ---------- */
-    .bottom-nav{
+    .chatbot-navigation.bottom-nav{
     flex-shrink:0;
     display:flex;
     border-top:0.5px solid var(--border-glass);
