@@ -845,11 +845,13 @@ main-coach-sec
 }
 .coach-card {
     display: flex; 
-    background: url(../img/coach-card.png) no-repeat center /cover;
+    background: url(../img/coach-card.png) no-repeat center /contain;
     border-radius: 20px;
-    width: 100%;
+    max-width: 1600px;
     height: 869px;
+    overflow: hidden;
 }
+
 .coach-content{
     display: flex;
     flex-direction: column;
@@ -900,7 +902,7 @@ main-coach-sec
     .coach-card {
     background: none;
     }
-    .coach-header {
+    .coach-header{
         display: none;
     }
     .coach-mo-img {
@@ -1974,7 +1976,6 @@ main-footer-sec
 /* ==========================================================================
 chat-bot
 ========================================================================== */
-    /* .stage{ position:relative;} */
 
     /* ---------- Launcher ---------- */
     .floating-wrap{
@@ -2389,10 +2390,24 @@ chat-bot
     background:var(--pink);
     }
 
+    @media (max-width: 1600px) {
+        .floating-wrap {
+            right: 38px;
+            bottom: 124px;
+        }
+    }
+
     @media (max-width: 820px) {
         .floating-wrap {
             right: 34px;
-            bottom: 112px;
+            bottom: 120px;
         }
     }
+    @media (max-width: 500px) {
+        .floating-wrap {
+            right: 34px;
+            bottom: 114px;
+        }
+    }
+
 
