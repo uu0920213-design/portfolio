@@ -2157,6 +2157,8 @@ chat-bot
     display:none; 
     flex-direction:column;
     overflow-y:auto;
+    scrollbar-width: none;    
+    -ms-overflow-style: none; 
     }
     .chatview.is-active{ display:flex; }
 
@@ -2252,6 +2254,42 @@ chat-bot
     cursor:pointer;
     }
 
+    /* 소셜 */
+    .social{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 16px 20px 16px;
+    padding: 10px 18px;
+    background: var(--surface-1);
+    border: 0.5px solid var(--border-glass);
+    border-radius: 18px;
+    backdrop-filter: blur(16px);
+    }
+    .social span{
+        font-size: 14px;
+        color: var(--color-white-opacity);
+        font-weight: 500;
+    }
+    .social-media{
+        display: flex;
+        gap: 8px;
+    }
+
+    .social-insta,
+    .social-youtube {
+    display: inline-flex;
+    width: 30px;
+    height: 30px;
+    }
+
+    .social-insta {
+    background: url(../img/instagram.svg) no-repeat center / cover;
+    }
+    .social-youtube {
+    background: url(../img/youtube.svg) no-repeat center / cover;
+    }
+    /*-----------------------------------------*/
     .section-label{
     display:flex; 
     align-items:center; justify-content:space-between;
@@ -2384,9 +2422,10 @@ chat-bot
     font-size:14px;
     }
     .chat-header .name{ 
-        font-size:16px; 
-        font-weight:600; 
-        color:var(--color-gray-100); }
+    font-size:16px; 
+    font-weight:600; 
+    color:var(--color-gray-100); 
+    }
 
     .chat-body{ 
     flex:1; 
@@ -2410,10 +2449,10 @@ chat-bot
     .chat-welcome b{ color:var(--color-gray-100); }
 
     .quick-replies{ 
-        display:flex; 
-        flex-direction:column; 
-        gap:8px; 
-        align-items:flex-end; 
+    display:flex; 
+    flex-direction:column; 
+    gap:8px; 
+    align-items:flex-end; 
     }
     .chip{
     padding:10px 14px; 
