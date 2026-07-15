@@ -847,28 +847,29 @@ main-coach-sec
     gap: 18px;
 }
 .coach-card {
-    display: flex; 
-    background: url(../img/coach-card.png) no-repeat center /contain;
+    position: relative;
+    display: block; 
+    width: 100%;
+    height: 0;
+    padding-top: 58%;
+    background: url(../img/coach-card.png) no-repeat center /cover;
     border-radius: 20px;
-    max-width: 1600px;
-    height: 869px;
     overflow: hidden;
 }
 
 .coach-content{
+    position: absolute;
+    inset: 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;  
     align-items: flex-start;
-    
-    width: 100%;
-    height: 100%;
-    padding: 0 0 clamp(20px, 3vw, 52px) clamp(20px, 4vw, 60px);
+    padding: 0 0 clamp(12px, 3vw, 40px) clamp(20px, 4vw, 48px);
 }
 
 .coach-header {
     color: var(--color-gray-300);
-    margin-bottom: clamp(20px, 2vw, 40px);
+    margin-bottom: clamp(10px, 2vw, 40px);
 }
 .coach-role {
     font-size: clamp(24px, 3vw, 52px);
@@ -903,21 +904,27 @@ main-coach-sec
     background: var(--color-black) url(../img/coach-mo-back.png) no-repeat center / cover;
     }
     .coach-card {
-    background: none;
+        height: auto;
+        padding-top: 0;
+        overflow: visible;
+        background: none;
     }
     .coach-header{
         display: none;
     }
     .coach-mo-img {
-        display: flex;
+        display: block;
+        position: relative;
         width: 100%;
-        height: 596px;
+        height: 0;
+        padding-top: 152%;
         background: url(../img/coach-card-mo.png) no-repeat center /cover;
         border-radius: var(--radius-4);
         margin-bottom: 24px;
     }
     .coach-content{
         padding: 0;
+        position: static;
     }
 
     .coach-achievements {
