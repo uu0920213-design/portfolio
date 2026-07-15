@@ -845,7 +845,7 @@ main-coach-sec
 }
 .coach-card {
     display: flex; 
-    background: url(../img/coach-card.png) no-repeat center /contain;
+    background: url(../img/coach-card.png) no-repeat center /cover;
     border-radius: 20px;
     max-width: 1600px;
     height: 869px;
@@ -1976,7 +1976,10 @@ main-footer-sec
 /* ==========================================================================
 chat-bot
 ========================================================================== */
-
+    .chat-bot{
+        position: fixed;
+        z-index: 999;
+    }
     /* ---------- Launcher ---------- */
     .floating-wrap{
     position:fixed;
