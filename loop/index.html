@@ -1093,7 +1093,7 @@ slider.addEventListener('mousemove', (e) => {
         </div>
         
     </div>
-    </div>
+</div>
 
     <script>
     const launcher = document.getElementById('launcher');
@@ -1104,34 +1104,36 @@ slider.addEventListener('mousemove', (e) => {
     const navBtns = document.querySelectorAll('.chat-nav-btn');
     const pages = document.querySelectorAll('.chatview[data-page]');
 
+
+    const chatBot = document.querySelector(".chat-bot");
+    const MOBILE_BP = 820;
+
     launcher.addEventListener('click', () => {
+        const isMobile = window.innerWidth <= MOBILE_BP;
 
         if (widget.classList.contains('open')) {
-
+            // 닫기
             widget.classList.remove('open');
             chatOverlay.classList.remove('open');
-
             launcher.classList.remove('is-active');
-
+            chatBot.classList.remove('chat-open');
         } else {
-
+            // 열기
             widget.classList.add('open');
-
             launcher.classList.add('is-active');
-
+            if (isMobile) {
+                chatBot.classList.add('chat-open');
+            }
         }
-
     });
 
     closeBtn.addEventListener('click', () => {
-
         widget.classList.remove('open');
         chatOverlay.classList.remove('open');
-
         launcher.classList.remove('is-active');
-
+        chatBot.classList.remove('chat-open'); // PC에서는 애초에 없는 클래스
     });
-
+    // 내려가면 버튼생김 //
     navBtns.forEach(btn => {
         btn.addEventListener('click', () => {
         navBtns.forEach(b => b.classList.remove('is-active'));
