@@ -2431,6 +2431,9 @@ chat-bot
     }
 
 @media(max-width:820px){
+    .floating-wrap{
+        right: 30px;
+    }
     .chat-bot.chat-open .launcher,
         .chat-bot.chat-open .top-btn{
         opacity:0;
