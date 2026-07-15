@@ -473,14 +473,14 @@ main-hero-sec
     margin-right: 0;
     align-self: flex-end;
 
-    opacity: 0;
-    transform: translateY(8px);
+    opacity: 1;
+    transform: translateY(0px);
     transition: opacity .35s ease, transform .35s ease;
 }
-.stats-content.show {
+/* .stats-content.show {
     opacity: 1;
     transform: translateY(0);
-}
+} */
 .hero-stats {
     display: flex;
     flex-direction: column;
