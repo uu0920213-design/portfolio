@@ -1217,6 +1217,10 @@ main-special welcome kit-sec
     .kit-list{
         display: none;
     }
+    .kit-btn {
+        padding: 14px 66px;
+        max-width: 100%;
+    }
 }
 @media (max-width: 500px) {
     .kit-visual {
