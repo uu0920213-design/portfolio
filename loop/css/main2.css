@@ -2268,7 +2268,7 @@ chat-bot
     }
     .social span{
         font-size: 14px;
-        color: var(--color-white-opacity);
+        color: var(--color-white);
         font-weight: 500;
     }
     .social-media{
