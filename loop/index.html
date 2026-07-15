@@ -198,30 +198,52 @@
         </section>
         <script>
             const hero = document.querySelector(".hero-sec");
-const stats = document.querySelector(".stats-content");
 
-window.addEventListener("load", () => {
+            window.addEventListener("load", () => {
+            
+                // ① Hero 등장
+                hero.classList.add("open");
+            
+                // ② Hero 등장 완료(0.9초)
+                setTimeout(() => {
+            
+                    // AOS 실행
+                    AOS.refresh();            
+            
+                }, 700);
+            
+            });
 
-    // ① Hero 등장
-    hero.classList.add("open");
+            function animateCounters() {
+            const counts = document.querySelectorAll('.count');
+            
+            counts.forEach(counter => {
+                const target = parseInt(counter.textContent);
+                const duration = 1600; 
+                const start = Date.now();
+                
+                function update() {
+                const elapsed = Date.now() - start;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                
+                const eased = 1 - Math.pow(1 - progress, 2);
+                const current = Math.floor(target * eased);
+                
+                counter.textContent = current;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    counter.textContent = target; 
+                }
+                }
+                
+                update();
+            });
+            }
 
-    // ② Hero 등장 완료(0.9초)
-    setTimeout(() => {
-
-        // AOS 실행
-        AOS.refresh();
-
-        // ③ 텍스트 FadeUp(0.7초) 거의 끝날 때
-        setTimeout(() => {
-
-            // ④ 숫자 영역 등장
-            stats.classList.add("show");
-
-        }, 650);
-
-    }, 700);
-
-});
+            document.addEventListener('DOMContentLoaded', animateCounters);
         </script>
 
         <!-- class-sec -->
