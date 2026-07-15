@@ -1152,6 +1152,28 @@ slider.addEventListener('mousemove', (e) => {
             behavior: "smooth"
         });
     });
+
+    const heroSec = document.querySelector('.hero-sec');
+
+    if (heroSec) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // hero-section이 보이면 숨기기
+                    launcher.classList.remove('is-visible');
+                    topBtn.classList.remove('is-visible');
+                } else {
+                    // hero-section이 지나가면 보이기
+                    launcher.classList.add('is-visible');
+                    topBtn.classList.add('is-visible');
+                }
+            });
+        }, {
+            threshold: 0
+        });
+
+        observer.observe(heroSec);
+    }
     </script>
     
 
