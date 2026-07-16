@@ -9,6 +9,7 @@
     --color-transparent-2: rgba(0, 0, 0, 0);         /* 000000 0% */
     --color-black: #060606;
     --color-black-opacity: rgba(6, 6, 6, 0.2);       /* 060606 20% */
+    --color-black-opacity-05: rgba(6, 6, 6, 0.1); 
     --color-black-soft: #080808;
     --color-black-soft-2: #0D0D0D;
     --color-black-soft-opacity: rgba(8, 8, 8, 0.9);   /* 080808 90% */
@@ -46,12 +47,10 @@
     --bg-page:#07070d;
     --bg-deep:#0a0a14;
     --surface-1:rgba(255,255,255,0.045);
-    --surface-2:rgba(255,255,255,0.075);
-    --surface-3:rgba(255,255,255,0.11);
+    --surface-2:var(--color-black-opacity);
+    --surface-3:var(--color-black-opacity-05);
     --border-glass:rgba(255,255,255,0.10);
     --border-glass-strong:rgba(255,255,255,0.18);
-    --color-gray-100:#F3F1FF;
-    --color-gray-100: #EEEEF3;
     --text-secondary:#A9A6C4;
     --text-muted:#6E6B8C;
     --violet:var(--color-purple-bright);
@@ -2390,7 +2389,7 @@ chat-bot
     border:none; 
     border-radius:14px;
     background:var(--grad-main); 
-    color:#fff;
+    color:var(--color-white);
     font-family:var(--font-kr); 
     font-size:14px; font-weight:600;
     display:flex; 
