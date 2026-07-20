@@ -1911,6 +1911,10 @@ main-footer-sec
     font-weight: 500;
     padding-top: 20px;
 }
+.bottom-des {
+    font-size: 12px;
+    font-weight: 500;
+}
 @media(max-width:1024px){
     .footer-desc{
         max-width: 240px;
@@ -1978,6 +1982,9 @@ main-footer-sec
         display: block;
         word-break: keep-all;
         overflow-wrap: break-word;
+    }
+    .bottom-des{
+        font-size: 10px;
     }
 }
 
