@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D.note — Run. Recover. Repeat.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: 'Pretendard';
+    src: local('Pretendard');
+  }
+  :root{
+    /* ===== D.note Color System ===== */
+    --bg:            #F7F3EC;   /* 오프화이트 배경 */
+    --bg-alt:        #EFE9DD;   /* 섹션 구분용 스톤 */
+    --card:          #FFFFFF;
+    --beige:         #D8C39D;   /* 베이지 */
+    --wood:          #7C5A38;   /* 우드톤 — 메인 액센트/CTA */
+    --wood-deep:     #5B3F26;
+    --sage:          #6B7A5C;   /* 보조 액센트 — 회복/자연 느낌 */
+    --ink:           #2A2420;   /* 헤드라인 텍스트 */
+    --ink-soft:      #55493D;   /* 본문 텍스트 */
+    --line:          #E1D8C6;   /* 헤어라인 */
+
+    --serif: 'Noto Serif KR', serif;
+    --sans: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--bg);
+    color:var(--ink-soft);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{ display:block; max-width:100%; }
+  a{ color:inherit; text-decoration:none; }
+  ul{ list-style:none; }
+  button{ font-family:inherit; cursor:pointer; border:none; background:none; }
+  ::selection{ background:var(--beige); color:var(--ink); }
+  :focus-visible{ outline:2px solid var(--wood); outline-offset:3px; }
+
+  .eyebrow{
+    font-family:var(--sans);
+    font-size:0.72rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--wood);
+    font-weight:600;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:18px; height:1px;
+    background:var(--wood);
+  }
+  h1,h2,h3{ font-family:var(--serif); color:var(--ink); font-weight:600; letter-spacing:-0.01em; }
+  .section-title{ font-size:clamp(1.6rem, 3vw, 2.4rem); margin:14px 0 12px; }
+  .section-sub{ color:var(--ink-soft); font-size:0.98rem; max-width:520px; }
+  .wrap{ max-width:1200px; margin:0 auto; padding:0 32px; }
+  .section{ padding:110px 0; }
+  .section-head{ margin-bottom:56px; }
+  .section-head.center{ text-align:center; }
+  .section-head.center .section-sub{ margin:0 auto; }
+
+  /* ================= HEADER ================= */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:200;
+    background:rgba(247,243,236,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1200px; margin:0 auto; padding:0 32px;
+    height:78px; display:flex; align-items:center; justify-content:space-between;
+  }
+  .logo{
+    font-family:var(--serif); font-size:1.4rem; font-weight:700; color:var(--ink);
+    letter-spacing:-0.02em;
+  }
+  .logo span{ color:var(--wood); }
+  .nav-menu{ display:flex; gap:40px; }
+  .nav-menu > li{ position:relative; }
+  .nav-menu > li > a{
+    font-size:0.93rem; font-weight:500; color:var(--ink);
+    padding:28px 0; display:block;
+    transition:color .2s;
+  }
+  .nav-menu > li:hover > a{ color:var(--wood); }
+  .dropdown{
+    position:absolute; top:100%; left:50%; transform:translateX(-50%) translateY(6px);
+    background:var(--card); border:1px solid var(--line); border-radius:10px;
+    padding:14px 6px; min-width:150px;
+    opacity:0; visibility:hidden; transition:all .2s;
+    box-shadow:0 12px 30px rgba(42,36,32,0.08);
+  }
+  .nav-menu > li:hover .dropdown{ opacity:1; visibility:visible; transform:translateX(-50%) translateY(0); }
+  .dropdown a{
+    display:block; padding:9px 18px; font-size:0.87rem; color:var(--ink-soft); white-space:nowrap;
+    border-radius:6px;
+  }
+  .dropdown a:hover{ background:var(--bg-alt); color:var(--wood); }
+  .nav-right{ display:flex; align-items:center; gap:22px; }
+  .nav-auth{ display:flex; gap:16px; font-size:0.85rem; font-weight:500; }
+  .nav-auth a:hover{ color:var(--wood); }
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:13px 28px; border-radius:999px;
+    font-size:0.88rem; font-weight:600; letter-spacing:0.01em;
+    transition:all .25s;
+  }
+  .btn-primary{ background:var(--wood); color:#fff; }
+  .btn-primary:hover{ background:var(--wood-deep); transform:translateY(-1px); }
+  .btn-ghost{ border:1px solid var(--ink); color:var(--ink); }
+  .btn-ghost:hover{ background:var(--ink); color:#fff; }
+  .btn-line{ border:1px solid var(--line); color:var(--ink); background:var(--card); }
+  .btn-line:hover{ border-color:var(--wood); color:var(--wood); }
+  .hamburger{ display:none; flex-direction:column; gap:5px; width:24px; }
+  .hamburger span{ height:2px; background:var(--ink); width:100%; }
+
+  /* ================= HERO ================= */
+  .hero{
+    padding:180px 0 90px;
+    position:relative; overflow:hidden;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.05fr 0.95fr; gap:60px; align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 5.4vw, 4.4rem);
+    line-height:1.08;
+    margin:20px 0 26px;
+  }
+  .hero h1 em{ font-style:normal; color:var(--wood); }
+  .hero p{ font-size:1.05rem; max-width:440px; margin-bottom:36px; }
+  .hero-actions{ display:flex; gap:14px; flex-wrap:wrap; }
+  .hero-visual{ position:relative; aspect-ratio:1/1.05; }
+  .contour{
+    position:absolute; inset:0; border-radius:50% 50% 46% 54% / 54% 46% 54% 46%;
+    background:linear-gradient(155deg, var(--beige) 0%, var(--bg-alt) 100%);
+    overflow:hidden;
+  }
+  .contour svg{ position:absolute; inset:0; width:100%; height:100%; opacity:0.55; }
+  .hero-stat-card{
+    position:absolute; bottom:-18px; left:-18px;
+    background:var(--card); border:1px solid var(--line);
+    border-radius:14px; padding:20px 24px;
+    box-shadow:0 18px 40px rgba(42,36,32,0.10);
+    max-width:230px;
+  }
+  .hero-stat-card .n{ font-family:var(--serif); font-size:1.8rem; color:var(--wood); font-weight:700; }
+  .hero-stat-card .l{ font-size:0.8rem; color:var(--ink-soft); margin-top:2px; }
+
+  /* ================= RECOVERY SOLUTION — signature bodymap ================= */
+  .bodymap-section{ background:var(--ink); color:#EFE9DD; }
+  .bodymap-section .eyebrow{ color:var(--beige); }
+  .bodymap-section .eyebrow::before{ background:var(--beige); }
+  .bodymap-section h2{ color:#F7F3EC; }
+  .bodymap-section .section-sub{ color:#C9BFAF; }
+  .bodymap-grid{
+    display:grid; grid-template-columns:0.85fr 1.15fr; gap:70px; align-items:center;
+  }
+  .figure-wrap{ position:relative; max-width:340px; margin:0 auto; }
+  .figure-wrap svg{ width:100%; }
+  .hotspot{
+    position:absolute; width:34px; height:34px; border-radius:50%;
+    background:rgba(216,195,157,0.18); border:1.5px solid var(--beige);
+    cursor:pointer; transform:translate(-50%,-50%);
+    display:flex; align-items:center; justify-content:center;
+    transition:all .25s;
+  }
+  .hotspot::after{
+    content:''; width:8px; height:8px; border-radius:50%; background:var(--beige);
+  }
+  .hotspot:hover, .hotspot.active{
+    background:var(--wood); border-color:var(--wood);
+    box-shadow:0 0 0 8px rgba(124,90,56,0.22);
+  }
+  .hotspot.active::after{ background:#fff; }
+  .hs-calf{ top:78%; left:56%; }
+  .hs-knee{ top:57%; left:45%; }
+  .hs-hamstring{ top:47%; left:58%; }
+  .hs-foot{ top:94%; left:50%; }
+
+  .solution-panel{ }
+  .solution-tabs{ display:flex; gap:10px; margin-bottom:30px; flex-wrap:wrap; }
+  .stab{
+    padding:9px 18px; border-radius:999px; border:1px solid rgba(239,233,221,0.25);
+    font-size:0.85rem; color:#C9BFAF; transition:all .2s;
+  }
+  .stab.active{ background:var(--beige); color:var(--ink); border-color:var(--beige); font-weight:600; }
+  .solution-card{ display:none; }
+  .solution-card.active{ display:block; animation:fade .35s ease; }
+  @keyframes fade{ from{ opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+  .solution-card h3{ color:#F7F3EC; font-size:1.5rem; margin-bottom:10px; }
+  .solution-card p{ color:#C9BFAF; margin-bottom:22px; max-width:460px; }
+  .tag-row{ display:flex; gap:10px; flex-wrap:wrap; }
+  .tag{
+    padding:8px 16px; border-radius:8px; background:rgba(239,233,221,0.07);
+    border:1px solid rgba(239,233,221,0.15); font-size:0.82rem; color:#EFE9DD;
+  }
+
+  /* ================= MARATHON CLASS ================= */
+  .class-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+  .class-card{
+    background:var(--card); border:1px solid var(--line); border-radius:16px;
+    overflow:hidden; transition:transform .3s, box-shadow .3s;
+  }
+  .class-card:hover{ transform:translateY(-6px); box-shadow:0 20px 40px rgba(42,36,32,0.09); }
+  .class-thumb{
+    aspect-ratio:4/3; position:relative; overflow:hidden;
+  }
+  .class-thumb svg{ width:100%; height:100%; }
+  .class-level{
+    position:absolute; top:14px; left:14px; background:var(--card);
+    padding:5px 12px; border-radius:999px; font-size:0.72rem; font-weight:600; color:var(--wood);
+  }
+  .class-body{ padding:22px 22px 24px; }
+  .class-body h3{ font-size:1.1rem; margin-bottom:8px; }
+  .class-meta{ display:flex; gap:14px; font-size:0.8rem; color:var(--ink-soft); margin-bottom:14px; }
+  .class-meta span{ display:flex; align-items:center; gap:5px; }
+  .class-foot{ display:flex; justify-content:space-between; align-items:center; padding-top:14px; border-top:1px solid var(--line); }
+  .class-price{ font-family:var(--serif); font-weight:700; color:var(--ink); }
+  .class-price small{ font-family:var(--sans); font-weight:400; color:var(--ink-soft); font-size:0.78rem; }
+  .link-arrow{ font-size:0.82rem; font-weight:600; color:var(--wood); display:flex; align-items:center; gap:5px; }
+
+  /* ================= BEST PRODUCTS ================= */
+  .bg-alt{ background:var(--bg-alt); }
+  .product-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+  .product-card{
+    background:var(--card); border-radius:16px; padding:0; overflow:hidden;
+    border:1px solid var(--line);
+  }
+  .product-thumb{ aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; background:var(--bg); }
+  .product-body{ padding:20px 22px 24px; }
+  .product-body .cat{ font-size:0.74rem; color:var(--sage); font-weight:600; letter-spacing:0.05em; text-transform:uppercase; }
+  .product-body h3{ font-size:1.05rem; margin:8px 0 6px; }
+  .stars{ color:var(--wood); font-size:0.82rem; margin-bottom:10px; }
+  .product-foot{ display:flex; justify-content:space-between; align-items:center; }
+  .price{ font-family:var(--serif); font-weight:700; color:var(--ink); }
+  .shop-all-wrap{ text-align:center; margin-top:44px; }
+
+  /* ================= CATEGORY ================= */
+  .cat-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+  .cat-card{
+    aspect-ratio:3/3.6; border-radius:16px; padding:26px;
+    display:flex; flex-direction:column; justify-content:flex-end;
+    position:relative; overflow:hidden; color:#fff;
+    transition:transform .3s;
+  }
+  .cat-card:hover{ transform:translateY(-5px); }
+  .cat-card h3{ color:#fff; font-size:1.2rem; margin-bottom:4px; }
+  .cat-card p{ color:rgba(255,255,255,0.75); font-size:0.82rem; }
+  .cat-card::before{ content:''; position:absolute; inset:0; opacity:0.92; z-index:0; }
+  .cat-card > *{ position:relative; z-index:1; }
+  .cat1::before{ background:linear-gradient(160deg,#7C5A38,#3E2C1B); }
+  .cat2::before{ background:linear-gradient(160deg,#6B7A5C,#31391F); }
+  .cat3::before{ background:linear-gradient(160deg,#8E7A5A,#4A3C24); }
+  .cat4::before{ background:linear-gradient(160deg,#5B3F26,#241811); }
+
+  /* ================= WHY D.NOTE ================= */
+  .why-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:0; border-top:1px solid var(--line); }
+  .why-item{ padding:44px 30px; border-right:1px solid var(--line); }
+  .why-item:last-child{ border-right:none; }
+  .why-num{ font-family:var(--serif); font-size:0.85rem; color:var(--wood); margin-bottom:18px; }
+  .why-item h3{ font-size:1.2rem; margin-bottom:10px; }
+  .why-item p{ font-size:0.92rem; }
+
+  /* ================= GUIDE ================= */
+  .guide-grid{ display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:26px; }
+  .guide-card{ border-radius:16px; overflow:hidden; background:var(--card); border:1px solid var(--line); }
+  .guide-feature{ grid-row:span 2; }
+  .guide-thumb{ aspect-ratio:16/10; overflow:hidden; }
+  .guide-feature .guide-thumb{ aspect-ratio:16/13; }
+  .guide-thumb svg{ width:100%; height:100%; }
+  .guide-body{ padding:22px; }
+  .guide-cat{ font-size:0.74rem; color:var(--sage); font-weight:600; text-transform:uppercase; letter-spacing:0.05em; }
+  .guide-body h3{ font-size:1.05rem; margin:8px 0; line-height:1.4; }
+  .guide-feature h3{ font-size:1.35rem; }
+  .guide-meta{ font-size:0.78rem; color:var(--ink-soft); }
+
+  /* ================= COMMUNITY ================= */
+  .review-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .review-card{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:26px; }
+  .review-top{ display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+  .avatar{
+    width:42px; height:42px; border-radius:50%;
+    background:var(--beige); display:flex; align-items:center; justify-content:center;
+    font-family:var(--serif); font-weight:700; color:var(--wood-deep);
+  }
+  .review-name{ font-weight:600; color:var(--ink); font-size:0.92rem; }
+  .review-goal{ font-size:0.76rem; color:var(--sage); }
+  .review-product{
+    display:inline-block; font-size:0.76rem; color:var(--wood); background:var(--bg-alt);
+    padding:4px 10px; border-radius:6px; margin-bottom:12px;
+  }
+  .review-text{ font-size:0.92rem; color:var(--ink-soft); }
+
+  /* ================= INSTAGRAM ================= */
+  .insta-head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:36px; flex-wrap:wrap; gap:12px; }
+  .insta-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:14px; }
+  .insta-item{ aspect-ratio:1/1; border-radius:10px; overflow:hidden; position:relative; }
+  .insta-item svg{ width:100%; height:100%; }
+
+  /* ================= NEWSLETTER ================= */
+  .newsletter{ background:var(--wood); color:#fff; text-align:center; }
+  .newsletter .eyebrow{ color:var(--beige); justify-content:center; }
+  .newsletter .eyebrow::before{ background:var(--beige); }
+  .newsletter h2{ color:#fff; }
+  .newsletter p{ color:rgba(255,255,255,0.8); max-width:440px; margin:12px auto 30px; }
+  .nl-form{ display:flex; gap:10px; max-width:440px; margin:0 auto; }
+  .nl-form input{
+    flex:1; padding:14px 18px; border-radius:999px; border:none; font-size:0.9rem;
+    font-family:var(--sans);
+  }
+  .nl-form button{ padding:14px 26px; border-radius:999px; background:var(--ink); color:#fff; font-weight:600; font-size:0.88rem; white-space:nowrap; }
+
+  /* ================= FOOTER ================= */
+  footer{ background:var(--ink); color:#C9BFAF; padding:70px 0 30px; }
+  .footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; margin-bottom:50px; }
+  .footer-logo{ font-family:var(--serif); color:#fff; font-size:1.3rem; margin-bottom:14px; }
+  .footer-col h4{ color:#F7F3EC; font-size:0.85rem; margin-bottom:16px; font-weight:600; }
+  .footer-col a{ display:block; font-size:0.85rem; margin-bottom:10px; color:#B4A996; }
+  .footer-col a:hover{ color:#fff; }
+  .footer-bottom{ border-top:1px solid rgba(255,255,255,0.1); padding-top:24px; display:flex; justify-content:space-between; font-size:0.78rem; color:#8A8071; flex-wrap:wrap; gap:10px; }
+
+  /* ================= AI CHATBOT FLOATING ================= */
+  .ai-launcher{
+    position:fixed; right:28px; bottom:28px; z-index:300;
+    display:flex; align-items:center; gap:10px;
+    background:var(--ink); color:#fff; border-radius:999px;
+    padding:14px 20px 14px 14px;
+    box-shadow:0 14px 34px rgba(42,36,32,0.28);
+    transition:transform .25s;
+  }
+  .ai-launcher:hover{ transform:translateY(-3px); }
+  .ai-launcher .dot{
+    width:34px; height:34px; border-radius:50%; background:var(--beige);
+    display:flex; align-items:center; justify-content:center; color:var(--wood-deep); font-size:1rem;
+  }
+  .ai-launcher span{ font-size:0.85rem; font-weight:600; }
+
+  .chat-panel{
+    position:fixed; right:28px; bottom:96px; z-index:300;
+    width:320px; max-height:420px; background:var(--card);
+    border-radius:18px; border:1px solid var(--line);
+    box-shadow:0 24px 60px rgba(42,36,32,0.25);
+    display:none; flex-direction:column; overflow:hidden;
+  }
+  .chat-panel.open{ display:flex; }
+  .chat-head{ background:var(--ink); color:#fff; padding:16px 20px; display:flex; justify-content:space-between; align-items:center; }
+  .chat-head strong{ font-family:var(--serif); font-size:0.98rem; }
+  .chat-head small{ display:block; color:#C9BFAF; font-size:0.72rem; margin-top:2px; }
+  .chat-close{ color:#C9BFAF; font-size:1.1rem; }
+  .chat-body{ padding:18px 20px; overflow-y:auto; flex:1; }
+  .chat-q{ font-size:0.88rem; color:var(--ink-soft); margin-bottom:14px; }
+  .chat-opts{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .chat-opt{
+    padding:10px; border-radius:10px; border:1px solid var(--line); font-size:0.82rem;
+    color:var(--ink); text-align:center; transition:all .2s;
+  }
+  .chat-opt:hover{ background:var(--wood); color:#fff; border-color:var(--wood); }
+
+  @media(max-width:980px){
+    .nav-menu, .nav-auth{ display:none; }
+    .hamburger{ display:flex; }
+    .hero-grid, .bodymap-grid{ grid-template-columns:1fr; }
+    .class-grid, .product-grid, .why-grid{ grid-template-columns:repeat(2,1fr); }
+    .why-item{ border-right:none; border-bottom:1px solid var(--line); }
+    .cat-grid{ grid-template-columns:repeat(2,1fr); }
+    .guide-grid{ grid-template-columns:1fr 1fr; }
+    .guide-feature{ grid-column:span 2; grid-row:auto; }
+    .insta-grid{ grid-template-columns:repeat(3,1fr); }
+    .footer-grid{ grid-template-columns:1fr 1fr; }
+    .section{ padding:70px 0; }
+  }
+  @media(max-width:600px){
+    .class-grid,.product-grid,.why-grid,.cat-grid{ grid-template-columns:1fr; }
+    .insta-grid{ grid-template-columns:repeat(2,1fr); }
+    .chat-panel{ width:calc(100vw - 40px); right:20px; }
+    .ai-launcher{ right:20px; bottom:20px; }
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="nav-inner">
+    <a href="#top" class="logo">D<span>.</span>note</a>
+    <ul class="nav-menu">
+      <li><a href="#class">RUNNING CLASS</a>
+        <ul class="dropdown">
+          <li><a href="#class">전체 클래스</a></li>
+          <li><a href="#">초보 러너</a></li>
+          <li><a href="#">마라톤 대비</a></li>
+          <li><a href="#">부상 예방</a></li>
+        </ul>
+      </li>
+      <li><a href="#shop">SHOP</a>
+        <ul class="dropdown">
+          <li><a href="#shop">Recovery Tool</a></li>
+          <li><a href="#shop">Mobility</a></li>
+          <li><a href="#shop">Running Care</a></li>
+          <li><a href="#shop">Accessories</a></li>
+        </ul>
+      </li>
+      <li><a href="#guide">GUIDE</a></li>
+      <li><a href="#community">COMMUNITY</a>
+        <ul class="dropdown">
+          <li><a href="#community">Review</a></li>
+          <li><a href="#">Runner Story</a></li>
+        </ul>
+      </li>
+      <li><a href="#about">ABOUT</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-auth">
+        <a href="#">LOGIN</a>
+        <a href="#">JOIN</a>
+      </div>
+      <a href="#shop" class="btn btn-primary">Shop All</a>
+      <div class="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">RUNNING RECOVERY STUDIO</span>
+      <h1>RUN.<br><em>RECOVER.</em><br>REPEAT.</h1>
+      <p>더 오래 달리고 더 건강하게 성장하는 러너의 회복 루틴. 전문 코치의 마라톤 클래스와 검증된 리커버리 소도구를 한 곳에서 만나보세요.</p>
+      <div class="hero-actions">
+        <a href="#class" class="btn btn-primary">마라톤 클래스 보기</a>
+        <a href="#shop" class="btn btn-ghost">Recovery Gear 쇼핑</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="contour">
+        <svg viewBox="0 0 400 420" preserveAspectRatio="none">
+          <path d="M0,120 C80,90 140,150 200,120 C260,90 320,140 400,110" stroke="#7C5A38" stroke-width="1.5" fill="none"/>
+          <path d="M0,200 C80,170 140,230 200,200 C260,170 320,220 400,190" stroke="#7C5A38" stroke-width="1.5" fill="none"/>
+          <path d="M0,280 C80,250 140,310 200,280 C260,250 320,300 400,270" stroke="#7C5A38" stroke-width="1.5" fill="none"/>
+          <path d="M0,360 C80,330 140,390 200,360 C260,330 320,380 400,350" stroke="#7C5A38" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
+      <div class="hero-stat-card">
+        <div class="n">4,200+</div>
+        <div class="l">D.note와 함께 회복 루틴을 완주한 러너</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RECOVERY SOLUTION (signature bodymap) ============ -->
+<section class="section bodymap-section" id="solution">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">RECOVERY SOLUTION</span>
+      <h2 class="section-title">오늘, 어디가 불편하세요?</h2>
+      <p class="section-sub">부위를 선택하면 러너에게 맞는 스트레칭과 추천 도구를 바로 확인할 수 있어요. 더 정밀한 진단은 AI Recovery 챗봇에게 물어보세요.</p>
+    </div>
+    <div class="bodymap-grid">
+      <div class="figure-wrap">
+        <svg viewBox="0 0 200 400" fill="none">
+          <circle cx="104" cy="30" r="16" fill="#EFE9DD" opacity="0.9"/>
+          <path d="M104 46 C104 46 96 90 98 130 C99 150 92 170 88 200" stroke="#EFE9DD" stroke-width="7" stroke-linecap="round" opacity="0.9"/>
+          <path d="M104 46 C104 46 112 90 110 130 C109 150 118 170 122 200" stroke="#EFE9DD" stroke-width="7" stroke-linecap="round" opacity="0.9"/>
+          <path d="M100 60 C85 70 60 90 46 100" stroke="#EFE9DD" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+          <path d="M108 60 C126 78 140 95 150 118" stroke="#EFE9DD" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+          <path d="M88 200 C84 240 82 270 78 300" stroke="#EFE9DD" stroke-width="9" stroke-linecap="round" opacity="0.9"/>
+          <path d="M122 200 C130 240 128 270 132 300" stroke="#EFE9DD" stroke-width="9" stroke-linecap="round" opacity="0.9"/>
+          <path d="M78 300 C76 330 74 350 70 368" stroke="#EFE9DD" stroke-width="8" stroke-linecap="round" opacity="0.9"/>
+          <path d="M132 300 C130 330 118 350 100 368" stroke="#EFE9DD" stroke-width="8" stroke-linecap="round" opacity="0.9"/>
+          <ellipse cx="66" cy="374" rx="16" ry="6" fill="#EFE9DD" opacity="0.85"/>
+          <ellipse cx="96" cy="374" rx="16" ry="6" fill="#EFE9DD" opacity="0.85"/>
+        </svg>
+        <button class="hotspot hs-hamstring active" data-target="hamstring" aria-label="햄스트링"></button>
+        <button class="hotspot hs-knee" data-target="knee" aria-label="무릎"></button>
+        <button class="hotspot hs-calf" data-target="calf" aria-label="종아리"></button>
+        <button class="hotspot hs-foot" data-target="foot" aria-label="발바닥"></button>
+      </div>
+
+      <div class="solution-panel">
+        <div class="solution-tabs">
+          <button class="stab active" data-tab="hamstring">햄스트링</button>
+          <button class="stab" data-tab="knee">무릎</button>
+          <button class="stab" data-tab="calf">종아리</button>
+          <button class="stab" data-tab="foot">발바닥</button>
+        </div>
+
+        <div class="solution-card active" id="card-hamstring">
+          <h3>햄스트링 관리</h3>
+          <p>장거리 러닝 후 뒤쪽 허벅지가 뻐근하다면 근력과 유연성의 균형이 필요합니다. 가벼운 스트레칭과 폼롤러 압박으로 긴장을 풀어주세요.</p>
+          <div class="tag-row">
+            <span class="tag">스탠딩 햄스트링 스트레칭</span>
+            <span class="tag">폼롤러 압박 마사지</span>
+            <span class="tag">한 다리 데드리프트 근력</span>
+          </div>
+        </div>
+        <div class="solution-card" id="card-knee">
+          <h3>무릎 관리</h3>
+          <p>착지 충격이 누적되는 무릎은 회복과 근력 보강이 함께 필요한 부위예요. 대퇴사두근 강화와 마사지 볼로 관리해보세요.</p>
+          <div class="tag-row">
+            <span class="tag">대퇴사두근 강화 운동</span>
+            <span class="tag">마사지볼 슬개골 주변</span>
+            <span class="tag">냉찜질 회복</span>
+          </div>
+        </div>
+        <div class="solution-card" id="card-calf">
+          <h3>종아리 피로</h3>
+          <p>러너에게 가장 흔한 피로 부위. 마사지건과 폼롤러로 근막을 풀어주고 카프레이즈로 탄력을 유지하세요.</p>
+          <div class="tag-row">
+            <span class="tag">마사지건 종아리 릴리즈</span>
+            <span class="tag">벽 스트레칭</span>
+            <span class="tag">카프레이즈 강화</span>
+          </div>
+        </div>
+        <div class="solution-card" id="card-foot">
+          <h3>발바닥 피로</h3>
+          <p>족저근막의 피로가 쌓이면 러닝 폼 전체가 무너질 수 있어요. 마사지볼 롤링과 발가락 스트레칭으로 회복하세요.</p>
+          <div class="tag-row">
+            <span class="tag">발바닥 마사지볼 롤링</span>
+            <span class="tag">족저근막 스트레칭</span>
+            <span class="tag">테이핑 가이드</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARATHON CLASS ============ -->
+<section class="section" id="class">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">RUNNING CLASS</span>
+      <h2 class="section-title">전문 코치의 마라톤 클래스</h2>
+      <p class="section-sub">완주가 아닌 완성을 목표로 하는 코칭. 목표 거리와 페이스에 맞춰 클래스를 선택하세요.</p>
+    </div>
+    <div class="class-grid">
+      <div class="class-card">
+        <div class="class-thumb">
+          <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="#EFE9DD"/><path d="M0 220 Q100 180 200 210 T400 190 V300 H0 Z" fill="#D8C39D"/><circle cx="310" cy="90" r="46" fill="#F7F3EC"/></svg>
+          <span class="class-level">입문 · 4주</span>
+        </div>
+        <div class="class-body">
+          <h3>10K 첫 완주 클래스</h3>
+          <div class="class-meta"><span>주 3회</span><span>온라인 코칭</span></div>
+          <div class="class-foot">
+            <div class="class-price">₩89,000 <small>/4주</small></div>
+            <a href="#" class="link-arrow">자세히 →</a>
+          </div>
+        </div>
+      </div>
+      <div class="class-card">
+        <div class="class-thumb">
+          <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="#E4DCC8"/><path d="M0 240 Q120 190 220 220 T400 200 V300 H0 Z" fill="#7C5A38"/><circle cx="90" cy="80" r="40" fill="#F7F3EC"/></svg>
+          <span class="class-level">중급 · 8주</span>
+        </div>
+        <div class="class-body">
+          <h3>하프 마라톤 서브 2 클래스</h3>
+          <div class="class-meta"><span>주 4회</span><span>영상 피드백</span></div>
+          <div class="class-foot">
+            <div class="class-price">₩159,000 <small>/8주</small></div>
+            <a href="#" class="link-arrow">자세히 →</a>
+          </div>
+        </div>
+      </div>
+      <div class="class-card">
+        <div class="class-thumb">
+          <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="#DED2B8"/><path d="M0 230 Q150 200 250 230 T400 210 V300 H0 Z" fill="#5B3F26"/><circle cx="250" cy="70" r="34" fill="#F7F3EC"/></svg>
+          <span class="class-level">고급 · 12주</span>
+        </div>
+        <div class="class-body">
+          <h3>풀코스 서브 4 클래스</h3>
+          <div class="class-meta"><span>주 5회</span><span>1:1 코칭</span></div>
+          <div class="class-foot">
+            <div class="class-price">₩259,000 <small>/12주</small></div>
+            <a href="#" class="link-arrow">자세히 →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BEST RECOVERY PRODUCTS ============ -->
+<section class="section bg-alt" id="best">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">BEST RECOVERY GEAR</span>
+      <h2 class="section-title">러너가 가장 많이 찾는 회복 도구</h2>
+    </div>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-thumb">
+          <svg width="140" height="140" viewBox="0 0 140 140"><rect x="40" y="20" width="60" height="20" rx="10" fill="#7C5A38"/><rect x="55" y="40" width="30" height="70" rx="15" fill="#D8C39D"/><circle cx="70" cy="120" r="16" fill="#7C5A38"/></svg>
+        </div>
+        <div class="product-body">
+          <span class="cat">Recovery Tool</span>
+          <h3>마사지건 프로 미니</h3>
+          <div class="stars">★★★★★ <span style="color:var(--ink-soft)">(214)</span></div>
+          <div class="product-foot">
+            <span class="price">₩89,000</span>
+            <a href="#" class="link-arrow">View →</a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-thumb">
+          <svg width="140" height="140" viewBox="0 0 140 140"><rect x="30" y="55" width="80" height="30" rx="15" fill="#6B7A5C"/><circle cx="30" cy="70" r="14" fill="#5B3F26"/><circle cx="110" cy="70" r="14" fill="#5B3F26"/></svg>
+        </div>
+        <div class="product-body">
+          <span class="cat">Mobility</span>
+          <h3>폼롤러 리지드 45</h3>
+          <div class="stars">★★★★★ <span style="color:var(--ink-soft)">(189)</span></div>
+          <div class="product-foot">
+            <span class="price">₩38,000</span>
+            <a href="#" class="link-arrow">View →</a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-thumb">
+          <svg width="140" height="140" viewBox="0 0 140 140"><circle cx="70" cy="70" r="38" fill="#D8C39D"/><circle cx="70" cy="70" r="38" fill="none" stroke="#7C5A38" stroke-width="3"/></svg>
+        </div>
+        <div class="product-body">
+          <span class="cat">Recovery Tool</span>
+          <h3>딥티슈 마사지볼 세트</h3>
+          <div class="stars">★★★★☆ <span style="color:var(--ink-soft)">(97)</span></div>
+          <div class="product-foot">
+            <span class="price">₩24,000</span>
+            <a href="#" class="link-arrow">View →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="shop-all-wrap">
+      <a href="#shop" class="btn btn-ghost">Shop All</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CATEGORY / SHOP ============ -->
+<section class="section" id="shop">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">SHOP</span>
+      <h2 class="section-title">카테고리별로 둘러보기</h2>
+    </div>
+    <div class="cat-grid">
+      <a href="#" class="cat-card cat1"><h3>Recovery Tool</h3><p>마사지건 · 폼롤러 · 마사지볼</p></a>
+      <a href="#" class="cat-card cat2"><h3>Mobility</h3><p>스트레칭밴드 · 요가매트</p></a>
+      <a href="#" class="cat-card cat3"><h3>Running Care</h3><p>기능성 양말 · 보호대 · 테이핑</p></a>
+      <a href="#" class="cat-card cat4"><h3>Accessories</h3><p>수납 파우치 · 휴대용 제품</p></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY D.NOTE ============ -->
+<section class="section bg-alt" id="why">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">WHY D.NOTE</span>
+      <h2 class="section-title">러너를 위한, 러너가 검증한</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="why-num">Runner Based</div>
+        <h3>러너의 몸을 이해하는 제품</h3>
+        <p>수백 명의 러너 데이터를 바탕으로 실제 러닝 후 회복 패턴에 맞춰 설계했습니다.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-num">Recovery First</div>
+        <h3>훈련만큼 중요한 회복</h3>
+        <p>기록 향상은 얼마나 잘 달리느냐가 아니라 얼마나 잘 회복하느냐에서 시작됩니다.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-num">Selected Gear</div>
+        <h3>직접 검증한 제품만</h3>
+        <p>코치와 러너가 직접 테스트한 도구만 큐레이션하여 소개합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RUNNING RECOVERY GUIDE ============ -->
+<section class="section" id="guide">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">RECOVERY GUIDE</span>
+      <h2 class="section-title">달리는 법보다, 회복하는 법</h2>
+    </div>
+    <div class="guide-grid">
+      <div class="guide-card guide-feature">
+        <div class="guide-thumb"><svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="320" fill="#E4DCC8"/><path d="M0 240 Q100 200 200 230 T400 210 V320 H0 Z" fill="#7C5A38"/></svg></div>
+        <div class="guide-body">
+          <span class="guide-cat">Training</span>
+          <h3>마라톤 완주 후, 첫 72시간 회복 루틴</h3>
+          <div class="guide-meta">2026.07.21 · 7분 읽기</div>
+        </div>
+      </div>
+      <div class="guide-card">
+        <div class="guide-thumb"><svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="190" fill="#EFE9DD"/><circle cx="150" cy="95" r="50" fill="#D8C39D"/></svg></div>
+        <div class="guide-body">
+          <span class="guide-cat">Injury Prevention</span>
+          <h3>러너가 가장 자주 아픈 부위 TOP 5</h3>
+          <div class="guide-meta">2026.07.14 · 5분 읽기</div>
+        </div>
+      </div>
+      <div class="guide-card">
+        <div class="guide-thumb"><svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="190" fill="#DED2B8"/><rect x="90" y="60" width="120" height="20" rx="10" fill="#5B3F26"/></svg></div>
+        <div class="guide-body">
+          <span class="guide-cat">Recovery</span>
+          <h3>폼롤러, 제대로 쓰고 있나요?</h3>
+          <div class="guide-meta">2026.07.09 · 4분 읽기</div>
+        </div>
+      </div>
+      <div class="guide-card">
+        <div class="guide-thumb"><svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="190" fill="#E4DCC8"/><path d="M60 140 Q150 60 240 140" stroke="#6B7A5C" stroke-width="10" fill="none"/></svg></div>
+        <div class="guide-body">
+          <span class="guide-cat">Training</span>
+          <h3>10km 러너를 위한 스트레칭 5분 루틴</h3>
+          <div class="guide-meta">2026.06.30 · 6분 읽기</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMMUNITY REVIEW ============ -->
+<section class="section bg-alt" id="community">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">COMMUNITY</span>
+      <h2 class="section-title">러너들의 진짜 회복 후기</h2>
+    </div>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="review-top">
+          <div class="avatar">김</div>
+          <div>
+            <div class="review-name">김OO Runner</div>
+            <div class="review-goal">10km 대회 준비 중</div>
+          </div>
+        </div>
+        <span class="review-product">Foam Roller 사용</span>
+        <p class="review-text">훈련 후 종아리 뭉침이 심했는데, 폼롤러로 매일 5분씩 풀어주니 다음 훈련이 확실히 가벼워졌어요.</p>
+      </div>
+      <div class="review-card">
+        <div class="review-top">
+          <div class="avatar">박</div>
+          <div>
+            <div class="review-name">박OO Runner</div>
+            <div class="review-goal">첫 하프 마라톤</div>
+          </div>
+        </div>
+        <span class="review-product">마사지건 프로 미니 사용</span>
+        <p class="review-text">장거리 후 무릎 주변이 뻐근했는데 마사지건으로 관리하면서 통증이 훨씬 줄었습니다.</p>
+      </div>
+      <div class="review-card">
+        <div class="review-top">
+          <div class="avatar">이</div>
+          <div>
+            <div class="review-name">이OO Runner</div>
+            <div class="review-goal">서브4 도전 중</div>
+          </div>
+        </div>
+        <span class="review-product">서브 4 클래스 수강</span>
+        <p class="review-text">코치님의 페이스 코칭과 회복 루틴을 병행하니 훈련 강도를 높여도 부상 없이 이어갈 수 있었어요.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INSTAGRAM ============ -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="insta-head">
+      <div>
+        <span class="eyebrow">INSTAGRAM</span>
+        <h2 class="section-title" style="margin-bottom:0;">@d.note.running</h2>
+      </div>
+      <a href="#" class="link-arrow">팔로우하기 →</a>
+    </div>
+    <div class="insta-grid">
+      <div class="insta-item"><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#D8C39D"/></svg></div>
+      <div class="insta-item"><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#7C5A38"/></svg></div>
+      <div class="insta-item"><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#EFE9DD"/></svg></div>
+      <div class="insta-item"><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#6B7A5C"/></svg></div>
+      <div class="insta-item"><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#5B3F26"/></svg></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEWSLETTER ============ -->
+<section class="section newsletter">
+  <div class="wrap">
+    <span class="eyebrow">D.NOTE LETTER</span>
+    <h2 class="section-title">매주 받아보는 러닝 회복 팁</h2>
+    <p>훈련 정보, 회복 가이드, 신제품 소식을 이메일로 받아보세요.</p>
+    <form class="nl-form" onsubmit="event.preventDefault(); alert('구독해주셔서 감사합니다. (프로토타입)');">
+      <input type="email" placeholder="이메일 주소를 입력하세요" required>
+      <button type="submit">구독하기</button>
+    </form>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">D.note</div>
+        <p style="font-size:0.85rem; max-width:260px;">러너의 기록 향상을 위한 회복 관리 플랫폼. 훈련만큼 회복도 중요합니다.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <a href="#">Recovery Tool</a>
+        <a href="#">Mobility</a>
+        <a href="#">Running Care</a>
+        <a href="#">Accessories</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">Brand Story</a>
+        <a href="#">Running Class</a>
+        <a href="#">Recovery Guide</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <a href="#">주문 조회</a>
+        <a href="#">교환/반품</a>
+        <a href="#">자주 묻는 질문</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 D.note. All rights reserved.</span>
+      <span>이 페이지는 프로토타입입니다.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ AI RECOVERY CHATBOT (floating) ============ -->
+<button class="ai-launcher" id="aiLauncher">
+  <span class="dot">✦</span>
+  <span>AI Recovery</span>
+</button>
+
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-head">
+    <div>
+      <strong>AI Recovery</strong>
+      <small>맞춤 회복 추천 챗봇</small>
+    </div>
+    <button class="chat-close" id="chatClose">✕</button>
+  </div>
+  <div class="chat-body">
+    <p class="chat-q">오늘 어디가 불편하세요?</p>
+    <div class="chat-opts">
+      <button class="chat-opt" data-part="종아리">종아리</button>
+      <button class="chat-opt" data-part="무릎">무릎</button>
+      <button class="chat-opt" data-part="햄스트링">햄스트링</button>
+      <button class="chat-opt" data-part="발바닥">발바닥</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ---- Recovery Solution: bodymap + tabs sync ----
+  const hotspots = document.querySelectorAll('.hotspot');
+  const tabs = document.querySelectorAll('.stab');
+  const cards = document.querySelectorAll('.solution-card');
+
+  function setActive(target){
+    hotspots.forEach(h => h.classList.toggle('active', h.dataset.target === target));
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === target));
+    cards.forEach(c => c.classList.toggle('active', c.id === 'card-' + target));
+  }
+  hotspots.forEach(h => h.addEventListener('click', () => setActive(h.dataset.target)));
+  tabs.forEach(t => t.addEventListener('click', () => setActive(t.dataset.tab)));
+
+  // ---- AI Recovery floating chatbot ----
+  const aiLauncher = document.getElementById('aiLauncher');
+  const chatPanel = document.getElementById('chatPanel');
+  const chatClose = document.getElementById('chatClose');
+
+  aiLauncher.addEventListener('click', () => chatPanel.classList.toggle('open'));
+  chatClose.addEventListener('click', () => chatPanel.classList.remove('open'));
+
+  document.querySelectorAll('.chat-opt').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const part = btn.dataset.part;
+      const map = { '종아리':'calf', '무릎':'knee', '햄스트링':'hamstring', '발바닥':'foot' };
+      document.getElementById('solution').scrollIntoView({behavior:'smooth'});
+      setActive(map[part]);
+      chatPanel.classList.remove('open');
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if(!chatPanel.contains(e.target) && !aiLauncher.contains(e.target)){
+      chatPanel.classList.remove('open');
+    }
+  });
+</script>
+
+</body>
+</html>
