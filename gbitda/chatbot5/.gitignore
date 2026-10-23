@@ -1,0 +1,8 @@
+.env
+.venv/
+venv/
+__pycache__/
+*.pyc
+# 용량이 큰 학습 모델/원본 CSV는 GitHub에 올리지 않습니다(모델 100MB 초과)
+models/estate/*.pkl
+data/estate/*.csv
