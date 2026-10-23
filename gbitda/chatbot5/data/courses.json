@@ -1,0 +1,58 @@
+
+[
+  {
+    "id": "course_001",
+    "name": "내집마련 CUSTOM CLASS",
+    "category": "내집마련",
+    "price": 4400000,
+    "description": "내 집 마련을 준비하는 학습자를 위한 클래스",
+    "target": ["내집마련", "부동산초보", "주택구입"],
+    "keywords": ["내집마련", "첫집", "집구매", "부동산기초"],
+    "url": "https://www.gbitda.com/31",
+    "status": "verify"
+  },
+  {
+    "id": "course_002",
+    "name": "이번정부에서 유리한 부동산 투자법_1Day 특강",
+    "category": "1Day",
+    "price": 30000,
+    "description": "하루 동안 부동산 투자 관련 내용을 배우는 특강",
+    "target": ["부동산초보", "단기학습"],
+    "keywords": ["1day", "하루", "특강", "부동산투자"],
+    "url": "https://www.gbitda.com/27",
+    "status": "verify"
+  },
+  {
+    "id": "course_003",
+    "name": "서울법원견학 : 법원 입찰 마스터 (원데이클래스)",
+    "category": "경매",
+    "price": 110000,
+    "description": "법원 견학과 입찰 과정을 접할 수 있는 원데이 클래스",
+    "target": ["경매초보", "입찰절차학습"],
+    "keywords": ["경매", "법원", "입찰", "원데이"],
+    "url": "https://www.gbitda.com/28",
+    "status": "verify"
+  },
+  {
+    "id": "course_004",
+    "name": "돈이 보이는 9주 경매 마스터반",
+    "category": "경매",
+    "price": 4400000,
+    "description": "경매를 체계적으로 학습하고 싶은 사람을 위한 클래스",
+    "target": ["경매초보", "경매심화"],
+    "keywords": ["경매", "권리분석", "말소기준권리", "낙찰"],
+    "url": "https://www.gbitda.com/28",
+    "status": "verify"
+  },
+  {
+    "id": "course_005",
+    "name": "투자N의 부동산 포비아 탈출 로드맵(4주 완성)",
+    "category": "부동산기초",
+    "price": 440000,
+    "description": "부동산에 대한 막연한 두려움을 줄이고 학습을 시작하려는 사람을 위한 과정",
+    "target": ["부동산초보", "내집마련준비"],
+    "keywords": ["부동산초보", "부동산기초", "내집마련", "4주"],
+    "url": "https://www.gbitda.com/31",
+    "status": "verify"
+  }
+]
