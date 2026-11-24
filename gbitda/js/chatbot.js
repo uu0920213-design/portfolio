@@ -62,6 +62,7 @@
   }
   function openPanel(open) {
     panel.hidden = !open; fab.classList.toggle('open', open);
+    document.documentElement.classList.toggle('cb-open', open);   // 모바일 전체화면일 때 뒤 페이지 스크롤 잠금
     if (open) { show('home'); loadSessions(); }
   }
 

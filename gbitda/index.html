@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="집이잇다 gbitda – 집을 보는 기준이 생기는 곳">
 <title>집이잇다 gbitda</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,13 +20,14 @@
   <header>
     <a class="logo" href="#">gbitda</a>
     <nav><ul><li><a href="#">about</a></li><li><a href="#class">프로그램</a></li><li><a href="#comm">커뮤니티</a></li><li><a href="#ground">임장기록</a></li><li><a href="#letter">부동산사전</a></li><li><a href="#faq">FAQ</a></li></ul></nav>
-    <div class="hr"><span class="search"><img src="icons/search.svg" alt="">강의 검색하기</span><button type="button" class="login-btn" id="openLogin" aria-haspopup="dialog">로그인</button></div>
+    <div class="hr"><button type="button" class="search" id="openSearch" aria-haspopup="dialog"><img src="icons/search.svg" alt="">강의 검색하기</button><button type="button" class="login-btn" id="openLogin" aria-haspopup="dialog">로그인</button><button type="button" class="mob-toggle" id="mobToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobMenu"><i></i><i></i><i></i></button></div>
   </header>
   <div class="wrap">
-    <p class="k">내집마련을 위한 첫걸음</p>
-    <h1>집을 사는 순간보다,<br>집을 보는 눈이 먼저입니다</h1>
+    <p class="k"><span>내집마련을 위한 첫걸음</span></p>
+    <h1>집을 사는 순간보다,<br><span class="hl">집을 보는 눈</span>이<br class="mbr"> 먼저입니다</h1>
+    <p class="hero-sub">배우기 전에 먼저 물어보고 확인하는<br>부동산 교육 플랫폼</p>
     <div class="btns">
-      <a class="hb" href="#">멤버십 보러가기 <img src="icons/arrow.svg" alt="" width="8" height="14"></a>
+      <a class="hb hb-main" href="#">멤버십 보러가기 <img src="icons/arrow.svg" alt="" width="8" height="14"></a>
       <a class="hb" href="#letter">오늘의 부동산 레터 <img src="icons/arrow.svg" alt="" width="8" height="14"></a>
     </div>
   </div>
@@ -34,10 +35,10 @@
 
 <!-- 2. CLASS -->
 <div class="strip" id="class"><div class="wrap"><span>단순한 정보가 아닌, 결정할 수 있는 기준</span><ul><li><img src="icons/data.svg" alt="">데이터 기반 분석</li><li><img src="icons/Group.svg" alt="">현장 중심 교육</li><li><img src="icons/Frame%20150.svg" alt="">실제 매입 사례</li></ul></div></div>
-<section style="padding-top:90px">
+<section class="s-class">
   <div class="wrap">
     <div class="cls-head">
-      <div><div class="eyebrow">gbitda x 투자 N</div><h2>한 번 배우면<br>평생 써먹는 클래스</h2><p class="sub">막연한 불안을 구체적인 실행 계획으로 바꾸는 실전 교육입니다.</p></div>
+      <div><div class="eyebrow">gbitda x 투자 N</div><h2><span class="pc-t">한 번 배우면<br>평생 써먹는 클래스</span><span class="mob-t">망설임은 줄이고<br>내 집 마련은 시작하세요</span></h2><p class="sub">막연한 불안을 구체적인<br class="mbr"> 실행 계획으로 바꾸는 실전 교육입니다.</p></div>
       <a class="pill" href="#">전체 클래스 <img src="icons/weui_arrow-filled.svg" alt="" width="12" height="24"></a>
     </div>
     <div class="grid3">
@@ -49,16 +50,16 @@
 </section>
 
 <!-- 3. CURRICULUM -->
-<section style="padding-top:60px">
+<section class="s-curr">
   <div class="wrap">
     <div class="eyebrow">YOUR NEXT STEP</div>
     <h2>내 집 마련의 시작, 나에게 맞는 클래스</h2>
-    <p class="sub">부동산 기초부터 실전 투자까지, 지금 나에게 필요한 클래스를 선택해 보세요</p>
+    <p class="sub">부동산 기초부터 실전 투자까지,<br class="mbr"> 지금 나에게 필요한 클래스를 선택해 보세요</p>
     <div class="cg">
-      <a class="cc" href="#"><small>HOME OWNERSHIP</small><h3>내집마련</h3><p>부동산 기초 공부부터<br>내 집 마련까지</p><span class="ar"><img src="icons/ci_arrow-right-lg.svg" alt=""></span></a>
-      <a class="cc" href="#"><small>QUICK START</small><h3 class="rg">1Day</h3><p>하루면 충분한<br>부동산 기초 다지기</p><span class="ar"><img src="icons/ci_arrow-right-lg.svg" alt=""></span></a>
-      <a class="cc" href="#"><small>REAL ESTATE AUCTION</small><h3>경매</h3><p>권리분석부터 낙찰까지<br>실전 경매 기초</p><span class="ar"><img src="icons/ci_arrow-right-lg.svg" alt=""></span></a>
-      <a class="cc" href="#"><small>NON-PERFORMING LOAN</small><h3 class="rg">NPL</h3><p>부실채권이 무엇인지부터<br>실전 사례까지</p><span class="ar"><img src="icons/ci_arrow-right-lg.svg" alt=""></span></a>
+      <a class="cc" href="#"><small>HOME OWNERSHIP</small><h3>내집마련</h3><p>부동산 기초 공부부터 <br>내 집 마련까지</p><span class="ar"><img src="icons/ci_arrow-right-lg.svg" alt=""></span></a>
+      <a class="cc" href="#"><small>QUICK START</small><h3 class="rg">1Day</h3><p>하루면 충분한 <br>부동산 기초 다지기</p><span class="ar"><img src="icons/ci_arrow-right-lg.svg" alt=""></span></a>
+      <a class="cc" href="#"><small>REAL ESTATE AUCTION</small><h3>경매</h3><p>권리분석부터 낙찰까지 <br>실전 경매 기초</p><span class="ar"><img src="icons/ci_arrow-right-lg.svg" alt=""></span></a>
+      <a class="cc" href="#"><small>NON-PERFORMING LOAN</small><h3 class="rg">NPL</h3><p>부실채권이 무엇인지부터 <br>실전 사례까지</p><span class="ar"><img src="icons/ci_arrow-right-lg.svg" alt=""></span></a>
     </div>
   </div>
 </section>
@@ -72,7 +73,7 @@
   <div class="gbody"><div class="wrap">
     <div class="eyebrow" style="margin-bottom:10px">ON THE GROUND &nbsp;REAL FIELD CLASS</div>
     <div class="gcols">
-      <div><h2>지도 밖으로 나가,<br>동네를 직접 읽습니다</h2><p class="sub">수치와 지도로만 알 수 없는 진짜 부동산 가치는 현장에 있습니다.<br>집이 있는 곳, 사람이 사는 곳을 직접 걸으며 배웁니다.</p></div>
+      <div><h2>지도 밖으로 나가,<br>동네를 직접 읽습니다</h2><p class="sub">수치와 지도로만 알 수 없는<br class="mbr"> 진짜 부동산 가치는 현장에 있습니다.<span class="pc-only"><br>집이 있는 곳, 사람이 사는 곳을 직접 걸으며 배웁니다.</span></p></div>
       <div><em>01</em><h4>생활권 동선 확인</h4><p class="d">역, 학교, 상권, 교통 등 실제 생활동선을 직접 걸으며 입지 가치를 확인합니다.</p></div>
       <div><em>02</em><h4>정비사업 현장 체크</h4><p class="d">재개발 재건축 등 정비사업 구역을 방문해 변화 가능성을 점검합니다.</p></div>
       <div><em>03</em><h4>실 거래 매물비교</h4><p class="d">실거래가, 매물 정보를 비교해 실제 시세를 파악합니다.</p></div>
@@ -85,7 +86,7 @@
 <section id="letter">
   <div class="wrap">
     <div class="lhead">
-      <div class="l"><div class="eyebrow">WEEKLY LETTER</div><h2>부동산의 흐름을 읽는 습관</h2><p class="sub">매주 달라지는 정책과 시장의 변화를 핵심만 정리해드립니다.<br>복잡한 뉴스 속에서 내 집 마련에 필요한 흐름과 판단 기준을 발견하세요</p></div>
+      <div class="l"><div class="eyebrow">WEEKLY LETTER</div><h2>부동산의 흐름을 읽는 습관</h2><p class="sub">매주 달라지는 정책과 시장의 변화를 핵심만 정리해드립니다.<span class="pc-only"><br>복잡한 뉴스 속에서 내 집 마련에 필요한 흐름과 판단 기준을 발견하세요</span></p></div>
       <div class="ltabs" id="ltabs"><button class="on">전체</button><button>전세</button><button>정책</button><button>청약</button><button>집값</button><button>공공주택</button><a class="all" href="#">뉴스 전체보기 <img src="icons/Vector.svg" alt="" width="20" height="12"></a></div>
     </div>
     <div class="lg" id="newsView"></div>
@@ -95,7 +96,7 @@
 <!-- 6. HISTORY -->
 <section class="hist">
   <div class="wrap hg">
-    <div><div class="eyebrow">투자N 수강생 실전 기록</div><h2>배움이 실전이<br>되는 순간</h2><p class="sub" style="margin-bottom:44px">투자N과 함께한 수강생들의 생생한 경험담<br>당신의 내 집 마련도 현실이 될 수 있습니다.</p><button type="button" class="pill hist-more" id="historyMore" style="font-size:18px;letter-spacing:-.02em">더 많은 수강생 후기 보기 <img src="icons/weui_arrow-filled-1.svg" alt="" width="24" height="12"></button></div>
+    <div><div class="eyebrow">투자N 수강생 실전 기록</div><h2>배움이 실전이<br class="hb"> 되는 순간</h2><p class="sub" style="margin-bottom:44px"><span class="pc-only">투자N과 함께한 수강생들의 생생한 경험담<span class="dot">. </span><br class="hb"></span>당신의 내 집 마련도 현실이 될 수 있습니다.</p><button type="button" class="pill hist-more" id="historyMore" style="font-size:18px;letter-spacing:-.02em">더 많은 수강생 후기 보기 <img src="icons/weui_arrow-filled-1.svg" alt="" width="24" height="12"></button></div>
     <div class="cards6" id="historyList"></div>
   </div>
 </section>
@@ -114,16 +115,16 @@
 </div></section>
 
 <!-- 9. YOUTUBE -->
-<section><div class="wrap yt">
+<section class="yts"><div class="wrap yt">
   <div><div class="eyebrow bar">집이잇다가 전하는 부동산 이야기</div><h2>1분이면 충분한<br>실전 부동산 꿀팁</h2><p class="sub">복잡한 부동산 짧고 쉽게!<br>집이잇다만의 실전 노하우를 1분 숏츠로 만나보세요.</p></div>
-  <div><div class="yh"><div><span class="hot">HOT</span>지금 추천하는 숏츠</div><div class="nv"><button id="ytPrev" aria-label="이전"><img src="icons/weui_arrow-filled-2.svg" alt="" width="12" height="24"></button><button id="ytNext" aria-label="다음"><img src="icons/weui_arrow-filled-3.svg" alt="" width="12" height="24"></button></div></div>
+  <div><div class="yh"><div><span class="hot">HOT</span>지금 추천하는 숏츠</div><div class="nv"><button id="ytPrev" aria-label="이전"><img class="d-ic" src="icons/weui_arrow-filled-2.svg" alt="" width="12" height="24"><img class="m-ic" src="icons/mob-arrow-youtube01.svg" alt="" width="42" height="42"></button><button id="ytNext" aria-label="다음"><img class="d-ic" src="icons/weui_arrow-filled-3.svg" alt="" width="12" height="24"><img class="m-ic" src="icons/mob-arrow-youtube02.svg" alt="" width="42" height="42"></button></div></div>
     <div class="yt-view"><div class="yt-track" id="ytTrack"></div></div></div>
 </div></section>
 
 <!-- 10. FAQ -->
 <section class="faq" id="faq"><div class="wrap">
   <div class="eyebrow">FAQ</div>
-  <h2>궁금한 점이 있으신가요?<br>자주 묻는 질문을 확인해보세요</h2>
+  <h2><span class="pc-only">궁금한 점이 있으신가요?<br></span>자주 묻는 질문을<br class="mbr"> 확인해보세요</h2>
   <p class="sub">집이잇다 클래스에 대해 자주 묻는 질문을 모아 정리했습니다.<br>더 궁금한 점은 카카오 채널로 편하게 문의해 주세요.</p>
   <div class="fl">
     <div><div class="tabs" id="ftabs">
@@ -137,7 +138,7 @@
 <!-- 11. CTA -->
 <section class="cta"><div class="wrap">
   <div class="eyebrow">READY TO START</div>
-  <h2>내 집 마련의 다음 단계, 집이잇다와 시작하세요</h2>
+  <h2>내 집 마련의 다음 단계,<br class="mbr"> 집이잇다와 시작하세요</h2>
   <div class="btns"><a class="wb" href="#class">클래스 둘러보기 <img src="icons/Vector.svg" alt="" width="20" height="12"></a><a class="wb" href="#" data-link="kakao">카카오톡으로 상담하기 <img src="icons/Vector.svg" alt="" width="20" height="12"></a></div>
 </div></section>
 
@@ -145,12 +146,40 @@
 <footer><div class="wrap">
   <div class="f1">
     <div class="fb"><strong>집이잇다<span>gbitda</span></strong><p>집을 보는 기준이 생기는 곳,<br>청년과 무주택자의 현명한 선택을 돕습니다.</p></div>
-    <div class="fc"><h5>고객센터</h5><ul><li><img src="icons/Frame%20264.svg" alt="">010-3916-7816</li><li><img src="icons/Frame%20268.svg" alt="">gbitda16@gmail.com</li><li><img src="icons/akar-icons_clock.svg" alt="">평일: 9:00 - 18:00 (주말/공휴일 휴무)</li></ul></div>
+    <div class="fc"><h5>고객센터</h5><ul><li><img src="icons/Frame%20264.svg" alt="">010-3916-7816</li><li><img src="icons/Frame%20268.svg" alt="">gbitda16@gmail.com</li><li><img src="icons/akar-icons_clock.svg" alt="">평일: 9:00 - 18:00<span class="pc-only">&nbsp;(주말/공휴일 휴무)</span></li></ul></div>
     <div class="fc"><h5>바로가기</h5><ul><li>클래스 전체보기</li><li>부동산 소식</li><li>FAQ</li></ul></div>
     <div class="fc"><h5>SNS</h5><ul><li><a href="#" data-link="instagram"><img src="icons/Frame%20269.svg" alt="">인스타그램</a></li><li><a href="#" data-link="youtube"><img src="icons/ant-design_youtube-filled.svg" alt="">YOUTUBE</a></li><li><a href="#" data-link="kakao"><img src="icons/fa7-brands_kakao-talk.svg" alt="">카카오톡</a></li></ul></div>
   </div>
-  <div class="f2"><span><b>gbitda</b>상호명: 집이잇다(gbitda) &nbsp; 대표자: 강한 &nbsp; 사업자등록번호: 2475900776 &nbsp; 통신판매업신고번호: 제2024-서울송파--373 &nbsp; 사업장주소: 서울 송파구 법원로8일 13(문정동, 문정헤리움써밋타워) 1117호</span><span>개인정보 처리방침 · 이용약관</span></div>
+  <div class="f2"><span><b>gbitda</b><span class="ft">상호명: 집이잇다(gbitda) &nbsp; 대표자: 강한 &nbsp; 사업자등록번호: 2475900776 &nbsp; 통신판매업신고번호: 제2024-서울송파--373 &nbsp; 사업장주소: 서울 송파구 법원로8일 13(문정동, 문정헤리움써밋타워) 1117호<span class="leg"> &nbsp; 개인정보 처리방침 · 이용약관</span></span></span><span>개인정보 처리방침 · 이용약관</span></div>
 </div></footer>
+
+<!-- MOBILE MENU / SEARCH (≤1100px) -->
+<div class="mob-menu" id="mobMenu" role="dialog" aria-modal="true" aria-label="전체 메뉴" aria-hidden="true">
+  <div class="mm-top"><a class="logo" href="#" data-mm-close>gbitda</a><button type="button" class="mob-toggle" id="mobClose" aria-label="메뉴 닫기"><i></i><i></i><i></i></button></div>
+  <div class="mm-scroll">
+    <button type="button" class="mm-login" id="mmLogin"><img src="icons/mob-bi_person.svg" alt="" width="35" height="35"><span id="mmLoginTxt">로그인하고 더 많은 서비스를 이용해보세요</span><img class="chev" src="icons/mob-dashicons_arrow-right-alt2.svg" alt="" width="6" height="16"></button>
+    <ul class="mm-list">
+      <li><a href="#" data-mm-close><b>about</b><small>집이 잇다를 소개합니다</small></a></li>
+      <li><a href="#class" data-mm-close><b>프로그램</b><small>다양한 강의를 만나보세요</small></a></li>
+      <li><a href="#comm" data-mm-close><b>커뮤니티</b><small>함께하는 부동산 이야기</small></a></li>
+      <li><a href="#ground" data-mm-close><b>임장기록</b><small>집이잇다와 함께한 임장 기록</small></a></li>
+      <li><a href="#letter" data-mm-close><b>부동산사전</b><small>알아두면 쓸모있는 부동산 지식</small></a></li>
+      <li><a href="#faq" data-mm-close><b>FAQ</b><small>자주 묻는 질문을 확인하세요</small></a></li>
+    </ul>
+    <div class="mm-btns">
+      <a class="mm-b fill" href="#" data-mm-close><img src="icons/mob-andrsrxn_calendar-check.svg" alt="" width="22" height="22">멤버십 보러가기<i class="chev" aria-hidden="true"></i></a>
+      <a class="mm-b line" href="#letter" data-mm-close><img src="icons/mob-ci_mail.svg" alt="" width="22" height="22">오늘의 부동산 레터<i class="chev" aria-hidden="true"></i></a>
+    </div>
+    <div class="mm-brand"><img src="icons/mob-home.svg" alt="" width="33" height="33"><span><b>gbitda</b><small>집을 보는 기준이 생기는 곳</small></span><span class="mm-sns"><a href="#" data-link="instagram" aria-label="인스타그램"><img src="icons/mob-g-selfhst_instagram.svg" alt="" width="21" height="21"></a><a href="#" data-link="youtube" aria-label="유튜브"><img src="icons/mob-g-thesvg-color_youtube-shorts.svg" alt="" width="21" height="21"></a><a href="#" data-link="kakao" aria-label="카카오톡"><img src="icons/mob-g-fa7-brands_kakao-talk.svg" alt="" width="21" height="21"></a></span></div>
+  </div>
+</div>
+<div class="mob-search" id="mobSearch" role="dialog" aria-modal="true" aria-label="강의 검색" aria-hidden="true">
+  <form class="ms-bar" id="msForm" role="search" autocomplete="off">
+    <button type="button" class="ms-back" id="msBack" aria-label="뒤로"><img src="icons/mob-arrow-back.svg" alt="" width="50" height="50"></button>
+    <label class="ms-field"><svg width="19" height="19" viewBox="0 0 19 19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M12.500 12.500L17.500 17.500"/></svg><input type="search" id="msInput" placeholder="검색/ 직접 입력" enterkeyhint="search" aria-label="강의 검색어"></label>
+  </form>
+  <div class="ms-body"><p class="ms-title" id="msTitle" hidden></p><div class="ms-chips" id="msChips"></div></div>
+</div>
 
 <!-- CHATBOT -->
 <div id="cb">

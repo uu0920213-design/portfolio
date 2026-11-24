@@ -16,7 +16,8 @@ window.GBITDA_CONFIG = {
   // → localhost 로 열면 localhost:8000, http://192.168.0.64:5500 으로 열면 192.168.0.64:8000. 따로 고칠 필요 없음.
   // (다른 서버를 쓰려면 'http://주소:포트' 로 직접 지정)
   chatApiBase: (location.protocol === 'http:' || location.protocol === 'https:') ? `${location.protocol}//${location.hostname}:8000` : 'http://127.0.0.1:8000',
-  historyStep: 6,    // '더 많은 수강생 후기 보기' 클릭 당 추가되는 카드 수
+  historyStep: 6,    // '더 많은 수강생 후기 보기' 클릭 당 추가되는 카드 수 (PC·태블릿)
+  historyStepMobile: 2, // 모바일(767px 이하)에서는 처음 2개, 클릭 당 2개씩 추가
   faqPerPage: 5      // FAQ 한 페이지에 보이는 질문 수
 };
 const CONFIG = window.GBITDA_CONFIG;
@@ -100,7 +101,7 @@ function renderNews(cat) {
       `<div class="fade">${rest.map(n => `<a class="li" href="${href(n.url)}"><img src="${n.img}" alt=""><div><span class="bdg org lg2">${n.cat}</span><h4>${n.title}</h4><p>${n.desc}</p><small>${n.src}</small></div></a>`).join('')}</div>`;
   } else {
     newsView.className = 'lg rows';
-    newsView.innerHTML = items.map(n => `<a class="nrow fade" href="${href(n.url)}"><img src="${n.img}" alt=""><div class="tx"><span class="bdg org lg2">${n.cat}</span><h4>${n.title}</h4><p>${n.desc}</p></div><span class="mt">${n.src}</span></a>`).join('');
+    newsView.innerHTML = items.map(n => `<a class="nrow fade" href="${href(n.url)}"><img src="${n.img}" alt=""><div class="tx"><span class="bdg org lg2">${n.cat}</span><h4>${n.title}</h4><p>${n.desc}</p><small class="m-src">${n.src}</small></div><span class="mt">${n.src}</span></a>`).join('');
   }
 }
 $('#ltabs').addEventListener('click', e => {
@@ -110,11 +111,14 @@ $('#ltabs').addEventListener('click', e => {
 });
 renderNews('전체');
 
-// ----- 수강생 후기: 6개씩 더 보기 -----
+// ----- 수강생 후기: 더 보기 (PC·태블릿 6개씩 / 모바일 2개씩) -----
+const mqMob = window.matchMedia('(max-width:767px)');
 const historyList = $('#historyList'), historyMore = $('#historyMore');
 let historyShown = 0;
+const mqHist = window.matchMedia('(max-width:699px)');   // 700px 이상은 6개씩
+const historyStep = () => mqHist.matches ? CONFIG.historyStepMobile : CONFIG.historyStep;
 function showMoreHistory() {
-  const next = HISTORY.slice(historyShown, historyShown + CONFIG.historyStep);
+  const next = HISTORY.slice(historyShown, historyShown + historyStep());
   historyList.insertAdjacentHTML('beforeend', next.map(h =>
     `<a class="hc fade" href="${href(h.url)}"><img src="${h.img}" alt=""><div class="bd"><span class="bdg org">${h.tag}</span><h4>${h.title}</h4><p>${h.desc}</p></div></a>`).join(''));
   historyShown += next.length;
@@ -122,6 +126,10 @@ function showMoreHistory() {
 }
 historyMore.addEventListener('click', showMoreHistory);
 showMoreHistory();
+// 모바일 ↔ PC 폭이 바뀌면 처음 개수부터 다시 보여줌
+(mqHist.addEventListener ? mqHist.addEventListener.bind(mqHist, 'change') : mqHist.addListener.bind(mqHist))(() => {
+  historyList.innerHTML = ''; historyShown = 0; showMoreHistory();
+});
 
 // ----- 키워드: 기본은 모두 비선택, 클릭하면 선택(다시 클릭하면 해제) -----
 $('#kws').addEventListener('click', e => {
@@ -132,7 +140,7 @@ $('#kws').addEventListener('click', e => {
 });
 
 // ----- 유튜브 숏츠: 3개씩 페이지 슬라이드 -----
-const ytTrack = $('#ytTrack'), ytPrev = $('#ytPrev'), ytNext = $('#ytNext');
+const ytTrack = $('#ytTrack'), ytPrev = $('#ytPrev'), ytNext = $('#ytNext'), ytView = $('.yt-view');
 const ytPages = Math.ceil(SHORTS.length / 3);
 let ytPage = 0;
 ytTrack.innerHTML = Array.from({ length: ytPages }, (_, p) =>
@@ -144,9 +152,22 @@ function ytGo(p) {
   ytTrack.style.transform = `translateX(-${ytPage * 100}%)`;
   ytPrev.disabled = ytPage === 0; ytNext.disabled = ytPage === ytPages - 1;
 }
-ytPrev.addEventListener('click', () => ytGo(ytPage - 1));
-ytNext.addEventListener('click', () => ytGo(ytPage + 1));
-ytGo(0);
+// 모바일: 카드 1장씩 옆으로 스크롤(스와이프 + 화살표 버튼)
+function ytScrollState() {
+  if (!mqMob.matches) return;
+  ytPrev.disabled = ytView.scrollLeft <= 4;
+  ytNext.disabled = ytView.scrollLeft + ytView.clientWidth >= ytView.scrollWidth - 4;
+}
+function ytStep(dir) {
+  const c = ytTrack.querySelector('.sh'); if (!c) return;
+  const gap = parseFloat(getComputedStyle(ytTrack).columnGap) || 0;
+  ytView.scrollBy({ left: dir * (c.getBoundingClientRect().width + gap), behavior: 'smooth' });
+}
+ytPrev.addEventListener('click', () => mqMob.matches ? ytStep(-1) : ytGo(ytPage - 1));
+ytNext.addEventListener('click', () => mqMob.matches ? ytStep(1) : ytGo(ytPage + 1));
+ytView.addEventListener('scroll', ytScrollState, { passive: true });
+window.addEventListener('resize', () => { if (mqMob.matches) ytScrollState(); else ytGo(ytPage); });
+ytGo(0); ytScrollState();
 
 // ----- FAQ: 카테고리 탭 + 아코디언 + 페이지네이션 -----
 const faqList = $('#faqList'), faqPg = $('#faqPg');
@@ -584,4 +605,182 @@ window.GBITDA_AUTH = (function(){
       else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
     }
   });
+})();
+
+/* =========================================================
+   반응형: 모바일 메뉴 · 강의 검색 · 커리큘럼 카드 선택 (≤1100px에서 동작)
+   ========================================================= */
+(function(){
+  var mqTab = window.matchMedia('(max-width:1100px)');
+  var root = document.documentElement;
+  var menu = document.getElementById('mobMenu'), toggle = document.getElementById('mobToggle'), mClose = document.getElementById('mobClose');
+  var search = document.getElementById('mobSearch'), sBtn = document.getElementById('openSearch'), sBack = document.getElementById('msBack');
+  var sForm = document.getElementById('msForm'), sInput = document.getElementById('msInput'), sChips = document.getElementById('msChips'), sTitle = document.getElementById('msTitle');
+  var loginBtn = document.getElementById('openLogin'), mmLogin = document.getElementById('mmLogin'), mmTxt = document.getElementById('mmLoginTxt');
+  var lastFocus = null;
+
+  /* ----- 전체 메뉴: 햄버거 → X 로 부드럽게 변하며 열림 ----- */
+  var closeTimer = null;
+  function setMenu(open){
+    var isOpen = menu.classList.contains('open');
+    if(open === isOpen) return;
+    clearTimeout(closeTimer);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    toggle.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+    menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+    root.classList.toggle('menu-open', open);
+    if(open){
+      lastFocus = document.activeElement;
+      toggle.classList.add('is-x');                       // 헤더의 햄버거가 먼저 X로 변하고
+      menu.classList.add('open');                         // 메뉴 화면이 페이드 인
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){ mClose.classList.add('is-x'); }); });
+      setTimeout(function(){ mClose.focus({preventScroll:true}); }, 60);
+    } else {
+      mClose.classList.remove('is-x'); toggle.classList.remove('is-x');   // X → 햄버거로 되돌아간 뒤
+      closeTimer = setTimeout(function(){ menu.classList.remove('open'); }, 260);   // 메뉴 화면이 사라짐
+      if(lastFocus){ toggle.focus({preventScroll:true}); }
+    }
+  }
+  toggle.addEventListener('click', function(){ setMenu(!menu.classList.contains('open')); });
+  mClose.addEventListener('click', function(){ setMenu(false); });
+  function goTo(hash){
+    if(!hash || hash === '#'){ window.scrollTo({top:0, behavior:'smooth'}); return; }
+    var t = document.querySelector(hash); if(t) t.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  menu.addEventListener('click', function(e){
+    var a = e.target.closest('[data-mm-close]'); if(!a) return;
+    e.preventDefault();
+    var h = a.getAttribute('href');
+    setMenu(false);
+    setTimeout(function(){ goTo(h); }, 60);
+  });
+  mmLogin.addEventListener('click', function(){
+    setMenu(false);
+    setTimeout(function(){ loginBtn.click(); }, 60);   // 로그인 모달(로그인 상태면 로그아웃)
+  });
+  GBITDA_AUTH.onChange(function(u){
+    mmTxt.textContent = u ? (u.name + '님 · 로그아웃') : '로그인하고 더 많은 서비스를 이용해보세요';
+  });
+
+  /* ----- 강의 검색: 연관 검색어 예시 + 검색창 활성화 ----- */
+  var DEFAULT_TERMS = ['내집 마련', '원데이 클래스', '경매', 'PIN크루 1기', 'NPL', '유리한 부동산 투자법'];
+  var POOL = DEFAULT_TERMS.concat(['부동산 기초', '전월세', '부동산 계약', '대출 금리', 'NPL·특수물건', '재개발', '재건축', '임장', '현장 체크',
+    '지역분석', '입지', '정책 제도', '인테리어', '이사', '내집마련 CUSTOM CLASS', '1Day 클래스', '투자N', '권리분석', '낙찰']);
+  var ALIAS = { '원데이':'1day', '원데이클래스':'1day', '내집마련':'내집마련', '핀크루':'pin크루' };
+  var norm = function(t){ return String(t||'').toLowerCase().replace(/[\s·\-_/]/g,''); };
+  var esc = function(t){ return String(t).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
+
+  function renderChips(q){
+    var n = norm(q), list;
+    sTitle.className = 'ms-title';
+    if(!n){ list = DEFAULT_TERMS; sTitle.hidden = true; }
+    else {
+      list = POOL.filter(function(t){ var k = norm(t); return k.indexOf(n) > -1 || (ALIAS[n] && k.indexOf(ALIAS[n]) > -1); });
+      sTitle.hidden = false;
+      sTitle.textContent = list.length ? '연관 검색어' : '연관된 검색어가 없어요. 엔터를 눌러 직접 검색해 보세요.';
+    }
+    sChips.innerHTML = list.map(function(t){
+      var h = esc(t), i = n ? t.toLowerCase().replace(/\s/g,'').indexOf(n) : -1;
+      return '<button type="button" data-t="' + esc(t) + '">' + h + '</button>';
+    }).join('');
+  }
+  function openSearch(){
+    lastFocus = document.activeElement;
+    sInput.value = ''; renderChips('');
+    search.classList.add('open'); search.setAttribute('aria-hidden','false');
+    root.classList.add('menu-open');
+    setTimeout(function(){ sInput.focus(); }, 40);              // 검색창 활성화
+  }
+  function closeSearch(){
+    search.classList.remove('open'); search.setAttribute('aria-hidden','true');
+    root.classList.remove('menu-open'); sInput.blur();
+    if(lastFocus && lastFocus.focus) lastFocus.focus({preventScroll:true});
+  }
+  sBtn.addEventListener('click', openSearch);
+  sBack.addEventListener('click', closeSearch);
+  sInput.addEventListener('input', function(){ renderChips(sInput.value); });
+  sChips.addEventListener('click', function(e){
+    var b = e.target.closest('button'); if(!b) return;
+    sInput.value = b.dataset.t; sForm.requestSubmit ? sForm.requestSubmit() : sForm.dispatchEvent(new Event('submit',{cancelable:true}));
+  });
+  function findTarget(q){
+    var n = norm(q), a = ALIAS[n]; if(!n) return null;
+    var els = [].slice.call(document.querySelectorAll('.grid3 .card, .cg .cc'));
+    return els.filter(function(el){ var t = norm(el.textContent); return t.indexOf(n) > -1 || (a && t.indexOf(a) > -1); })[0] || null;
+  }
+  sForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var q = sInput.value.trim(); if(!q) { sInput.focus(); return; }
+    var t = findTarget(q);
+    if(!t){ sTitle.hidden = false; sTitle.className = 'ms-title bad'; sTitle.textContent = '‘' + q + '’에 대한 강의를 찾지 못했어요. 다른 검색어를 입력해 보세요.'; return; }
+    closeSearch();
+    setTimeout(function(){
+      t.scrollIntoView({behavior:'smooth', block:'center'});
+      t.classList.remove('hit'); void t.offsetWidth; t.classList.add('hit');
+      window.gbitdaToast && window.gbitdaToast('‘' + q + '’ 관련 강의를 찾았어요.');
+    }, 80);
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key !== 'Escape') return;
+    if(search.classList.contains('open')) closeSearch();
+    else if(menu.classList.contains('open')) setMenu(false);
+  });
+  // 화면이 넓어져 PC 레이아웃이 되면 열려 있던 메뉴·검색을 닫음
+  (mqTab.addEventListener ? mqTab.addEventListener.bind(mqTab,'change') : mqTab.addListener.bind(mqTab))(function(){
+    if(!mqTab.matches){ setMenu(false); }
+  });
+
+  /* ----- 커리큘럼 카드: 모바일에서는 누른 카드가 강조(기본은 첫 번째) ----- */
+  var cc = [].slice.call(document.querySelectorAll('.cg .cc'));
+  
+  cc.forEach(function(c){
+    c.addEventListener('click', function(){ cc.forEach(function(x){ x.classList.toggle('on', x === c); }); });
+  });
+})();
+
+/* =========================================================
+   카드 영역 드래그 스크롤 (마우스로도 끌어서 이동 · 페이지는 가로로 움직이지 않음)
+   ========================================================= */
+(function(){
+  function dragScroll(el){
+    if(!el) return;
+    el.classList.add('drag-x');
+    var down = false, moved = false, sx = 0, sl = 0, id = null, lastX = 0;
+    el.addEventListener('pointerdown', function(e){
+      if(e.pointerType !== 'mouse' || e.button !== 0) return;
+      var ox = getComputedStyle(el).overflowX; if((ox !== 'auto' && ox !== 'scroll') || el.scrollWidth <= el.clientWidth + 2) return;   // 가로로 넘치는 모바일 레이아웃에서만
+      down = true; moved = false; sx = e.clientX; sl = el.scrollLeft; id = e.pointerId;
+    });
+    window.addEventListener('pointermove', function(e){
+      if(!down) return;
+      var dx = e.clientX - sx; lastX = e.clientX;
+      if(!moved && Math.abs(dx) > 5){ moved = true; el.classList.add('dragging'); try{ el.setPointerCapture(id); }catch(_){} }
+      if(moved){ el.scrollLeft = sl - dx; e.preventDefault(); }
+    }, { passive:false });
+    function end(){
+      if(!down) return; down = false;
+      if(moved){
+        var dx = lastX - sx;
+        el.classList.remove('dragging');
+        if(Math.abs(dx) > 30){                                   // 조금만 끌어도 다음/이전 카드로 넘어가게
+          var c = el.firstElementChild && (el.firstElementChild.classList.contains('yt-track') ? el.querySelector('.sh') : el.firstElementChild);
+          var step = c ? c.getBoundingClientRect().width + (parseFloat(getComputedStyle(c.parentElement).columnGap) || 0) : 260;
+          el.scrollTo({ left: sl + (dx < 0 ? 1 : -1) * step, behavior: 'smooth' });
+        }
+        setTimeout(function(){ moved = false; }, 0);
+      }
+    }
+    window.addEventListener('pointerup', end); window.addEventListener('pointercancel', end);
+    el.addEventListener('click', function(e){ if(moved){ e.preventDefault(); e.stopPropagation(); } }, true);
+    el.addEventListener('dragstart', function(e){ e.preventDefault(); });
+    el.addEventListener('mousedown', function(e){          // 링크·이미지가 브라우저 기본 드래그로 끌려가지 않게
+      var ox = getComputedStyle(el).overflowX;
+      if((ox === 'auto' || ox === 'scroll') && el.scrollWidth > el.clientWidth + 2 && e.button === 0) e.preventDefault();
+    });
+  }
+  dragScroll(document.querySelector('.grid3'));
+  dragScroll(document.querySelector('.yt-view'));
+  dragScroll(document.querySelector('.ltabs'));
+  dragScroll(document.querySelector('.tabs'));
 })();
