@@ -784,3 +784,6 @@ window.GBITDA_AUTH = (function(){
   dragScroll(document.querySelector('.ltabs'));
   dragScroll(document.querySelector('.tabs'));
 })();
+
+// href="#" 카드·버튼을 눌러도 페이지 맨 위로 튀지 않게
+document.addEventListener('click', e => { const a = e.target.closest('a[href="#"]'); if (a) e.preventDefault(); });
