@@ -857,7 +857,13 @@ html.menu-open,html.menu-open body{overflow:hidden}
   .mm-brand small{font-size:10px}
 }
 
-@media(max-width:380px){
+@media(max-width:767px){
+  .fl{grid-template-columns:auto auto;justify-content:space-between;column-gap:8px}
+  .fl>.tabs,.fl #faqList{min-width:0}
+  .inq{gap:8px;font-size:12px;white-space:nowrap}.inq img{width:24px}.inq b{gap:12px}
+  .pg{gap:6px;font-size:14px}.pg button{min-width:20px}.pg img{width:8px}
+}
+@media(max-width:767px){
   .fl{column-gap:8px}
   .fl{grid-template-columns:auto auto;justify-content:space-between}
   .fl>.tabs,.fl #faqList{min-width:0}
