@@ -178,7 +178,8 @@ footer{background:var(--back2);color:#ddd;padding:70px 0 50px}
 #cb{--o:#F4511E;font-family:var(--font)}
 #cb *{box-sizing:border-box}
 #cb [hidden]{display:none!important}
-.cb-fab{position:fixed;right:28px;bottom:28px;z-index:900;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#FA4B00,#C93612);color:#fff;display:grid;place-items:center;box-shadow:0 10px 28px rgba(244,81,30,.4);transition:transform .25s}
+.cb-fab{position:fixed;right:24px;bottom:24px;z-index:900;width:72px;height:72px;padding:0;background:none;border:0;display:grid;place-items:center;transition:transform .25s}
+.cb-fab img{width:100%;height:100%;display:block;filter:drop-shadow(0 3px 5px rgba(70,70,70,.28));pointer-events:none}
 .cb-fab:hover{transform:translateY(-4px) scale(1.04)}
 .cb-panel{position:fixed;right:28px;bottom:108px;z-index:901;width:min(380px,calc(100vw - 32px),max(300px,calc((100vh - 130px)*.619)));height:min(614px,calc(100vh - 130px));max-height:calc(100dvh - 130px);background:#fff;border-radius:24px;box-shadow:0 20px 60px rgba(33,24,19,.28);display:flex;flex-direction:column;overflow:hidden;animation:cbin .25s ease}
 @keyframes cbin{from{opacity:0;transform:translateY(16px)}}
@@ -281,7 +282,7 @@ footer{background:var(--back2);color:#ddd;padding:70px 0 50px}
 .cb-est-chip:hover{border-color:var(--o);color:var(--o)}
 /* 모바일(600px 이하): 챗봇을 열면 화면 전체를 차지 / 태블릿 이상은 기존 떠 있는 창 */
 @media(max-width:600px){
-  .cb-fab{right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));width:56px;height:56px}
+  .cb-fab{right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));width:60px;height:60px}
   .cb-fab.open{display:none}
   .cb-panel{inset:0;width:100%;height:100vh;height:100dvh;max-height:none;border-radius:0;box-shadow:none;animation:cbFull .25s ease}
   html.cb-open,html.cb-open body{overflow:hidden;overscroll-behavior:none}
